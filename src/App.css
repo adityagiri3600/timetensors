@@ -1,38 +1,77 @@
-.App {
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+*{
+  user-select: none;
+}
+*::selection{
+  color: #2b7df8;
+  background-color: white;
+}
+
+input,
+textarea,
+button,
+select,
+a{
+    -webkit-tap-highlight-color: transparent;
+}
+
+h1{
+  margin-top: 10px;
   text-align: center;
+  font-size: 1.5rem;
+  font-family: QuicksandRegular, "Roboto Light", sans-serif;
+  text-shadow: 0px 0px 10px #ffffff;
+  user-select: text;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.title {
+  font-size: 2rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.info {
+  text-align: center;
+  font-family: QuickSandLight, "Roboto Light", sans-serif;
+  text-shadow: 0px 0px 5px #ffffff;
+  margin-top: -5px;
+  font-size: 0.9rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.info a {
+  text-decoration: underline;
+}
+
+.info a:hover{
+  color: lightblue;
+  transition: color 300ms linear;
+  text-shadow: none;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+.datetime-batch-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 2.5vh auto;
 }
