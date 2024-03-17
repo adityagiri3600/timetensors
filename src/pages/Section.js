@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import Papa from "papaparse";
 import Class from "../app/class/class";
 import Navigate from "../app/navigate/navigate";
+import ClassList from "../app/classList/classList";
+import Datetime from "../app/datetime/datetime";
+import "./Section.css"
 
 const Section = () => {
     const { section } = useParams();
@@ -40,20 +43,13 @@ const Section = () => {
     }
 
     return (
-        <div>
-            {todaysClasses.length > 0 ? (
                 <div>
                     <h1 className={"title"}>TimeTrack</h1>
                     <h2 className={"info"}><a href="https://github.com/Xyncross1111/timetrack">Repo</a></h2>
+                    <Datetime date={date}/>
                     <Navigate handlePrev={handlePrev} handleNext={handleNext} />
-                    {todaysClasses.map((props, i) => (
-                        <Class key={i} {...props} date={fakeDate}/>
-                    ))}
+                    <ClassList todaysClasses={todaysClasses} date={fakeDate} day={fakeWeekDay} />
                 </div>
-            ) : (
-                <p>Loading...</p>
-            )}
-        </div>
     );
 }
 
