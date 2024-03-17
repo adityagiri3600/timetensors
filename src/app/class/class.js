@@ -1,5 +1,6 @@
 import {React,useState,useEffect} from "react";
 import "./class.css";
+import Icon from "../icon/icon";
 
 const Class = ({Subject,Start,End,date}) => {
     let cssClassName = `class `;
@@ -41,6 +42,7 @@ const Class = ({Subject,Start,End,date}) => {
         <div className={cssClassName}>
             <h2>{Subject}</h2>
             <p>{Start} - {End}</p>
+            {classesWithIcons.includes(Subject) && <Icon class={Subject} />}
         </div>
     );
 }

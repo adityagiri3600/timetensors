@@ -1,17 +1,17 @@
 import { React, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Papa from "papaparse";
-import Class from "../app/class/class";
 import Navigate from "../app/navigate/navigate";
 import ClassList from "../app/classList/classList";
 import Datetime from "../app/datetime/datetime";
+import Batch from "../app/batch/batch";
 import "./Section.css"
 
 const Section = () => {
     const { section } = useParams();
     const [data, setData] = useState([]);
     useEffect(() => {
-        Papa.parse(`/${section}.csv`, {
+        Papa.parse(`/data/${section}1.csv`, {
             download: true,
             header: true,
             complete: data => {
@@ -47,6 +47,7 @@ const Section = () => {
             <h1 className={"title"}>TimeTrack</h1>
             <div className="datetime-batch-container">
                 <Datetime date={date} />
+                <Batch setData={setData} section={section}/>
             </div>
             <Navigate handlePrev={handlePrev} handleNext={handleNext} />
             <ClassList todaysClasses={todaysClasses} date={fakeDate} day={fakeWeekDay} />
