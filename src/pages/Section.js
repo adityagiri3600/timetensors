@@ -1,4 +1,4 @@
-import {React,useState,useEffect} from "react";
+import { React, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Papa from "papaparse";
 import Class from "../app/class/class";
@@ -34,22 +34,23 @@ const Section = () => {
 
     const handleNext = () => {
         fakeDate.setDate(date.getDate() + 1);
-        setFakeWeekDay((fakeWeekDay+1)%7);
+        setFakeWeekDay((fakeWeekDay + 1) % 7);
     }
-    
+
     const handlePrev = () => {
         fakeDate.setDate(date.getDate() - 1);
-        setFakeWeekDay((fakeWeekDay+6)%7);
+        setFakeWeekDay((fakeWeekDay + 6) % 7);
     }
 
     return (
-                <div>
-                    <h1 className={"title"}>TimeTrack</h1>
-                    <h2 className={"info"}><a href="https://github.com/Xyncross1111/timetrack">Repo</a></h2>
-                    <Datetime date={date}/>
-                    <Navigate handlePrev={handlePrev} handleNext={handleNext} />
-                    <ClassList todaysClasses={todaysClasses} date={fakeDate} day={fakeWeekDay} />
-                </div>
+        <div>
+            <h1 className={"title"}>TimeTrack</h1>
+            <div className="datetime-batch-container">
+                <Datetime date={date} />
+            </div>
+            <Navigate handlePrev={handlePrev} handleNext={handleNext} />
+            <ClassList todaysClasses={todaysClasses} date={fakeDate} day={fakeWeekDay} />
+        </div>
     );
 }
 

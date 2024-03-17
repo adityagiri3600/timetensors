@@ -29,9 +29,11 @@ a{
 }
 
 h1{
+  margin: 0;
   margin-top: 10px;
   text-align: center;
   font-size: 1.5rem;
+  font-weight: 100;
   font-family: QuicksandRegular, "Roboto Light", sans-serif;
   text-shadow: 0px 0px 10px #ffffff;
   user-select: text;
