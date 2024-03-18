@@ -5,6 +5,7 @@ import Navigate from "../app/navigate/navigate";
 import ClassList from "../app/classList/classList";
 import Datetime from "../app/datetime/datetime";
 import Batch from "../app/batch/batch";
+import NewTimeTable from "../app/newTimeTable/newTimeTable";
 import "./Section.css"
 
 const Section = () => {
@@ -45,6 +46,7 @@ const Section = () => {
     return (
         <div>
             <h1 className={"title"}>TimeTrack</h1>
+            <NewTimeTable />
             <div className="datetime-batch-container">
                 <Datetime date={date} />
                 <Batch setData={setData} section={section}/>

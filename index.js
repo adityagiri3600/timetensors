@@ -1,13 +1,16 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const port = 3000;
+const port = 5000;
 
 app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.json());
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/client/build/index.html'));
 });
+
+app.use('/api/newTimeTable', require('./api/newTimeTable'));
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
