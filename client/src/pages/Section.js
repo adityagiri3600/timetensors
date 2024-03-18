@@ -18,7 +18,7 @@ const Section = () => {
                 setData(data.data);
             }
         });
-    }, []);
+    });
 
     const [date, setDate] = useState(new Date());
     const [fakeDate, setFakeDate] = useState(date);
