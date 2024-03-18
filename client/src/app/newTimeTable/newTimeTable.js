@@ -10,8 +10,7 @@ class NewTimeTable extends React.Component {
         },
         body: JSON.stringify({ ttName: 'timetable1',
                                 classes:[
-                                        { day: 1, subject: 'Math', start: '09:00', end: '10:00' },
-                                        { day: 1, subject: 'OOPS', start: '10:00', end: '11:00' }
+                                        { day: this.props.day, subject: this.props.subject, start: this.props.start, end: this.props.end }
                                 ]})
     })
     .then(response => response.json())
@@ -22,7 +21,7 @@ class NewTimeTable extends React.Component {
   render() {
     return (
       <button onClick={this.handleClick} className='newTimeTable-btn'>
-        +
+        Create
       </button>
     );
   }

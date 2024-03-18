@@ -43,6 +43,11 @@ h1{
   font-size: 2rem;
 }
 
+a{
+  color: inherit;
+  text-decoration: none;
+}
+
 .info {
   text-align: center;
   font-family: QuickSandLight, "Roboto Light", sans-serif;

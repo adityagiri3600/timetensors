@@ -5,21 +5,25 @@ import Navigate from "../app/navigate/navigate";
 import ClassList from "../app/classList/classList";
 import Datetime from "../app/datetime/datetime";
 import Batch from "../app/batch/batch";
-import NewTimeTable from "../app/newTimeTable/newTimeTable";
 import "./Section.css"
 
 const Section = () => {
     const { section } = useParams();
     const [data, setData] = useState([]);
-    useEffect(() => {
-        Papa.parse(`/data/${section}1.csv`, {
+
+    const fetchData = async () => {
+        Papa.parse(`/data/${section}.csv`, {
             download: true,
             header: true,
             complete: data => {
                 setData(data.data);
             }
         });
-    });
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     const [date, setDate] = useState(new Date());
     const [fakeDate, setFakeDate] = useState(date);
@@ -45,11 +49,9 @@ const Section = () => {
 
     return (
         <div>
-            <h1 className={"title"}>TimeTrack</h1>
-            <NewTimeTable />
+            <h1 className={"title"}> <a href="/">TimeTrack</a> </h1>
             <div className="datetime-batch-container">
                 <Datetime date={date} />
-                <Batch setData={setData} section={section}/>
             </div>
             <Navigate handlePrev={handlePrev} handleNext={handleNext} />
             <ClassList todaysClasses={todaysClasses} date={fakeDate} day={fakeWeekDay} />
