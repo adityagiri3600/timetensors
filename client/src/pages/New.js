@@ -24,8 +24,8 @@ const New = () => {
     const [ttName, setTtName] = useState("")
 
     const [nameOfClass, setNameOfClass] = useState("")
-    const [startTime, setStartTime] = useState("")
-    const [endTime, setEndTime] = useState("")
+    const [startTime, setStartTime] = useState("12:00")
+    const [endTime, setEndTime] = useState("13:00")
 
     return (
         <div>

@@ -22,3 +22,10 @@
     border-left: 16px solid #2b7df8;
     outline: none;
 }
+input::placeholder{
+    color: rgba(255, 255, 255, 0.349);
+    text-shadow: none;
+}
+input[type=time]{
+    text-shadow: none;
+}
