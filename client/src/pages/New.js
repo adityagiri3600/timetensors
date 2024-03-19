@@ -33,7 +33,7 @@ const New = () => {
             <Navigate handlePrev={handlePrev} handleNext={handleNext} />
             <input type="text" placeholder="Name your TimeTable" value={ttName} onChange={(e) => setTtName(e.target.value)} className="ttNameField"/>
             <NewClass nameOfClass={nameOfClass} setNameOfClass={setNameOfClass} startTime={startTime} setStartTime={setStartTime} endTime={endTime} setEndTime={setEndTime} />
-            <NewTimeTable day={fakeWeekDay} subject={nameOfClass} start={startTime} end={endTime} />
+            <NewTimeTable ttName={ttName} day={fakeWeekDay} subject={nameOfClass} start={startTime} end={endTime} />
         </div>
     );
 }

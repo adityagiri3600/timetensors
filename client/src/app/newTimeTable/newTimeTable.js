@@ -8,7 +8,7 @@ class NewTimeTable extends React.Component {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ ttName: 'timetable1',
+        body: JSON.stringify({ ttName: this.props.ttName,
                                 classes:[
                                         { day: this.props.day, subject: this.props.subject, start: this.props.start, end: this.props.end }
                                 ]})
