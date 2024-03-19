@@ -9,9 +9,8 @@ class NewTimeTable extends React.Component {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ ttName: this.props.ttName,
-                                classes:[
-                                        { day: this.props.day, subject: this.props.subject, start: this.props.start, end: this.props.end }
-                                ]})
+                                classes: this.props.classes
+                              })
     })
     .then(response => response.json())
     .then(data => console.log(data))
@@ -20,7 +19,7 @@ class NewTimeTable extends React.Component {
 
   render() {
     return (
-      <button onClick={this.handleClick} className='newTimeTable-btn'>
+      <button onClick={this.handleClick} className='newTimeTable-btn' disabled={this.props.disabled}>
         Create
       </button>
     );

@@ -1,4 +1,4 @@
-import {React,useState,useEffect} from "react";
+import { React, useState, useEffect } from "react";
 import Navigate from "../app/navigate/navigate";
 import NewClass from "../app/newClass/newClass";
 import NewTimeTable from "../app/newTimeTable/newTimeTable";
@@ -23,17 +23,29 @@ const New = () => {
 
     const [ttName, setTtName] = useState("")
 
-    const [nameOfClass, setNameOfClass] = useState("")
-    const [startTime, setStartTime] = useState("12:00")
-    const [endTime, setEndTime] = useState("13:00")
+    const [classes, setClasses] = useState([
+        { day: weekDay, subject: "", start: "12:00", end: "13:00" }
+    ]);
+
+    const addClass = () => {
+        setClasses([...classes, { day: fakeWeekDay, subject: "", start: "12:00", end: "13:00" }])
+    }
 
     return (
         <div>
+            <input type="text" placeholder="TimeTable name" value={ttName} onChange={(e) => setTtName(e.target.value)} className="ttNameField" />
             <h1 className="dayTitle">{fakeDate.toLocaleDateString('en-us', { weekday: "long" })}</h1>
             <Navigate handlePrev={handlePrev} handleNext={handleNext} />
-            <input type="text" placeholder="Name your TimeTable" value={ttName} onChange={(e) => setTtName(e.target.value)} className="ttNameField"/>
-            <NewClass nameOfClass={nameOfClass} setNameOfClass={setNameOfClass} startTime={startTime} setStartTime={setStartTime} endTime={endTime} setEndTime={setEndTime} />
-            <NewTimeTable ttName={ttName} day={fakeWeekDay} subject={nameOfClass} start={startTime} end={endTime} />
+            {
+                classes.map((c, i) => (
+                    c.day === fakeWeekDay ?
+                        <NewClass key={i} classes={classes} setClasses={setClasses} index={i} day={fakeWeekDay} />
+                        : null
+
+                ))
+            }
+            <button onClick={addClass} className="newClass-btn">Add Class</button>
+            <NewTimeTable ttName={ttName} classes={classes} disabled={ttName === ""} />
         </div>
     );
 }
