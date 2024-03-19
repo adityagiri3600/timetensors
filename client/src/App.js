@@ -2,7 +2,7 @@ import React from 'react';
 import {Routes, Route} from "react-router-dom";
 import Home from './pages/Home';
 import New from './pages/New';
-import Section from './pages/Section';
+import TimeTable from './pages/TimeTable';
 import './App.css';
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/new' element={<New />} />
-        <Route path=':section' element={<Section />} />
+        <Route path=':ttName' element={<TimeTable />} />
       </Routes>
     </>
   );

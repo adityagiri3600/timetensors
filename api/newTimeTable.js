@@ -7,7 +7,7 @@ router.post('/', (req, res) => {
     const data = req.body.classes;
 
     const csvWriter = createCsvWriter({
-        path: `./client/public/data/${ttName}.csv`,
+        path: `./api/data/${ttName}.csv`,
         header: [
             { id: 'day', title: 'Day' },
             { id: 'subject', title: 'Subject' },
@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
 
     csvWriter.writeRecords(data)
         .then(() => {
-            console.log('CSV file created successfully');
+            console.log(`New timetable added: ${ttName}.csv`);
             res.status(200).json(req.body);
         })
         .catch(error => {

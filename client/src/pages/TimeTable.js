@@ -5,20 +5,30 @@ import Navigate from "../app/navigate/navigate";
 import ClassList from "../app/classList/classList";
 import Datetime from "../app/datetime/datetime";
 import Batch from "../app/batch/batch";
-import "./Section.css"
+import NotFound from "./NotFound";
+import "./TimeTable.css"
 
-const Section = () => {
-    const { section } = useParams();
+const TimeTable = () => {
+    const { ttName } = useParams();
     const [data, setData] = useState([]);
+    const [notFound, setNotFound] = useState(false);
 
     const fetchData = async () => {
-        Papa.parse(`/data/${section}.csv`, {
-            download: true,
+
+        const response = await fetch(`api/data/${ttName}.csv`);
+        if (!response.ok) {
+            setNotFound(true);
+            return;
+        }
+
+        const csvData = await response.text();
+
+        const parsedData = Papa.parse(csvData, {
             header: true,
-            complete: data => {
-                setData(data.data);
-            }
+            dynamicTyping: true
         });
+
+        setData(parsedData.data);
     };
 
     useEffect(() => {
@@ -48,15 +58,22 @@ const Section = () => {
     }
 
     return (
-        <div>
-            <h1 className={"title"}> <a href="/">TimeTrack</a> </h1>
-            <div className="datetime-batch-container">
-                <Datetime date={date} />
-            </div>
-            <Navigate handlePrev={handlePrev} handleNext={handleNext} />
-            <ClassList todaysClasses={todaysClasses} date={fakeDate} day={fakeWeekDay} />
-        </div>
+        <>
+            {
+                notFound ?
+                    <NotFound ttName={ttName}/>
+                    :
+                    <div>
+                        <h1 className={"title"}> <a href="/">TimeTrack</a> </h1>
+                        <div className="datetime-batch-container">
+                            <Datetime date={date} />
+                        </div>
+                        <Navigate handlePrev={handlePrev} handleNext={handleNext} />
+                        <ClassList todaysClasses={todaysClasses} date={fakeDate} day={fakeWeekDay} />
+                    </div>
+            }
+        </>
     );
 }
 
-export default Section;
+export default TimeTable;

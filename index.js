@@ -6,6 +6,10 @@ const port = 5000;
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(express.json());
 
+app.get('/api/data/:section', (req, res) => {
+    res.sendFile(path.join(__dirname, `/api/data/${req.params.section}`));
+});
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/client/build/index.html'));
 });
