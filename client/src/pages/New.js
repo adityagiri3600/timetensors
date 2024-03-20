@@ -22,6 +22,7 @@ const New = () => {
     }
 
     const [ttName, setTtName] = useState("")
+    const [ttCode, setTtCode] = useState("")
 
     const [classes, setClasses] = useState([
         { day: weekDay, subject: "", start: "12:00", end: "13:00" }
@@ -34,6 +35,7 @@ const New = () => {
     return (
         <div>
             <input type="text" placeholder="TimeTable name" value={ttName} onChange={(e) => setTtName(e.target.value)} className="ttNameField" />
+            <input type="text" placeholder="code" value={ttCode} onChange={(e) => setTtCode(e.target.value)} className="ttCodeField" />
             <h1 className="dayTitle">{fakeDate.toLocaleDateString('en-us', { weekday: "long" })}</h1>
             <Navigate handlePrev={handlePrev} handleNext={handleNext} />
             {
@@ -45,7 +47,7 @@ const New = () => {
                 ))
             }
             <button onClick={addClass} className="newClass-btn">Add Class</button>
-            <NewTimeTable ttName={ttName} classes={classes} disabled={ttName === ""} />
+            <NewTimeTable ttName={ttName} classes={classes} ttCode={ttCode} disabled={ttName === ""} />
         </div>
     );
 }

@@ -4,17 +4,19 @@ import './newTimeTable.css';
 class NewTimeTable extends React.Component {
   handleClick = () => {
     fetch('/api/newTimeTable', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ ttName: this.props.ttName,
-                                classes: this.props.classes
-                              })
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        ttName: this.props.ttName,
+        classes: this.props.classes,
+        ttCode: this.props.ttCode
+      })
     })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
   };
 
   render() {

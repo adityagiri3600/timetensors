@@ -9,13 +9,13 @@ import NotFound from "./NotFound";
 import "./TimeTable.css"
 
 const TimeTable = () => {
-    const { ttName } = useParams();
+    const {  ttCode } = useParams();
     const [data, setData] = useState([]);
     const [notFound, setNotFound] = useState(false);
 
     const fetchData = async () => {
 
-        const response = await fetch(`api/data/${ttName}.csv`);
+        const response = await fetch(`api/data/${ttCode}`);
         if (!response.ok) {
             setNotFound(true);
             return;
@@ -61,7 +61,7 @@ const TimeTable = () => {
         <>
             {
                 notFound ?
-                    <NotFound ttName={ttName}/>
+                    <NotFound ttName={ttCode}/>
                     :
                     <div>
                         <h1 className={"title"}> <a href="/">TimeTrack</a> </h1>
