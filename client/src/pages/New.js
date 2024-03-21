@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import Navigate from "../app/navigate/navigate";
 import NewClass from "../app/newClass/newClass";
 import NewTimeTable from "../app/newTimeTable/newTimeTable";
+import Created from "./Created";
 import "./New.css"
 
 const New = () => {
@@ -23,6 +24,7 @@ const New = () => {
 
     const [ttName, setTtName] = useState("")
     const [ttCode, setTtCode] = useState("")
+    const [created, setCreated] = useState(false)
 
     const [classes, setClasses] = useState([
         { day: weekDay, subject: "", start: "12:00", end: "13:00" }
@@ -33,22 +35,53 @@ const New = () => {
     }
 
     return (
-        <div>
-            <input type="text" placeholder="TimeTable name" value={ttName} onChange={(e) => setTtName(e.target.value)} className="ttNameField" />
-            <input type="text" placeholder="code" value={ttCode} onChange={(e) => setTtCode(e.target.value)} className="ttCodeField" />
-            <h1 className="dayTitle">{fakeDate.toLocaleDateString('en-us', { weekday: "long" })}</h1>
-            <Navigate handlePrev={handlePrev} handleNext={handleNext} />
-            {
-                classes.map((c, i) => (
-                    c.day === fakeWeekDay ?
-                        <NewClass key={i} classes={classes} setClasses={setClasses} index={i} day={fakeWeekDay} />
-                        : null
-
-                ))
-            }
-            <button onClick={addClass} className="newClass-btn">Add Class</button>
-            <NewTimeTable ttName={ttName} classes={classes} ttCode={ttCode} disabled={ttName === ""} />
-        </div>
+        <>
+            {created ? (
+                <Created />
+            ) : (
+                <div>
+                    <input
+                        type="text"
+                        placeholder="TimeTable name"
+                        value={ttName}
+                        onChange={(e) => setTtName(e.target.value)}
+                        className="ttNameField"
+                    />
+                    <input
+                        type="text"
+                        placeholder="code"
+                        value={ttCode}
+                        onChange={(e) => setTtCode(e.target.value)}
+                        className="ttCodeField"
+                    />
+                    <h1 className="dayTitle">
+                        {fakeDate.toLocaleDateString("en-us", { weekday: "long" })}
+                    </h1>
+                    <Navigate handlePrev={handlePrev} handleNext={handleNext} />
+                    {classes.map((c, i) =>
+                        c.day === fakeWeekDay ? (
+                            <NewClass
+                                key={i}
+                                classes={classes}
+                                setClasses={setClasses}
+                                index={i}
+                                day={fakeWeekDay}
+                            />
+                        ) : null
+                    )}
+                    <button onClick={addClass} className="newClass-btn">
+                        Add Class
+                    </button>
+                    <NewTimeTable
+                        ttName={ttName}
+                        classes={classes}
+                        ttCode={ttCode}
+                        setCreated={setCreated}
+                        disabled={ttName === ""}
+                    />
+                </div>
+            )}
+        </>
     );
 }
 

@@ -38,7 +38,9 @@ h1{
   text-shadow: 0px 0px 10px #ffffff;
   user-select: text;
 }
-
+.timetable-container{
+  height: 95vh;
+}
 .title {
   font-size: 2rem;
 }

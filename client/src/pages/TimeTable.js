@@ -6,6 +6,9 @@ import ClassList from "../app/classList/classList";
 import Datetime from "../app/datetime/datetime";
 import Batch from "../app/batch/batch";
 import NotFound from "./NotFound";
+import ReactDOM from 'react-dom';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 import "./TimeTable.css"
 
 const TimeTable = () => {
@@ -41,11 +44,9 @@ const TimeTable = () => {
     const [weekDay, setWeekDay] = useState(date.getDay())
     const [fakeWeekDay, setFakeWeekDay] = useState(weekDay);
 
-    const [todaysClasses, setTodaysClasses] = useState(data.filter(someClass => someClass.Day == weekDay));
-
-    useEffect(() => {
-        setTodaysClasses(data.filter(someClass => someClass.Day == fakeWeekDay));
-    }, [data, fakeWeekDay]);
+    const getClassesAtDay = (day) => {
+        return data.filter(someClass => someClass.Day == day);
+    }
 
     const handleNext = () => {
         fakeDate.setDate(date.getDate() + 1);
@@ -57,21 +58,55 @@ const TimeTable = () => {
         setFakeWeekDay((fakeWeekDay + 6) % 7);
     }
 
+    const handleCarouselChange = (index) => {
+        index += weekDay;
+        index %= 7;
+        console.log(index, fakeWeekDay)
+        if(fakeWeekDay < index || (index==0 && fakeWeekDay==6)){
+            fakeDate.setDate(date.getDate() + 1);
+            setFakeWeekDay(index);
+        }
+        else if(fakeWeekDay > index || (index==6 && fakeWeekDay==0)){
+            fakeDate.setDate(date.getDate() - 1);
+            setFakeWeekDay(index);
+        }
+    }
+
     return (
         <>
-            {
-                notFound ?
-                    <NotFound ttName={ttCode}/>
-                    :
-                    <div>
-                        <h1 className={"title"}> <a href="/">TimeTrack</a> </h1>
-                        <div className="datetime-batch-container">
-                            <Datetime date={date} />
-                        </div>
-                        <Navigate handlePrev={handlePrev} handleNext={handleNext} />
-                        <ClassList todaysClasses={todaysClasses} date={fakeDate} day={fakeWeekDay} />
+            {notFound ? (
+                <NotFound ttName={ttCode} />
+            ) : (
+                <div className="timetable-container">
+                    <h1 className={"title"}>
+                        <a href="/">TimeTrack</a>
+                    </h1>
+                    <div className="datetime-batch-container">
+                        <Datetime date={date} />
                     </div>
-            }
+                    <Navigate handlePrev={handlePrev} handleNext={handleNext} />
+                    <Carousel
+                        showThumbs={false}
+                        showArrows={false}
+                        showStatus={false}
+                        showIndicators={false}
+                        infiniteLoop={true}
+                        autoPlay={false}
+                        onChange={handleCarouselChange}
+                        swipeScrollTolerance={50}
+                        preventMovementUntilSwipeScrollTolerance={true}
+                    >
+                        {[...Array(7).keys()].map((day) => (
+                            <div key={day}>
+                                <ClassList
+                                    todaysClasses={getClassesAtDay((day + weekDay)%7)}
+                                    date={fakeDate}
+                                />
+                            </div>
+                        ))}
+                    </Carousel>
+                </div>
+            )}
         </>
     );
 }
