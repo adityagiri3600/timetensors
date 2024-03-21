@@ -1,12 +1,10 @@
 import { React, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Papa from "papaparse";
-import Navigate from "../app/navigate/navigate";
 import ClassList from "../app/classList/classList";
 import Datetime from "../app/datetime/datetime";
 import Batch from "../app/batch/batch";
 import NotFound from "./NotFound";
-import ReactDOM from 'react-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import "./TimeTable.css"
@@ -58,14 +56,18 @@ const TimeTable = () => {
         setFakeWeekDay((fakeWeekDay + 6) % 7);
     }
 
+    const floorMod = (a, b) => {
+        return ((a % b) + b) % b;
+    }
+
     const handleCarouselChange = (index) => {
         index += weekDay;
         index %= 7;
-        if(fakeWeekDay < index || (index==0 && fakeWeekDay==6)){
+        if(floorMod(index - fakeWeekDay, 7) == 1){
             fakeDate.setDate(date.getDate() + 1);
             setFakeWeekDay(index);
         }
-        else if(fakeWeekDay > index || (index==6 && fakeWeekDay==0)){
+        else if(floorMod(index - fakeWeekDay, 7) == 6){
             fakeDate.setDate(date.getDate() - 1);
             setFakeWeekDay(index);
         }
@@ -83,7 +85,6 @@ const TimeTable = () => {
                     <div className="datetime-batch-container">
                         <Datetime date={date} />
                     </div>
-                    <Navigate handlePrev={handlePrev} handleNext={handleNext} />
                     <Carousel
                         showThumbs={false}
                         showArrows={false}
