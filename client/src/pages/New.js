@@ -24,6 +24,7 @@ const New = () => {
 
     const [ttName, setTtName] = useState("")
     const [ttCode, setTtCode] = useState("")
+    const [ttRoute, setTtRoute] = useState("")
     const [created, setCreated] = useState(false)
 
     const [classes, setClasses] = useState([
@@ -37,7 +38,7 @@ const New = () => {
     return (
         <>
             {created ? (
-                <Created />
+                <Created ttName={ttName} ttRoute={ttRoute}/>
             ) : (
                 <div>
                     <input
@@ -77,6 +78,7 @@ const New = () => {
                         classes={classes}
                         ttCode={ttCode}
                         setCreated={setCreated}
+                        setTtRoute={setTtRoute}
                         disabled={ttName === ""}
                     />
                 </div>

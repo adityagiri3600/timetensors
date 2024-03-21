@@ -61,7 +61,6 @@ const TimeTable = () => {
     const handleCarouselChange = (index) => {
         index += weekDay;
         index %= 7;
-        console.log(index, fakeWeekDay)
         if(fakeWeekDay < index || (index==0 && fakeWeekDay==6)){
             fakeDate.setDate(date.getDate() + 1);
             setFakeWeekDay(index);
@@ -75,7 +74,7 @@ const TimeTable = () => {
     return (
         <>
             {notFound ? (
-                <NotFound ttName={ttCode} />
+                <NotFound ttCode={ttCode} />
             ) : (
                 <div className="timetable-container">
                     <h1 className={"title"}>

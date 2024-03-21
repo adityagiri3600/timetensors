@@ -5,7 +5,10 @@ class NewTimeTable extends React.Component {
 
   handleResponse = (response) => {
     if (response.status === 200) {
-      this.props.setCreated(true);
+      response.json().then(data => {
+        this.props.setTtRoute(data.ttRoute);
+        this.props.setCreated(true);
+      });
     }
   };
 

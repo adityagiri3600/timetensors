@@ -25,7 +25,7 @@ router.post('/', (req, res) => {
     csvWriter.writeRecords(data)
         .then(() => {
             console.log(`New timetable added: ${folderName}`);
-            res.status(200).json(req.body);
+            res.status(200).json({ ttRoute: folderName});
         })
         .catch(error => {
             console.error('Error writing to CSV file:', error);
