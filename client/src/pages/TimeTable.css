@@ -85,3 +85,6 @@ body {
   margin: 2.5vh auto;
   margin-bottom: 20px;
 }
+.carousel{
+  -webkit-tap-highlight-color: transparent;
+}

@@ -10,7 +10,7 @@ import { Carousel } from 'react-responsive-carousel';
 import "./TimeTable.css"
 
 const TimeTable = () => {
-    const {  ttCode } = useParams();
+    const { ttCode } = useParams();
     const [data, setData] = useState([]);
     const [notFound, setNotFound] = useState(false);
 
@@ -46,28 +46,38 @@ const TimeTable = () => {
         return data.filter(someClass => someClass.Day == day);
     }
 
-    const handleNext = () => {
-        fakeDate.setDate(date.getDate() + 1);
-        setFakeWeekDay((fakeWeekDay + 1) % 7);
-    }
-
-    const handlePrev = () => {
-        fakeDate.setDate(date.getDate() - 1);
-        setFakeWeekDay((fakeWeekDay + 6) % 7);
-    }
-
     const floorMod = (a, b) => {
         return ((a % b) + b) % b;
+    }
+    const diffmod7 = (a, b) => {
+        a %= 7
+        b %= 7
+        if (a < b) {
+            if (b - a < 4) {
+                return a - b;
+            }
+            else {
+                return a - b + 7;
+            }
+        }
+        else {
+            if (a - b < 4) {
+                return a - b;
+            }
+            else {
+                return a - b - 7;
+            }
+        }
     }
 
     const handleCarouselChange = (index) => {
         index += weekDay;
         index %= 7;
-        if(floorMod(index - fakeWeekDay, 7) == 1){
+        if (floorMod(index - fakeWeekDay, 7) == 1) {
             fakeDate.setDate(date.getDate() + 1);
             setFakeWeekDay(index);
         }
-        else if(floorMod(index - fakeWeekDay, 7) == 6){
+        else if (floorMod(index - fakeWeekDay, 7) == 6) {
             fakeDate.setDate(date.getDate() - 1);
             setFakeWeekDay(index);
         }
@@ -99,8 +109,14 @@ const TimeTable = () => {
                         {[...Array(7).keys()].map((day) => (
                             <div key={day}>
                                 <ClassList
-                                    todaysClasses={getClassesAtDay((day + weekDay)%7)}
-                                    date={fakeDate}
+                                    todaysClasses={getClassesAtDay((day + weekDay) % 7)}
+                                    date={
+                                        (weekDay + day) % 7 == fakeWeekDay
+                                            ? fakeDate
+                                            : new Date(fakeDate.getFullYear(), 
+                                                       fakeDate.getMonth(), 
+                                                       fakeDate.getDate() + diffmod7(floorMod(day + weekDay, 7), fakeWeekDay))
+                                    }
                                 />
                             </div>
                         ))}
