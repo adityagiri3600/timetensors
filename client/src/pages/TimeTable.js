@@ -99,7 +99,9 @@ const TimeTable = () => {
                         showThumbs={false}
                         showArrows={false}
                         showStatus={false}
-                        showIndicators={false}
+                        showIndicators={true}
+                        useKeyboardArrows={true}
+                        autoFocus={true}
                         infiniteLoop={true}
                         autoPlay={false}
                         onChange={handleCarouselChange}

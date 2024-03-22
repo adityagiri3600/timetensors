@@ -2,7 +2,7 @@
     width: 100%;
     max-width: 90%;
     margin: 2vw auto;
-    margin-top: 10px;
+    margin-top: 20px;
     background: radial-gradient(circle,#2b7df8b8 -30%, #99bdefd7 0%, #2b7df8b8 30%);
     background-size: 400% 400%;
     animation: gradientAnimation 10s ease infinite;
