@@ -5,8 +5,7 @@ import ClassList from "../app/classList/classList";
 import Datetime from "../app/datetime/datetime";
 import Batch from "../app/batch/batch";
 import NotFound from "./NotFound";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from 'react-responsive-carousel';
+import Carousel from "../app/carousel/carousel";
 import "./TimeTable.css"
 
 const TimeTable = () => {
@@ -95,21 +94,8 @@ const TimeTable = () => {
                     <div className="datetime-batch-container">
                         <Datetime date={date} />
                     </div>
-                    <Carousel
-                        showThumbs={false}
-                        showArrows={false}
-                        showStatus={false}
-                        showIndicators={true}
-                        useKeyboardArrows={true}
-                        autoFocus={true}
-                        infiniteLoop={true}
-                        autoPlay={false}
-                        onChange={handleCarouselChange}
-                        swipeScrollTolerance={50}
-                        preventMovementUntilSwipeScrollTolerance={true}
-                    >
+                    <Carousel onChange={handleCarouselChange}>
                         {[...Array(7).keys()].map((day) => (
-                            <div key={day}>
                                 <ClassList
                                     todaysClasses={getClassesAtDay((day + weekDay) % 7)}
                                     date={
@@ -120,7 +106,6 @@ const TimeTable = () => {
                                                        fakeDate.getDate() + diffmod7(floorMod(day + weekDay, 7), fakeWeekDay))
                                     }
                                 />
-                            </div>
                         ))}
                     </Carousel>
                 </div>
