@@ -20,6 +20,7 @@ app.get('*', (req, res) => {
 });
 
 app.use('/api/newTimeTable', require('./api/newTimeTable'));
+app.use('/api/updateTimeTable', require('./api/updateTimeTable'));
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

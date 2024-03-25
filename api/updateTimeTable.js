@@ -8,12 +8,10 @@ router.post('/', (req, res) => {
     const data = req.body.classes;
     const ttCode = req.body.ttCode;
 
-    const folderName = Math.random().toString(36).substring(7);
-    fs.mkdirSync(`./api/data/${folderName}`);
-    fs.writeFileSync(`./api/data/${folderName}/metadata.json`, JSON.stringify({ttName: ttName, ttCode: ttCode}));
+    fs.writeFileSync(`./api/data/${ttCode}/metadata.json`, JSON.stringify({ttName: ttName, ttCode: ttCode}));
 
     const csvWriter = createCsvWriter({
-        path: `./api/data/${folderName}/timetable.csv`,
+        path: `./api/data/${ttCode}/timetable.csv`,
         header: [
             { id: 'Day', title: 'Day' },
             { id: 'Subject', title: 'Subject' },
@@ -24,8 +22,8 @@ router.post('/', (req, res) => {
 
     csvWriter.writeRecords(data)
         .then(() => {
-            console.log(`New timetable added: ${folderName}`);
-            res.status(200).json({ ttRoute: folderName});
+            console.log(`Time table updated: ${ttCode}`);
+            res.status(200).json({});
         })
         .catch(error => {
             console.error('Error writing to CSV file:', error);

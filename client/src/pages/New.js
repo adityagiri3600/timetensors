@@ -28,11 +28,11 @@ const New = () => {
     const [created, setCreated] = useState(false)
 
     const [classes, setClasses] = useState([
-        { day: weekDay, subject: "", start: "12:00", end: "13:00" }
+        { Day: weekDay, Subject: "", Start: "12:00", End: "13:00" }
     ]);
 
     const addClass = () => {
-        setClasses([...classes, { day: fakeWeekDay, subject: "", start: "12:00", end: "13:00" }])
+        setClasses([...classes, { Day: fakeWeekDay, Subject: "", Start: "12:00", End: "13:00" }])
     }
 
     return (
@@ -60,13 +60,13 @@ const New = () => {
                     </h1>
                     <Navigate handlePrev={handlePrev} handleNext={handleNext} />
                     {classes.map((c, i) =>
-                        c.day === fakeWeekDay ? (
+                        c.Day === fakeWeekDay ? (
                             <NewClass
                                 key={i}
                                 classes={classes}
                                 setClasses={setClasses}
                                 index={i}
-                                day={fakeWeekDay}
+                                Day={fakeWeekDay}
                             />
                         ) : null
                     )}

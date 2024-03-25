@@ -1,0 +1,12 @@
+.newTimeTable-btn{
+    color: white;
+    background-color: #159215;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: QuickSandRegular;
+}
+.newTimeTable-btn:disabled{
+    background-color: #0f3c80;
+}

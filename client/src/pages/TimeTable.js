@@ -15,7 +15,7 @@ const TimeTable = () => {
 
     const fetchData = async () => {
 
-        const response = await fetch(`api/data/${ttCode}`);
+        const response = await fetch(`/api/data/${ttCode}`);
         if (!response.ok) {
             setNotFound(true);
             return;
@@ -93,6 +93,7 @@ const TimeTable = () => {
                     </h1>
                     <div className="datetime-batch-container">
                         <Datetime date={date} />
+                        <a href={`/update/${ttCode}`}>Edit</a>
                     </div>
                     <Carousel onChange={handleCarouselChange}>
                         {[...Array(7).keys()].map((day) => (

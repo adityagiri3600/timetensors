@@ -1,19 +1,18 @@
 import React from 'react';
-import './newTimeTable.css';
+import './updateTimeTable.css';
 
-class NewTimeTable extends React.Component {
+class UpdateTimeTable extends React.Component {
 
   handleResponse = (response) => {
     if (response.status === 200) {
       response.json().then(data => {
-        this.props.setTtRoute(data.ttRoute);
-        this.props.setCreated(true);
+        console.log("Time table updated")
       });
     }
   };
 
   handleClick = () => {
-    fetch('/api/newTimeTable', {
+    fetch('/api/updateTimeTable', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -27,15 +26,16 @@ class NewTimeTable extends React.Component {
       .then(this.handleResponse)
       .catch(error => console.error('Error:', error));
     console.log(this.props.classes);
+    window.location.replace(`/${this.props.ttCode}`);
   };
 
   render() {
     return (
       <button onClick={this.handleClick} className='newTimeTable-btn' disabled={this.props.disabled}>
-        Create
+        Update
       </button>
     );
   }
 }
 
-export default NewTimeTable;
+export default UpdateTimeTable;

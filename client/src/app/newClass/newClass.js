@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import "./newClass.css";
 
-const NewClass = ({ classes, setClasses, index, day }) => {
+const NewClass = ({ classes, setClasses, index, Day }) => {
 
     const deleteClass = () => {
         setClasses(classes.filter((c, i) => i !== index))
@@ -12,11 +12,11 @@ const NewClass = ({ classes, setClasses, index, day }) => {
             <input
                 type="text"
                 placeholder="Class Name"
-                value={classes[index].subject}
+                value={classes[index].Subject}
                 onChange={(e) =>
                     setClasses(
                         classes.map((c, i) =>
-                            i === index ? { ...c, subject: e.target.value, day: day } : c
+                            i === index ? { ...c, Subject: e.target.value, Day: Day } : c
                         )
                     )
                 }
@@ -24,11 +24,11 @@ const NewClass = ({ classes, setClasses, index, day }) => {
             />
             <input
                 type="time"
-                value={classes[index].start}
+                value={classes[index].Start}
                 onChange={(e) =>
                     setClasses(
                         classes.map((c, i) =>
-                            i === index ? { ...c, start: e.target.value, day: day } : c
+                            i === index ? { ...c, Start: e.target.value, Day: Day } : c
                         )
                     )
                 }
@@ -36,11 +36,11 @@ const NewClass = ({ classes, setClasses, index, day }) => {
             />
             <input
                 type="time"
-                value={classes[index].end}
+                value={classes[index].End}
                 onChange={(e) =>
                     setClasses(
                         classes.map((c, i) =>
-                            i === index ? { ...c, end: e.target.value, day: day } : c
+                            i === index ? { ...c, End: e.target.value, Day: Day } : c
                         )
                     )
                 }
