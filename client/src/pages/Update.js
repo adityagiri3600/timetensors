@@ -4,6 +4,7 @@ import NewClass from "../app/newClass/newClass";
 import Navigate from "../app/navigate/navigate";
 import UpdateTimeTable from "../app/updateTimeTable/updateTimeTable";
 import Papa from "papaparse";
+import "./New.css";
 
 const Update = () => {
     
@@ -47,6 +48,7 @@ const Update = () => {
     const [ttName, setTtName] = useState("");
     const [editCode, setEditCode] = useState("");
     const [data, setData] = useState([]);
+    const [editCodeError, setEditCodeError] = useState(false);
     
     const addClass = () => {
         setData([...data, { Day: fakeWeekDay, Subject: "", Start: "12:00", End: "13:00" }])
@@ -68,6 +70,7 @@ const Update = () => {
                 onChange={(e) => setEditCode(e.target.value)}
                 className="editCodeField"
             />
+            {editCodeError ? <p className="editCodeError">Invalid edit code</p> : null}
             <h1 className="dayTitle">
                 {fakeDate.toLocaleDateString("en-us", { weekday: "long" })}
             </h1>
@@ -87,10 +90,11 @@ const Update = () => {
                 Add Class
             </button>
             <UpdateTimeTable
-                ttName={ttName}
                 classes={data}
+                ttName={ttName}
                 ttRoute={ttRoute}
                 editCode={editCode}
+                setEditCodeError={setEditCodeError}
                 disabled={ttName === ""}
             />
         </div>

@@ -10,6 +10,7 @@ class UpdateTimeTable extends React.Component {
         }
         else {
             console.error("Error updating time table")
+            this.props.setEditCodeError(true);
         }
     };
 
@@ -28,7 +29,6 @@ class UpdateTimeTable extends React.Component {
         })
             .then(this.handleResponse)
             .catch(error => console.error('Error:', error));
-        console.log(this.props.classes);
     };
 
     render() {

@@ -47,3 +47,6 @@ input[type=time]{
     border-radius: 10px;
     padding: 10px;
 }
+.editCodeError{
+    color: red;
+}
