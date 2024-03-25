@@ -8,6 +8,21 @@
     src: url(fonts/Quicksand-Regular.ttf);
 }
 
+@font-face{
+    font-family: QuickSandMedium;
+    src: url(fonts/Quicksand-Medium.ttf);
+}
+
+@font-face{
+    font-family: QuickSandSemiBold;
+    src: url(fonts/Quicksand-SemiBold.ttf);
+}
+
+@font-face{
+    font-family: QuickSandBold;
+    src: url(fonts/Quicksand-Bold.ttf);
+}
+
 .class {
     margin-top: 10px;
     padding: 10px;

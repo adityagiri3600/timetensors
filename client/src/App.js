@@ -2,7 +2,7 @@ import React from 'react';
 import {Routes, Route} from "react-router-dom";
 import Home from './pages/Home';
 import New from './pages/New';
-import Update from './pages/Update';
+import Update from './pages/update-pages/Update';
 import TimeTable from './pages/TimeTable';
 import './App.css';
 

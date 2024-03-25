@@ -1,0 +1,17 @@
+.step-heading{
+    text-shadow: none;
+    text-align: left;
+    font-family: Helvetica;
+    font-weight: normal;
+    padding: 10px;
+    padding-top: 30px;
+    font-size: 1.4rem;
+}
+.stepCount{
+    color: grey;
+}
+.editCodeError{
+    color: red;
+    padding: 10px;
+    margin: 0;
+}
