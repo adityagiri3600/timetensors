@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-const Carousel = ({ children, transitionTime, getIndex, onChange }) => {
+const Carousel = ({ children, transitionTime, getIndex, onChange, thresholdFraction}) => {
 
     transitionTime = transitionTime || 0.3;
+    thresholdFraction = thresholdFraction || 0.25;
 
     const childWrapper = useRef(null);
     const carouselRef = useRef(null);
@@ -38,6 +39,8 @@ const Carousel = ({ children, transitionTime, getIndex, onChange }) => {
     const handleTouchEnd = (e) => {
         const diff = touchStartX - e.changedTouches[0].clientX;
         carouselRef.current.style.transition = `transform ${transitionTime}s ease-in-out`;
+        const threshold = thresholdFraction*childWidth;
+        if(Math.abs(diff)<threshold) return;
         if (diff > 0) {
             handleNext();
         } else if (diff < 0) {
