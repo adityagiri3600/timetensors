@@ -40,11 +40,15 @@ const Carousel = ({ children, transitionTime, getIndex, onChange, thresholdFract
         const diff = touchStartX - e.changedTouches[0].clientX;
         carouselRef.current.style.transition = `transform ${transitionTime}s ease-in-out`;
         const threshold = thresholdFraction*childWidth;
-        if(Math.abs(diff)<threshold) return;
-        if (diff > 0) {
-            handleNext();
-        } else if (diff < 0) {
-            handlePrev();
+        if(Math.abs(diff)<threshold){
+            setCurrentChildIndex(currentChildIndex);
+        }
+        else{
+            if (diff > 0) {
+                handleNext();
+            } else if (diff < 0) {
+                handlePrev();
+            }
         }
     }
 
