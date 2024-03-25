@@ -6,11 +6,11 @@ const fs = require('fs');
 router.post('/', (req, res) => {
     const ttName = req.body.ttName;
     const data = req.body.classes;
-    const ttCode = req.body.ttCode;
+    const editCode = req.body.editCode;
 
     const folderName = Math.random().toString(36).substring(7);
     fs.mkdirSync(`./api/data/${folderName}`);
-    fs.writeFileSync(`./api/data/${folderName}/metadata.json`, JSON.stringify({ttName: ttName, ttCode: ttCode}));
+    fs.writeFileSync(`./api/data/${folderName}/metadata.json`, JSON.stringify({ttName: ttName, editCode: editCode}));
 
     const csvWriter = createCsvWriter({
         path: `./api/data/${folderName}/timetable.csv`,

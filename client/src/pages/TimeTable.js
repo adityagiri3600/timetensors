@@ -9,13 +9,13 @@ import Carousel from "../app/carousel/carousel";
 import "./TimeTable.css"
 
 const TimeTable = () => {
-    const { ttCode } = useParams();
+    const { ttRoute } = useParams();
     const [data, setData] = useState([]);
     const [notFound, setNotFound] = useState(false);
 
     const fetchData = async () => {
 
-        const response = await fetch(`/api/data/${ttCode}`);
+        const response = await fetch(`/api/data/${ttRoute}`);
         if (!response.ok) {
             setNotFound(true);
             return;
@@ -85,7 +85,7 @@ const TimeTable = () => {
     return (
         <>
             {notFound ? (
-                <NotFound ttCode={ttCode} />
+                <NotFound ttRoute={ttRoute} />
             ) : (
                 <div className="timetable-container">
                     <h1 className={"title"}>
@@ -93,7 +93,7 @@ const TimeTable = () => {
                     </h1>
                     <div className="datetime-batch-container">
                         <Datetime date={date} />
-                        <a href={`/update/${ttCode}`}>Edit</a>
+                        <a href={`/update/${ttRoute}`}>Edit</a>
                     </div>
                     <Carousel onChange={handleCarouselChange}>
                         {[...Array(7).keys()].map((day) => (

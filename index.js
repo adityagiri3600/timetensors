@@ -7,12 +7,12 @@ const port = 5000;
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(express.json());
 
-app.get('/api/data/:ttCode', (req, res) => {
-    if (!fs.existsSync(path.join(__dirname, `/api/data/${req.params.ttCode}/timetable.csv`))) {
+app.get('/api/data/:ttRoute', (req, res) => {
+    if (!fs.existsSync(path.join(__dirname, `/api/data/${req.params.ttRoute}/timetable.csv`))) {
         res.status(404).send('Not found');
         return;
     }
-    res.sendFile(path.join(__dirname, `/api/data/${req.params.ttCode}/timetable.csv`));
+    res.sendFile(path.join(__dirname, `/api/data/${req.params.ttRoute}/timetable.csv`));
 });
 
 app.get('*', (req, res) => {

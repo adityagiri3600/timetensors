@@ -16,7 +16,7 @@
     font-family: QuickSandLight;
     font-size: 1.5rem;
 }
-.ttCodeField{
+.editCodeField{
     margin: 10px;
     width: 100px;
     padding: 10px;
@@ -30,7 +30,7 @@
 .ttNameField:focus{
     outline: none;
 }
-.ttCodeField:focus{
+.editCodeField:focus{
     outline: none;
 }
 input::placeholder{

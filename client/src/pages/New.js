@@ -23,7 +23,7 @@ const New = () => {
     }
 
     const [ttName, setTtName] = useState("")
-    const [ttCode, setTtCode] = useState("")
+    const [editCode, setEditCode] = useState("")
     const [ttRoute, setTtRoute] = useState("")
     const [created, setCreated] = useState(false)
 
@@ -50,10 +50,10 @@ const New = () => {
                     />
                     <input
                         type="text"
-                        placeholder="code"
-                        value={ttCode}
-                        onChange={(e) => setTtCode(e.target.value)}
-                        className="ttCodeField"
+                        placeholder="Edit Code"
+                        value={editCode}
+                        onChange={(e) => setEditCode(e.target.value)}
+                        className="editCodeField"
                     />
                     <h1 className="dayTitle">
                         {fakeDate.toLocaleDateString("en-us", { weekday: "long" })}
@@ -76,7 +76,7 @@ const New = () => {
                     <NewTimeTable
                         ttName={ttName}
                         classes={classes}
-                        ttCode={ttCode}
+                        editCode={editCode}
                         setCreated={setCreated}
                         setTtRoute={setTtRoute}
                         disabled={ttName === ""}

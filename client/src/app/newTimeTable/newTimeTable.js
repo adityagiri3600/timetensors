@@ -21,7 +21,7 @@ class NewTimeTable extends React.Component {
       body: JSON.stringify({
         ttName: this.props.ttName,
         classes: this.props.classes,
-        ttCode: this.props.ttCode
+        editCode: this.props.editCode
       })
     })
       .then(this.handleResponse)

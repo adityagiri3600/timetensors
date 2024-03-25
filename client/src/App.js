@@ -12,8 +12,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/new' element={<New />} />
-        <Route path='/update/:ttCode' element={<Update />} />
-        <Route path=':ttCode' element={<TimeTable />} />
+        <Route path='/update/:ttRoute' element={<Update />} />
+        <Route path=':ttRoute' element={<TimeTable />} />
       </Routes>
     </>
   );

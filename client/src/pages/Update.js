@@ -6,47 +6,48 @@ import UpdateTimeTable from "../app/updateTimeTable/updateTimeTable";
 import Papa from "papaparse";
 
 const Update = () => {
-    const { ttCode } = useParams();
-    const [ttName, setTtName] = useState("");
-    const [data, setData] = useState([]);
-
+    
     const fetchData = async () => {
-
-        const response = await fetch(`/api/data/${ttCode}`);
+        const response = await fetch(`/api/data/${ttRoute}`);
         if (!response.ok) {
             return;
         }
-
+        
         const csvData = await response.text();
-
+        
         const parsedData = Papa.parse(csvData, {
             header: true,
             dynamicTyping: true
         });
-
+        
         setData(parsedData.data);
     };
-
+    
     useEffect(() => {
         fetchData();
     }, []);
-
+    
     const [date, setDate] = useState(new Date());
     const [fakeDate, setFakeDate] = useState(date);
-
+    
     const [weekDay, setWeekDay] = useState(date.getDay())
     const [fakeWeekDay, setFakeWeekDay] = useState(weekDay);
-
+    
     const handleNext = () => {
         fakeDate.setDate(date.getDate() + 1);
         setFakeWeekDay((fakeWeekDay + 1) % 7);
     }
-
+    
     const handlePrev = () => {
         fakeDate.setDate(date.getDate() - 1);
         setFakeWeekDay((fakeWeekDay + 6) % 7);
     }
 
+    const { ttRoute } = useParams();
+    const [ttName, setTtName] = useState("");
+    const [editCode, setEditCode] = useState("");
+    const [data, setData] = useState([]);
+    
     const addClass = () => {
         setData([...data, { Day: fakeWeekDay, Subject: "", Start: "12:00", End: "13:00" }])
     }
@@ -59,6 +60,13 @@ const Update = () => {
                 value={ttName}
                 onChange={(e) => setTtName(e.target.value)}
                 className="ttNameField"
+            />
+            <input
+                type="text"
+                placeholder="Edit Code"
+                value={editCode}
+                onChange={(e) => setEditCode(e.target.value)}
+                className="editCodeField"
             />
             <h1 className="dayTitle">
                 {fakeDate.toLocaleDateString("en-us", { weekday: "long" })}
@@ -81,7 +89,8 @@ const Update = () => {
             <UpdateTimeTable
                 ttName={ttName}
                 classes={data}
-                ttCode={ttCode}
+                ttRoute={ttRoute}
+                editCode={editCode}
                 disabled={ttName === ""}
             />
         </div>
