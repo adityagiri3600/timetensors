@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 const Carousel = ({ children, transitionTime, getIndex, onChange, thresholdFraction}) => {
 
     transitionTime = transitionTime || 0.3;
-    thresholdFraction = thresholdFraction || 0.25;
+    thresholdFraction = thresholdFraction || 0.1;
 
     const childWrapper = useRef(null);
     const carouselRef = useRef(null);
