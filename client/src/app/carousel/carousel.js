@@ -41,7 +41,7 @@ const Carousel = ({ children, transitionTime, getIndex, onChange, thresholdFract
         carouselRef.current.style.transition = `transform ${transitionTime}s ease-in-out`;
         const threshold = thresholdFraction*childWidth;
         if(Math.abs(diff)<threshold){
-            setCurrentChildIndex(currentChildIndex);
+            carouselRef.current.style.transform = `translateX(-${currentChildIndex * childWidth}px)`;
         }
         else{
             if (diff > 0) {
