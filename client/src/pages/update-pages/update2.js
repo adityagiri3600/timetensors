@@ -65,29 +65,31 @@ const Update = ({editCode, setEditCodeError}) => {
                 {fakeDate.toLocaleDateString("en-us", { weekday: "long" })}
             </h1>
             <Navigate handlePrev={handlePrev} handleNext={handleNext} />
-            {data.map((c, i) =>
-                c.Day === fakeWeekDay ? (
-                    <NewClass
-                        key={i}
-                        classes={data}
-                        setClasses={setData}
-                        index={i}
-                        Day={fakeWeekDay}
-                    />
-                ) : null
-            )}
-            
-            <button onClick={addClass} className="newClass-btn">
-                Add Class
-            </button>
-            <UpdateTimeTable
-                classes={data}
-                ttName={ttName}
-                ttRoute={ttRoute}
-                editCode={editCode}
-                setEditCodeError={setEditCodeError}
-                disabled={ttName === ""}
-            />
+            <div>
+                {data.map((c, i) =>
+                    c.Day === fakeWeekDay ? (
+                        <NewClass
+                            key={i}
+                            classes={data}
+                            setClasses={setData}
+                            index={i}
+                            Day={fakeWeekDay}
+                        />
+                    ) : null
+                )}
+            </div>
+            <div className="add-update-container">
+                <button onClick={addClass} className="newClass-btn">
+                    Add Class
+                </button>
+                <UpdateTimeTable
+                    classes={data}
+                    ttName={ttName}
+                    ttRoute={ttRoute}
+                    editCode={editCode}
+                    setEditCodeError={setEditCodeError}
+                />
+            </div>
         </div>
     )
 }

@@ -8,3 +8,13 @@
     border-radius: 10px;
     border: 1px solid rgb(60, 60, 60);
 }
+.add-update-container{
+    display: flex;
+    justify-content: space-between;
+}
+.newClass-btn{
+    margin: 10px;
+}
+.newClass-btn:hover{
+    background-color: #1a58b3;
+}
