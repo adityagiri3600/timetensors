@@ -1,11 +1,10 @@
 import { React, useState, useEffect } from "react";
-import Navigate from "../app/navigate/navigate";
-import NewClass from "../app/newClass/newClass";
-import NewTimeTable from "../app/newTimeTable/newTimeTable";
-import Created from "./Created";
-import "./New.css"
+import Navigate from "../../app/navigate/navigate";
+import NewClass from "../../app/newClass/newClass";
+import NewTimeTable from "../../app/newTimeTable/newTimeTable";
+import "./new3.css"
 
-const New = () => {
+const New3 = ({ttName,editCode, setCreated, setTtRoute}) => {
     const [date, setDate] = useState(new Date());
     const [fakeDate, setFakeDate] = useState(date);
 
@@ -22,11 +21,6 @@ const New = () => {
         setFakeWeekDay((fakeWeekDay + 6) % 7);
     }
 
-    const [ttName, setTtName] = useState("")
-    const [editCode, setEditCode] = useState("")
-    const [ttRoute, setTtRoute] = useState("")
-    const [created, setCreated] = useState(false)
-
     const [classes, setClasses] = useState([
         { Day: weekDay, Subject: "", Start: "12:00", End: "13:00" }
     ]);
@@ -36,25 +30,8 @@ const New = () => {
     }
 
     return (
-        <>
-            {created ? (
-                <Created ttName={ttName} ttRoute={ttRoute}/>
-            ) : (
+        <div className="new3-container">
                 <div>
-                    <input
-                        type="text"
-                        placeholder="TimeTable name"
-                        value={ttName}
-                        onChange={(e) => setTtName(e.target.value)}
-                        className="ttNameField"
-                    />
-                    <input
-                        type="text"
-                        placeholder="Edit Code"
-                        value={editCode}
-                        onChange={(e) => setEditCode(e.target.value)}
-                        className="editCodeField"
-                    />
                     <h1 className="dayTitle">
                         {fakeDate.toLocaleDateString("en-us", { weekday: "long" })}
                     </h1>
@@ -82,9 +59,8 @@ const New = () => {
                         disabled={ttName === ""}
                     />
                 </div>
-            )}
-        </>
+        </div>
     );
 }
 
-export default New;
+export default New3;

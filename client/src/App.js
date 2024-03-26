@@ -1,7 +1,7 @@
 import React from 'react';
 import {Routes, Route} from "react-router-dom";
 import Home from './pages/Home';
-import New from './pages/New';
+import New from './pages/new-pages/New';
 import Update from './pages/update-pages/Update';
 import TimeTable from './pages/TimeTable';
 import './App.css';
