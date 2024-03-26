@@ -91,31 +91,34 @@ const TimeTable = () => {
                     <h1 className={"title"}>
                         <a href="/">TimeTrack</a>
                     </h1>
-                    <div className="datetime-batch-container">
+                    <div className="date-edit-container">
                         <Datetime date={date} />
-                        <a href={`/update/${ttRoute}`}>Edit</a>
+                        <a href={`/update/${ttRoute}`} className="edit-btn">
+                            <img src="/editIcon.svg" alt="Edit" className="edit-icon" />
+                            <p>Edit</p>
+                        </a>
                     </div>
                     <Carousel onChange={handleCarouselChange} loopback={true}>
                         {[...Array(7).keys()].map((day) => (
-                                <ClassList
-                                    todaysClasses={getClassesAtDay((day + weekDay) % 7)}
-                                    date={
-                                        (weekDay + day) % 7 == fakeWeekDay
-                                            ? fakeDate
-                                            : new Date(fakeDate.getFullYear(), 
-                                                       fakeDate.getMonth(), 
-                                                       fakeDate.getDate() + diffmod7(floorMod(day + weekDay, 7), fakeWeekDay))
-                                    }
-                                    position={
-                                        diffmod7(floorMod(day + weekDay, 7), fakeWeekDay) == 0
-                                            ? "center"
-                                            : diffmod7(floorMod(day + weekDay, 7), fakeWeekDay) == 1
+                            <ClassList
+                                todaysClasses={getClassesAtDay((day + weekDay) % 7)}
+                                date={
+                                    (weekDay + day) % 7 == fakeWeekDay
+                                        ? fakeDate
+                                        : new Date(fakeDate.getFullYear(),
+                                            fakeDate.getMonth(),
+                                            fakeDate.getDate() + diffmod7(floorMod(day + weekDay, 7), fakeWeekDay))
+                                }
+                                position={
+                                    diffmod7(floorMod(day + weekDay, 7), fakeWeekDay) == 0
+                                        ? "center"
+                                        : diffmod7(floorMod(day + weekDay, 7), fakeWeekDay) == 1
                                             ? "right"
                                             : diffmod7(floorMod(day + weekDay, 7), fakeWeekDay) == -1
-                                            ? "left"
-                                            : "none"
-                                    }
-                                />
+                                                ? "left"
+                                                : "none"
+                                }
+                            />
                         ))}
                     </Carousel>
                 </div>
