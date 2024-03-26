@@ -95,7 +95,7 @@ const TimeTable = () => {
                         <Datetime date={date} />
                         <a href={`/update/${ttRoute}`}>Edit</a>
                     </div>
-                    <Carousel onChange={handleCarouselChange}>
+                    <Carousel onChange={handleCarouselChange} loopback={true}>
                         {[...Array(7).keys()].map((day) => (
                                 <ClassList
                                     todaysClasses={getClassesAtDay((day + weekDay) % 7)}

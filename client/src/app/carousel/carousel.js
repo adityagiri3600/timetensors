@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-const Carousel = ({ children, transitionTime, getIndex, onChange, thresholdFraction }) => {
+const Carousel = ({ children, transitionTime, getIndex, onChange, thresholdFraction, loopback }) => {
 
     transitionTime = transitionTime || 0.3;
     thresholdFraction = thresholdFraction || 0.1;
@@ -34,7 +34,9 @@ const Carousel = ({ children, transitionTime, getIndex, onChange, thresholdFract
 
     const handleTouchMove = (e) => {
         carouselRef.current.style.transition = 'none';
-        carouselRef.current.style.transform = `translateX(-${currentChildIndex * childWidth + touchStartX - e.touches[0].clientX}px)`;
+        // if loopback is false, then the first and last children are not draggable to the left and right respectively
+        if(loopback || (index > 0 && index < children.length - 1) || (touchStartX - e.touches[0].clientX > 0 && index === 0) || (touchStartX - e.touches[0].clientX < 0 && index === children.length - 1))
+            carouselRef.current.style.transform = `translateX(-${currentChildIndex * childWidth + touchStartX - e.touches[0].clientX}px)`;
     }
 
     const handleTouchEnd = (e) => {
@@ -46,9 +48,11 @@ const Carousel = ({ children, transitionTime, getIndex, onChange, thresholdFract
         }
         else {
             if (diff > 0) {
-                handleNext();
+                if (loopback || index < children.length - 1)
+                    handleNext();
             } else if (diff < 0) {
-                handlePrev();
+                if (loopback || index > 0)
+                    handlePrev();
             }
         }
     }
