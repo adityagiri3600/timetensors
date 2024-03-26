@@ -1,6 +1,5 @@
 .classList{
-    width: 100%;
-    max-width: 90%;
+    width: 70%;
     margin: 2vw auto;
     margin-top: 20px;
     background: radial-gradient(circle,#2b7df8b8 -30%, #99bdefd7 0%, #2b7df8b8 30%);
@@ -9,12 +8,12 @@
     box-shadow: 0px 0px 20px #2b7df8b8;
     border-radius: 10px;
     padding: 1px 10px 10px 10px;
-    perspective: 1000px;
-
     text-align: left;
+    transition: transform 0.5s;
 }
 
 .classList-container{
+    perspective: 1000px;
     min-height: 70vh;
 }
 
@@ -31,4 +30,13 @@
         background-position: 0% 80%;
     }
     
+}
+
+.left{
+    transform: translateX(35%) rotateY(30deg) translateY(10%);
+    transform-style: preserve-3d;
+}
+.right{
+    transform: translateX(-35%) rotateY(-30deg) translateY(10%);
+    transform-style: preserve-3d;
 }

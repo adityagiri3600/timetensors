@@ -2,7 +2,7 @@ import React from "react";
 import Class from "../class/class";
 import "./classList.css"
 
-const ClassList = ({ todaysClasses, date }) => {
+const ClassList = ({ todaysClasses, date, position }) => {
 
     if (todaysClasses.length === 0) return (
         <div className="classList-container" style={{width:"100vw"}}>
@@ -12,7 +12,7 @@ const ClassList = ({ todaysClasses, date }) => {
 
     return (
         <div className="classList-container" style={{width:"100vw"}}>
-            <div className="classList">
+            <div className={"classList " + position}>
                 {todaysClasses.map((props, i) => (
                     <Class key={i} {...props} date={date} />
                 ))}

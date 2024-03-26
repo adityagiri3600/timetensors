@@ -106,6 +106,15 @@ const TimeTable = () => {
                                                        fakeDate.getMonth(), 
                                                        fakeDate.getDate() + diffmod7(floorMod(day + weekDay, 7), fakeWeekDay))
                                     }
+                                    position={
+                                        diffmod7(floorMod(day + weekDay, 7), fakeWeekDay) == 0
+                                            ? "center"
+                                            : diffmod7(floorMod(day + weekDay, 7), fakeWeekDay) == 1
+                                            ? "right"
+                                            : diffmod7(floorMod(day + weekDay, 7), fakeWeekDay) == -1
+                                            ? "left"
+                                            : "none"
+                                    }
                                 />
                         ))}
                     </Carousel>
