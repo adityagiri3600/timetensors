@@ -7,9 +7,9 @@ router.use(express.json());
 
 router.post('/', (req, res) => {
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    var errs = []
 
     fs.readFile('./ips.json', 'utf8', (err, data) => {
-        let errs = []
         if (err) {
             console.log(`Error reading file from disk: ${err}`);
             errs.push(err);
