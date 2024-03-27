@@ -19,6 +19,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/client/build/index.html'));
 });
 
+app.use('/api/old-stats', require('./api/old-stats'));
 app.use('/api/newTimeTable', require('./api/newTimeTable'));
 app.use('/api/updateTimeTable', require('./api/updateTimeTable'));
 
