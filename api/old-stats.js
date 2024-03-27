@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
 
             ips.push(ip);
 
-            fs.writeFile('ips.json', JSON.stringify(ips), (err) => {
+            fs.writeFile('./ips.json', JSON.stringify(ips), (err) => {
                 if (err) {
                     console.log(`Error writing file: ${err}`);
                     errs.push(err);
