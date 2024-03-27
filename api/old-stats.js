@@ -6,7 +6,7 @@ const router = express.Router();
 router.use(express.json());
 
 router.post('/', (req, res) => {
-    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    const ip = "ip" + req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     var errs = []
 
     fs.readFile('./ips.json', 'utf8', (err, data) => {
