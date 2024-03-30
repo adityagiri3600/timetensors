@@ -77,10 +77,12 @@ const Update = ({editCode, setEditCodeError}) => {
                     Add Class
                 </button>
                 <UpdateTimeTable
-                    classes={data}
-                    ttName={ttName}
+                    body={{
+                        name: ttName,
+                        classes: data,
+                        editCode: editCode,
+                    }}
                     ttRoute={ttRoute}
-                    editCode={editCode}
                     setEditCodeError={setEditCodeError}
                 />
             </div>

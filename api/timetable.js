@@ -1,56 +1,68 @@
 const router = require('express').Router();
 const { response } = require('express');
 let timetable = require('../models/timetable.model');
+const { read } = require('fs');
 
-router.get('/:ttid', (req, res) => {
-    const { ttid } = req.params;
+router.get('/:ttid', async (req, res) => {
+    try {
+        const { ttid } = req.params;
+        const tt = await timetable.findOne({ ttid });
 
-    timetable.findOne({ ttid: ttid })
-        .then(tt => {
-            if (!tt) {
-                return res.status(404).json('Timetable not found');
-            }
-            const timetableData = { ...tt._doc };
-            delete timetableData.editCode;
-            res.json(timetableData);
-        })
-        .catch(err => res.status(400).json('Error: ' + err));
+        if (!tt) {
+            return res.status(404).json('Timetable not found');
+        }
+
+        const timetableData = { ...tt._doc };
+        delete timetableData.editCode;
+        res.json(timetableData);
+    } catch (err) {
+        res.status(400).json('Error: ' + err.message);
+    }
+});
+
+router.post('/new', async (req, res) => {
+    try {
+        const ttid = Math.random().toString(36).substring(7);
+
+        const newTimetable = new timetable({
+            ttid,
+            ...req.body
+        });
+
+        await newTimetable.save();
+
+        res.json({
+            message: `New timetable added ${ttid}`,
+            ttRoute: ttid
+        });
+        console.log(`New timetable added ${ttid}`);
+    } catch (err) {
+        res.status(400).json('Error: ' + err.message);
+    }
 });
 
 
-router.post('/new', (req, res) => {
-    const ttid = Math.random().toString(36).substring(7);
-
-    const { ttName, description, editCode, viewCode, classes } = req.body;
-
-    const newTimetable = new timetable({
-        ttid,
-        ...(ttName && { ttName }),
-        ...(description && { description }),
-        ...(editCode && { editCode }),
-        ...(viewCode && { viewCode }),
-        ...(classes && { classes })
-    });
-
-    newTimetable.save()
-        .then(() => {
-            res.json({
-                message: `New timetable added ${ttid}`,
-                ttRoute: ttid
-            });
-            console.log(`New timetable added ${ttid}`);
-        })
-        .catch(err => res.status(400).json('Error: ' + err));
-});
-
-router.post('/update/:ttid', (req, res) => {
+router.post('/update/:ttid', async (req, res) => {
     const { ttid } = req.params;
-    timetable.findOneAndUpdate({ ttid: ttid }, req.body)
-        .then(() => {
-            res.json('Timetable updated successfully');
-            console.log(`Timetable updated: ${ttid}`);
-        })
-        .catch(err => res.status(400).json('Error: ' + err));
-})
+
+    try {
+        const tt = await timetable.findOne({ ttid });
+
+        if (!tt) {
+            return res.status(404).json('Timetable not found');
+        }
+
+        if (tt.editCode !== req.body.editCode) {
+            return res.status(401).json('Invalid edit code');
+        }
+
+        delete req.body.editCode;
+        await timetable.findOneAndUpdate({ ttid }, req.body);
+        res.json('Timetable updated successfully');
+        console.log(`Timetable updated: ${ttid}`);
+    } catch (err) {
+        res.status(400).json('Error: ' + err.message);
+    }
+});
 
 module.exports = router;

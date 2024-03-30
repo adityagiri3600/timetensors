@@ -51,9 +51,7 @@ const New3 = ({ttName,editCode, setCreated, setTtRoute}) => {
                         Add Class
                     </button>
                     <NewTimeTable
-                        ttName={ttName}
-                        classes={classes}
-                        editCode={editCode}
+                        body={{ ttName, classes, editCode }}
                         setCreated={setCreated}
                         setTtRoute={setTtRoute}
                         disabled={ttName === ""}

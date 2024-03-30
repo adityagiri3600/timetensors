@@ -11,18 +11,14 @@ class NewTimeTable extends React.Component {
   };
 
   handleClick = () => {
-    axios.post('api/timetable/new', {
-      ttName: this.props.ttName,
-      classes: this.props.classes,
-      editCode: this.props.editCode
-    }, {
+    axios.post('api/timetable/new',
+      this.props.body, {
       headers: {
         'Content-Type': 'application/json'
       }
     })
-    .then(this.handleResponse)
-    .catch(error => console.error('Error:', error));
-    console.log(this.props.classes);
+      .then(this.handleResponse)
+      .catch(error => console.error('Error:', error));
   };
 
   render() {

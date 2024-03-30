@@ -8,25 +8,28 @@ class UpdateTimeTable extends React.Component {
         if (response.status === 200) {
             console.log("Time table updated");
             window.location.replace(`/${this.props.ttRoute}`);
-        }
-        else {
-            console.error("Error updating time table");
-            this.props.setEditCodeError(true);
+        } else {
+            console.error("An error occurred");
         }
     };
 
+    handleErrorResponse = (error) => {
+        console.error("Invalid edit code");
+        this.props.setEditCodeError(true);
+    }
+
+
     handleClick = () => {
-        axios.post(`/api/timetable/update/${this.props.ttRoute}`, {
-            ttName: this.props.ttName,
-            classes: this.props.classes,
-            editCode: this.props.editCode
-        }, {
-            headers: {
-                'Content-Type': 'application/json'
+        axios.post(`/api/timetable/update/${this.props.ttRoute}`,
+            this.props.body,
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             }
-        })
-        .then(this.handleResponse)
-        .catch(error => console.error('Error:', error));
+        )
+            .catch(this.handleErrorResponse)
+            .then(this.handleResponse)
     };
 
     render() {
