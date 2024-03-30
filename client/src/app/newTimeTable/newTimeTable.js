@@ -11,7 +11,7 @@ class NewTimeTable extends React.Component {
   };
 
   handleClick = () => {
-    axios.post('/api/newTimeTable', {
+    axios.post('api/timetable/new', {
       ttName: this.props.ttName,
       classes: this.props.classes,
       editCode: this.props.editCode

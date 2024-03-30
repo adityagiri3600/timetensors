@@ -16,10 +16,9 @@ class UpdateTimeTable extends React.Component {
     };
 
     handleClick = () => {
-        axios.post('/api/updateTimeTable', {
+        axios.post(`/api/timetable/update/${this.props.ttRoute}`, {
             ttName: this.props.ttName,
             classes: this.props.classes,
-            ttRoute: this.props.ttRoute,
             editCode: this.props.editCode
         }, {
             headers: {

@@ -1,27 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import NewClass from "../../app/newClass/newClass";
 import Navigate from "../../app/navigate/navigate";
 import UpdateTimeTable from "../../app/updateTimeTable/updateTimeTable";
-import Papa from "papaparse";
 import "./update2.css"
 
 const Update = ({editCode, setEditCodeError}) => {
     
     const fetchData = async () => {
-        const response = await fetch(`/api/data/${ttRoute}`);
-        if (!response.ok) {
-            return;
+        try {
+            const response = await axios.get(`/api/timetable/${ttRoute}`);
+            setData(response.data.classes);
+            console.log(response)
+        } catch (error) {
+            console.error('Error fetching data:', error);
         }
-        
-        const csvData = await response.text();
-        
-        const parsedData = Papa.parse(csvData, {
-            header: true,
-            dynamicTyping: true
-        });
-        
-        setData(parsedData.data);
     };
     
     useEffect(() => {
@@ -67,7 +61,7 @@ const Update = ({editCode, setEditCodeError}) => {
             <Navigate handlePrev={handlePrev} handleNext={handleNext} />
             <div>
                 {data.map((c, i) =>
-                    c.Day === fakeWeekDay ? (
+                    c.Day == fakeWeekDay ? (
                         <NewClass
                             key={i}
                             classes={data}

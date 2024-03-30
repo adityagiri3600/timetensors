@@ -1,10 +1,8 @@
 import {React,useState,useEffect} from "react";
 import "./class.css";
-import Icon from "../icon/icon";
 
 const Class = ({Subject,Start,End,date}) => {
     let cssClassName = `class `;
-    const classesWithIcons = ["Math", "Physics", "OOPS", "English", "UHV"]
 
     const [currDate, setCurrDate] = useState(new Date());
     const [hour, setHour] = useState(currDate.getHours() + currDate.getMinutes() / 60 + currDate.getSeconds() / 3600);
@@ -42,7 +40,6 @@ const Class = ({Subject,Start,End,date}) => {
         <div className={cssClassName}>
             <h2>{Subject}</h2>
             <p>{Start} - {End}</p>
-            {classesWithIcons.includes(Subject) && <Icon class={Subject} />}
         </div>
     );
 }

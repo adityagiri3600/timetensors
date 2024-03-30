@@ -1,10 +1,8 @@
 import { React, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import Papa from "papaparse";
 import ClassList from "../app/classList/classList";
 import Datetime from "../app/datetime/datetime";
-import Batch from "../app/batch/batch";
 import NotFound from "./NotFound";
 import Carousel from "../app/carousel/carousel";
 import "./TimeTable.css"
@@ -12,19 +10,15 @@ import "./TimeTable.css"
 const TimeTable = () => {
     const { ttRoute } = useParams();
     const [data, setData] = useState([]);
+    const [classes,setClasses] = useState([])
     const [notFound, setNotFound] = useState(false);
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`/api/data/${ttRoute}`);
-            const csvData = response.data;
-
-            const parsedData = Papa.parse(csvData, {
-                header: true,
-                dynamicTyping: true
-            });
-
-            setData(parsedData.data);
+            const response = await axios.get(`/api/timetable/${ttRoute}`);
+            setData(response.data);
+            setClasses(response.data.classes);
+            console.log(response)
         } catch (error) {
             setNotFound(true);
             console.error('Error fetching data:', error);
@@ -42,7 +36,8 @@ const TimeTable = () => {
     const [fakeWeekDay, setFakeWeekDay] = useState(weekDay);
 
     const getClassesAtDay = (day) => {
-        return data.filter(someClass => someClass.Day == day);
+        return classes.filter(classElement => classElement.Day == day);
+        return []
     }
 
     const floorMod = (a, b) => {

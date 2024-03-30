@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
 const app = express();
 const port = 5000;
 
@@ -9,20 +10,17 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(express.json());
 
-app.get('/api/data/:ttRoute', (req, res) => {
-    if (!fs.existsSync(path.join(__dirname, `/api/data/${req.params.ttRoute}/timetable.csv`))) {
-        res.status(404).send('Not found');
-        return;
-    }
-    res.sendFile(path.join(__dirname, `/api/data/${req.params.ttRoute}/timetable.csv`));
+mongoose.connect('mongodb://localhost:27017/timetrack');
+const connection = mongoose.connection;
+connection.once('open', () => {
+    console.log('MongoDB connection established');
 });
+
+app.use('/api/timetable', require('./api/timetable'));
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/client/build/index.html'));
 });
-
-app.use('/api/newTimeTable', require('./api/newTimeTable'));
-app.use('/api/updateTimeTable', require('./api/updateTimeTable'));
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
