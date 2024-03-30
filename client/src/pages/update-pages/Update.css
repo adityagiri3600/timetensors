@@ -48,6 +48,13 @@
 
 
 
+.update2-container{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+}
 .ttNameField{
     width: 300px;
     font-size: 1.4rem;
@@ -68,16 +75,52 @@
     padding: 10px;
     color: white;
 }
-.update2-container{
+
+.update3-container{
     width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-.add-update-container{
+.new-navbuttons{
+    width: 95%;
+    max-width: 500px;
     display: flex;
     justify-content: space-between;
 }
-.newClass-btn{
-    margin: 10px;
+.new-navbuttons button{
+    width: 100%;
+    height: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid rgb(60, 60, 60);
+    border-radius: 10px;
+    background: none;
+    color: white;
+    font-size: 1rem;
+    font-family: QuickSandLight;
+    transition: background-color 0.1s;
 }
-.newClass-btn:hover{
+.new-navbuttons button:active{
+    color: rgba(255, 255, 255, 0.5);
+}
+.newClasslist{
+    margin-top: 5px;
+    width: 95%;
+    max-width: 500px;
+}
+.update-btn-container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.newClass-btn{
+    margin-left: 10px;
+    margin-right: 10px;
+    width: calc(100% - 20px);
+    transition: background-color 0.1s;
+}
+.newClass-btn:active{
     background-color: #1a58b3;
 }

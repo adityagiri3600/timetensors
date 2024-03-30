@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import NewClass from "../../app/newClass/newClass";
-import Navigate from "../../app/navigate/navigate";
 import UpdateTimeTable from "../../app/updateTimeTable/updateTimeTable";
 
 const Update3 = ({ body, setEditCodeError, data, setData, ttRoute }) => {
@@ -26,12 +25,19 @@ const Update3 = ({ body, setEditCodeError, data, setData, ttRoute }) => {
     }
 
     return (
-        <div className="update2-container">
+        <div className="update3-container">
             <h1 className="dayTitle">
                 {fakeDate.toLocaleDateString("en-us", { weekday: "long" })}
             </h1>
-            <Navigate handlePrev={handlePrev} handleNext={handleNext} />
-            <div>
+            <div className="new-navbuttons">
+                <button onClick={handlePrev} className="prev-btn">
+                    prev
+                </button>
+                <button onClick={handleNext} className="next-btn">
+                    next
+                </button>
+            </div>
+            <div className="newClasslist">
                 {data.map((c, i) =>
                     c.Day == fakeWeekDay ? (
                         <NewClass
@@ -43,11 +49,11 @@ const Update3 = ({ body, setEditCodeError, data, setData, ttRoute }) => {
                         />
                     ) : null
                 )}
-            </div>
-            <div className="add-update-container">
                 <button onClick={addClass} className="newClass-btn">
                     Add Class
                 </button>
+            </div>
+            <div className="update-btn-container">
                 <UpdateTimeTable
                     body={{
                         ...body,
