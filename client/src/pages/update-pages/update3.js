@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
+import React, { useState } from "react";
 import NewClass from "../../app/newClass/newClass";
 import Navigate from "../../app/navigate/navigate";
 import UpdateTimeTable from "../../app/updateTimeTable/updateTimeTable";
 
-const Update3 = ({ editCode, setEditCodeError, ttName, data, setData , ttRoute}) => {
+const Update3 = ({ body, setEditCodeError, data, setData, ttRoute }) => {
 
     const [date, setDate] = useState(new Date());
     const [fakeDate, setFakeDate] = useState(date);
@@ -52,9 +50,8 @@ const Update3 = ({ editCode, setEditCodeError, ttName, data, setData , ttRoute})
                 </button>
                 <UpdateTimeTable
                     body={{
-                        ttName: ttName,
+                        ...body,
                         classes: data,
-                        editCode: editCode,
                     }}
                     ttRoute={ttRoute}
                     setEditCodeError={setEditCodeError}

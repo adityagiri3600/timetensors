@@ -22,32 +22,34 @@ const NewClass = ({ classes, setClasses, index, Day }) => {
                 }
                 className="classNameField"
             />
-            <input
-                type="time"
-                value={classes[index].Start}
-                onChange={(e) =>
-                    setClasses(
-                        classes.map((c, i) =>
-                            i === index ? { ...c, Start: e.target.value, Day: Day } : c
+            <div className="timeField">
+                <input
+                    type="time"
+                    value={classes[index].Start}
+                    onChange={(e) =>
+                        setClasses(
+                            classes.map((c, i) =>
+                                i === index ? { ...c, Start: e.target.value, Day: Day } : c
+                            )
                         )
-                    )
-                }
-                className="startTimeField"
-            />
-            <input
-                type="time"
-                value={classes[index].End}
-                onChange={(e) =>
-                    setClasses(
-                        classes.map((c, i) =>
-                            i === index ? { ...c, End: e.target.value, Day: Day } : c
+                    }
+                    className="startTimeField"
+                />
+                <input
+                    type="time"
+                    value={classes[index].End}
+                    onChange={(e) =>
+                        setClasses(
+                            classes.map((c, i) =>
+                                i === index ? { ...c, End: e.target.value, Day: Day } : c
+                            )
                         )
-                    )
-                }
-                className="endTimeField"
-            />
+                    }
+                    className="endTimeField"
+                />
+            </div>
             <button onClick={deleteClass} className="deleteClass-btn">
-                <img src="/delete.png" alt="delete" className="deleteIcon" />
+                <img src="/delete.svg" alt="delete" className="deleteIcon" />
             </button>
         </div>
     );

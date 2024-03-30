@@ -2,18 +2,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px;
-    background: #1e5cb88f;
+    background: rgba(255, 255, 255, 0.13);
     margin-left: 10px;
     margin-right: 10px;
+    overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.347);
     border-bottom: none;
+    border-top: none;
     font-family: QuickSandLight;
 }
 .newClass:first-of-type{
     margin-top: 20px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.347);
 }
 .newClass:last-of-type{
     margin-bottom: 20px;
@@ -22,31 +24,52 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.347);
 }
 
-.newClass input{
+
+.timeField{
+    display: flex;
+    flex-direction: column;
+}
+.newClass input[type="text"]{
     background-color: #00000000;
-    border-radius: 5px;
-    border: 1px solid rgba(255, 255, 255, 0.26);
-    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
     color: white;
     text-shadow: 0px 0px 4px #ffffff;
     font-family: QuickSandLight;
     margin: 5px;
-    padding: 5px;
-    max-width: 20vw;
+    padding: 10px;
 }
 .newClass input:focus{
-    border: 1px solid #2b7df8;
+    background-color: #2b7df8;
     outline: none;
 }
+.newClass input[type="time"]{
+    background-color: #2b7df8;
+    border: none;
+    font-size: .8rem;
+    margin: 0;
+    padding: 2px;
+}
+.startTimeField{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.endTimeField{
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
 .deleteClass-btn{
-    height: 30px;
-    width: 30px;
+    height: 60px;
+    width: 60px;
     border: none;
     padding: 2px;
-    background: red;
-    border-radius: 10px;
+    margin-left: 5px;
+    background: rgb(255, 55, 55);
+    box-shadow: -10px 0 30px 10px rgba(0, 0, 0, 0.45);
 }
-.deleteIcon{
-    width: 20px;
-    background: red;
+img.deleteIcon{
+    width: 30px;
+    height: 30px;
+    background: rgb(255, 55, 55);
 }

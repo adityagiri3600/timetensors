@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios"
 import Carousel from "../../app/carousel/carousel";
 import Update1 from "./update1";
@@ -18,6 +18,7 @@ const Update = () => {
     const [step, setStep] = useState(0);
 
     const [ttName, setTtName] = useState("")
+    const [description, setDescription] = useState("")
 
 
     const fetchData = async () => {
@@ -25,6 +26,7 @@ const Update = () => {
             const response = await axios.get(`/api/timetable/${ttRoute}`);
             setData(response.data.classes);
             setTtName(response.data.ttName);
+            setDescription(response.data.description);
             console.log(response)
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -55,11 +57,12 @@ const Update = () => {
                 <Update2
                     ttName={ttName}
                     setTtName={setTtName}
+                    description={description}
+                    setDescription={setDescription}
                 />
                 <Update3
-                    editCode={editCode}
+                    body={{ ttName, description, editCode }}
                     setEditCodeError={setEditCodeError}
-                    ttName={ttName}
                     data={data}
                     setData={setData}
                     ttRoute={ttRoute}
