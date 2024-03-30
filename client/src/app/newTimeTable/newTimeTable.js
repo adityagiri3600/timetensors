@@ -1,31 +1,27 @@
 import React from 'react';
+import axios from 'axios';
 import './newTimeTable.css';
 
 class NewTimeTable extends React.Component {
-
   handleResponse = (response) => {
     if (response.status === 200) {
-      response.json().then(data => {
-        this.props.setTtRoute(data.ttRoute);
-        this.props.setCreated(true);
-      });
+      this.props.setTtRoute(response.data.ttRoute);
+      this.props.setCreated(true);
     }
   };
 
   handleClick = () => {
-    fetch('/api/newTimeTable', {
-      method: 'POST',
+    axios.post('/api/newTimeTable', {
+      ttName: this.props.ttName,
+      classes: this.props.classes,
+      editCode: this.props.editCode
+    }, {
       headers: {
         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        ttName: this.props.ttName,
-        classes: this.props.classes,
-        editCode: this.props.editCode
-      })
+      }
     })
-      .then(this.handleResponse)
-      .catch(error => console.error('Error:', error));
+    .then(this.handleResponse)
+    .catch(error => console.error('Error:', error));
     console.log(this.props.classes);
   };
 

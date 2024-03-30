@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import Papa from "papaparse";
 import ClassList from "../app/classList/classList";
 import Datetime from "../app/datetime/datetime";
@@ -14,21 +15,20 @@ const TimeTable = () => {
     const [notFound, setNotFound] = useState(false);
 
     const fetchData = async () => {
+        try {
+            const response = await axios.get(`/api/data/${ttRoute}`);
+            const csvData = response.data;
 
-        const response = await fetch(`/api/data/${ttRoute}`);
-        if (!response.ok) {
+            const parsedData = Papa.parse(csvData, {
+                header: true,
+                dynamicTyping: true
+            });
+
+            setData(parsedData.data);
+        } catch (error) {
             setNotFound(true);
-            return;
+            console.error('Error fetching data:', error);
         }
-
-        const csvData = await response.text();
-
-        const parsedData = Papa.parse(csvData, {
-            header: true,
-            dynamicTyping: true
-        });
-
-        setData(parsedData.data);
     };
 
     useEffect(() => {

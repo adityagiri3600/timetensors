@@ -1,9 +1,11 @@
-const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const express = require('express');
+const cors = require('cors');
 const app = express();
 const port = 5000;
 
+app.use(cors());
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(express.json());
 
@@ -19,7 +21,6 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/client/build/index.html'));
 });
 
-app.use('/api/old-stats', require('./api/old-stats'));
 app.use('/api/newTimeTable', require('./api/newTimeTable'));
 app.use('/api/updateTimeTable', require('./api/updateTimeTable'));
 
