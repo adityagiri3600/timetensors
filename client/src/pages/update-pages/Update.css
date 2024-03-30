@@ -15,3 +15,56 @@
     padding: 10px;
     margin: 0;
 }
+.labels{
+    margin-left: 15px;
+    color: rgba(255, 255, 255, 0.5);
+}
+.info-paragraph{
+    font-size: .8rem;
+    padding: 0 15px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+
+
+
+.update1-container{
+    width: 100vw;
+    height: 80vh;
+}
+.editCodeField{
+    width: 300px;
+    background: none;
+    border: 1px solid rgb(60, 60, 60);
+}
+.editCodeField:focus{
+    border: 2px solid #2b7df8;
+}
+
+
+
+
+
+
+
+
+.ttNameField{
+    width: 300px;
+    font-size: 1.4rem;
+    background: none;
+    border-radius: 10px;
+    border: 1px solid rgb(60, 60, 60);
+}
+.update2-container{
+    width: 100vw;
+}
+.add-update-container{
+    display: flex;
+    justify-content: space-between;
+}
+.newClass-btn{
+    margin: 10px;
+}
+.newClass-btn:hover{
+    background-color: #1a58b3;
+}

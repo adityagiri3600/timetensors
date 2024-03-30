@@ -5,6 +5,7 @@ const StepProgress = ({step, n}) => {
         <div 
             style={{
                 padding:"5px",
+                marginBottom: "10px",
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center"
