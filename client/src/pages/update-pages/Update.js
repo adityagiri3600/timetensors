@@ -47,7 +47,12 @@ const Update = () => {
     return (
         <div className="update-container">
             <h1 className="step-heading"> <span className="step-count">Step {step + 1}:</span> {steps[step]}</h1>
-            <StepProgress step={step} n={steps.length} />
+            <p style={{
+                margin: "0 10px",
+                fontSize: "0.8rem",
+                color: "#FFFFFFAA"
+            }} >Swipe to Navigate</p>
+            <StepProgress step={step} n={steps.length}/>
             {editCodeError ? <p className="editCodeError">Invalid Edit Code</p> : null}
             <Carousel getIndex={setStep}>
                 <Update1
