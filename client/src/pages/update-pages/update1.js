@@ -17,7 +17,7 @@ const Update1 = ({ editCode, setEditCode, disabled }) => {
                 onChange={(e) => setEditCode(e.target.value)}
                 onKeyDown={(e) => {
                     // prevents tabbing to next input field as it breaks the carousel
-                    if (e.keyCode === 9) {
+                    if (e.keyCode === 9 || e.keyCode === 13) {
                         e.preventDefault()
                         e.target.focus();
                     }
