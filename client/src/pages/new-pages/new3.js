@@ -1,6 +1,5 @@
 import { React, useState, useEffect } from "react";
 import NewTimeTable from "../../app/newTimeTable/newTimeTable";
-import "./new3.css"
 import TimetableCreator from "../../app/timetableCreator/timetableCreator";
 
 const New3 = ({ ttName, editCode, setCreated, setTtRoute }) => {

@@ -1,15 +1,14 @@
-import React, { useState } from "react"
-import "./new2.css"
+import React from "react"
+import InputField from "../../app/inputField/InputField";
 
-const New2 = ({ editCode, setEditCode }) => {
+const New2 = ({ editCode, setEditCode, disabled }) => {
     return (
         <div className="new2-container">
-            <input
-                type="text"
-                placeholder="Edit Code"
-                value={editCode}
-                onChange={(e) => setEditCode(e.target.value)}
-                className="editCodeField"
+            <InputField
+                state={editCode}
+                setState={setEditCode}
+                label="Secret edit code"
+                disabled={disabled}
             />
         </div>
     )

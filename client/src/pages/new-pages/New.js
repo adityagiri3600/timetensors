@@ -5,6 +5,7 @@ import New1 from "./new1";
 import New2 from "./new2";
 import New3 from "./new3";
 import Created from "../Created";
+import "./New.css";
 
 const New = () => {
 
@@ -29,9 +30,23 @@ const New = () => {
                     <h1 className="step-heading"> <span className="step-count">Step {step + 1}:</span> {steps[step]}</h1>
                     <StepProgress step={step} n={steps.length} />
                     <Carousel getIndex={setStep}>
-                        <New1 ttName={ttName} setTtName={setTtName} />
-                        <New2 editCode={editCode} setEditCode={setEditCode} />
-                        <New3 ttName={ttName} editCode={editCode} setCreated={setCreated} setTtRoute={setTtRoute} />
+                        <New1
+                            ttName={ttName}
+                            setTtName={setTtName} 
+                            disabled={step !== 0}
+                        />
+                        <New2 
+                            editCode={editCode}
+                            setEditCode={setEditCode}
+                            disabled={step !== 1}
+                        />
+                        <New3 
+                            ttName={ttName}
+                            editCode={editCode}
+                            setCreated={setCreated}
+                            setTtRoute={setTtRoute}
+                            disabled={step !== 2}
+                        />
                     </Carousel>
                 </>
             }

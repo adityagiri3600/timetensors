@@ -1,0 +1,23 @@
+.new1-container{
+    width: 100vw;
+    height: 80vh;
+}
+.new2-container{
+    width: 100vw;
+    height: 80vh;
+}
+.new3-container{
+    width: 100vw;
+}
+.newClass-btn{
+    background: #2b7df8;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+}
+.new-btn-container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}

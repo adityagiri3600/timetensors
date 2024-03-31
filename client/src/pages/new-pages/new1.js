@@ -1,16 +1,15 @@
-import React, {useState} from "react"
-import "./new1.css"
+import React, { useState } from "react"
+import InputField from "../../app/inputField/InputField";
 
-const New1 = ({ttName,setTtName}) => {
+const New1 = ({ ttName, setTtName, disabled }) => {
     return (
         <div className="new1-container">
-            <input
-                        type="text"
-                        placeholder="TimeTable name"
-                        value={ttName}
-                        onChange={(e) => setTtName(e.target.value)}
-                        className="ttNameField"
-                    />
+            <InputField
+                state={ttName}
+                setState={setTtName}
+                label="Timetable Name"
+                disabled={disabled}
+            />
         </div>
     )
 }
