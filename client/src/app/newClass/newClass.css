@@ -1,5 +1,6 @@
 .newClass{
     display: flex;
+    height: 60px;
     justify-content: space-between;
     align-items: center;
     background: rgba(255, 255, 255, 0.13);
@@ -29,7 +30,7 @@
     flex-direction: column;
 }
 .newClass input[type="text"]{
-    max-width: 40%;
+    max-width: 30%;
     background-color: #00000000;
     border: none;
     border-radius: 10px;
