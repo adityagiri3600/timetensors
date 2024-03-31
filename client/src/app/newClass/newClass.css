@@ -30,19 +30,19 @@
     flex-direction: column;
 }
 .newClass input[type="text"]{
-    max-width: 30%;
+    max-width: 50%;
     background-color: #00000000;
     border: none;
-    border-radius: 10px;
+    border-radius: 6px;
     font-size: 1.2rem;
     color: white;
-    text-shadow: 0px 0px 4px #ffffff;
     font-family: QuickSandLight;
     margin: 5px;
     padding: 10px;
 }
 .newClass input:focus{
-    background-color: #2b7df8;
+    border: 1px solid #2b7df8;
+    font-weight: bold;
     outline: none;
 }
 .newClass input[type="time"]{
@@ -53,6 +53,7 @@
     font-size: .9rem;
     margin: 0;
     padding: 2px;
+    text-wrap: none;
 }
 .newClass input[type="time"]::-webkit-calendar-picker-indicator{
     display: none;
