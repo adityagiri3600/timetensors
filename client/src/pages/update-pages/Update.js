@@ -58,14 +58,12 @@ const Update = () => {
                 <Update1
                     editCode={editCode}
                     setEditCode={setEditCode}
-                    disabled={step !== 0}
                 />
                 <Update2
                     ttName={ttName}
                     setTtName={setTtName}
                     description={description}
                     setDescription={setDescription}
-                    disabled={step !== 1}
                 />
                 <Update3
                     body={{ ttName, description, editCode }}
@@ -73,7 +71,6 @@ const Update = () => {
                     data={data}
                     setData={setData}
                     ttRoute={ttRoute}
-                    disabled={step !== 2}
                 />
             </Carousel>
         </div>
