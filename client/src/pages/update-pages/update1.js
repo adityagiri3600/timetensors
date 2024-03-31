@@ -23,6 +23,7 @@ const Update1 = ({ editCode, setEditCode, disabled }) => {
                     }
                 }}
                 className="editCodeField"
+                disabled={disabled}
             />
         </div>
     );
