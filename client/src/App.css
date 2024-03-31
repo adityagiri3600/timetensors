@@ -4,3 +4,8 @@ body{
 *{
     font-family: QuickSandLight;
 }
+.info-paragraph{
+    font-size: .8rem;
+    padding: 0 15px;
+    color: rgba(255, 255, 255, 0.5);
+}
