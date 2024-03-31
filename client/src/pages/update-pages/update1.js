@@ -1,6 +1,6 @@
 import React from "react";
 
-const Update1 = ({ editCode, setEditCode }) => {
+const Update1 = ({ editCode, setEditCode, disabled }) => {
     return (
         <div className="update1-container">
 
@@ -16,6 +16,7 @@ const Update1 = ({ editCode, setEditCode }) => {
                 value={editCode}
                 onChange={(e) => setEditCode(e.target.value)}
                 className="editCodeField"
+                disabled={disabled}
             />
         </div>
     );

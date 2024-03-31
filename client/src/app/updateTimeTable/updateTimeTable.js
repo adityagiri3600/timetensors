@@ -34,7 +34,7 @@ class UpdateTimeTable extends React.Component {
 
     render() {
         return (
-            <button onClick={this.handleClick} className='updateTimeTable-btn' disabled={this.props.disabled}>
+            <button onClick={this.handleClick} className='updateTimeTable-btn' disabled={this.props.disabled}  tabIndex={-1}>
                 Update
             </button>
         );

@@ -30,10 +30,10 @@ const Update3 = ({ body, setEditCodeError, data, setData, ttRoute }) => {
                 {fakeDate.toLocaleDateString("en-us", { weekday: "long" })}
             </h1>
             <div className="new-navbuttons">
-                <button onClick={handlePrev} className="prev-btn">
+                <button onClick={handlePrev} className="prev-btn" tabIndex={-1}>
                     prev
                 </button>
-                <button onClick={handleNext} className="next-btn">
+                <button onClick={handleNext} className="next-btn" tabIndex={-1}>
                     next
                 </button>
             </div>
@@ -49,7 +49,7 @@ const Update3 = ({ body, setEditCodeError, data, setData, ttRoute }) => {
                         />
                     ) : null
                 )}
-                <button onClick={addClass} className="newClass-btn">
+                <button onClick={addClass} className="newClass-btn" tabIndex={-1}>
                     Add Class
                 </button>
             </div>
