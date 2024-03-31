@@ -15,6 +15,9 @@ const Update1 = ({ editCode, setEditCode }) => {
                 type="text"
                 value={editCode}
                 onChange={(e) => setEditCode(e.target.value)}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter') e.preventDefault();
+                }}
                 className="editCodeField"
             />
         </div>

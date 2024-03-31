@@ -45,11 +45,15 @@
     outline: none;
 }
 .newClass input[type="time"]{
-    background-color: #2b7df8;
-    border: none;
-    font-size: .8rem;
+    color: white;
+    background-color: #000000;
+    border: 1px solid rgb(60, 60, 60);
+    font-size: .9rem;
     margin: 0;
     padding: 2px;
+}
+.newClass input[type="time"]::-webkit-calendar-picker-indicator{
+    display: none;
 }
 .startTimeField{
     border-top-left-radius: 5px;
