@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import StepProgress from "../../app/step-progress/step-progress";
 import Carousel from "../../app/carousel/carousel";
 import New1 from "./new1";
 import New2 from "./new2";
 import New3 from "./new3";
+import New4 from "./new4";
 import Created from "../Created";
 import "./New.css";
 
@@ -16,10 +17,22 @@ const New = () => {
     const [ttRoute, setTtRoute] = useState("");
     const [created, setCreated] = useState(false);
 
+    const [classes, setClasses] = useState([
+        { Day: new Date().getDay(), Subject: "", Start: "12:00", End: "13:00" }
+    ]);
+    const [uniqueClasses, setUniqueClasses] = useState([]);
+
+    useEffect(() => {
+        const unique = [...new Set(classes.map(c => c.Subject))];
+        unique.sort();
+        setUniqueClasses(unique);
+    }, [classes]);
+
     const steps = [
         "Give a name!",
         "Write a secret edit code",
-        "Make your schedule"
+        "Make your schedule",
+        "Verify"
     ]
 
     return (
@@ -49,6 +62,11 @@ const New = () => {
                             disabled={step !== 1}
                         />
                         <New3
+                            classes={classes}
+                            setClasses={setClasses}
+                            />
+                        <New4 
+                            uniqueClasses={uniqueClasses}
                             body={{ ttName, description, editCode }}
                             setCreated={setCreated}
                             setTtRoute={setTtRoute}
