@@ -2,12 +2,6 @@
     width: 100vw;
 }
 
-.dayTitle{
-    font-size: 2rem;
-    margin: 20px;
-    text-align: left;
-    text-shadow: none;
-}
 .ttNameField{
     margin: 10px;
     margin-bottom: 0;
@@ -50,4 +44,9 @@ input[type=time]{
     border: none;
     border-radius: 10px;
     padding: 10px;
+}
+.new-btn-container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
 }

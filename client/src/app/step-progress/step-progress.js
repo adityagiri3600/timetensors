@@ -36,6 +36,7 @@ const StepProgress = ({ step, n, swipeToNavigateAlert }) => {
             }
             {[...Array(n).keys()].map((index) => (
                 <div
+                    key={index}
                     className="progress-bar"
                     style={{
                         width: `${100 / n}vw`,
