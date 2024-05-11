@@ -3,7 +3,8 @@ import axios from "axios"
 import Carousel from "../../app/carousel/carousel";
 import Update1 from "./update1";
 import Update2 from "./update2";
-import Update3 from "./update3"
+import Update3 from "./update3";
+import Update4 from "./update4";
 import StepProgress from "../../app/step-progress/step-progress";
 import "./Update.css"
 import { useParams } from "react-router-dom";
@@ -12,6 +13,8 @@ const Update = () => {
 
     const { ttRoute } = useParams();
     const [data, setData] = useState([]);
+    const [classes, setClasses] = useState([]);
+    const [events, setEvents] = useState([]);
 
     const [editCode, setEditCode] = useState("")
     const [editCodeError, setEditCodeError] = useState(false)
@@ -24,8 +27,10 @@ const Update = () => {
     const fetchData = async () => {
         try {
             const response = await axios.get(`/api/timetable/${ttRoute}`);
-            setData(response.data.classes);
+            setData(response.data);
             setTtName(response.data.ttName);
+            setClasses(response.data.classes);
+            setEvents(response.data.events);
             setDescription(response.data.description);
             getEditCodeFromLocalStorage(ttRoute, setEditCode);
             console.log(response)
@@ -42,7 +47,8 @@ const Update = () => {
     const steps = [
         "Enter the Edit Code:",
         "Change MetaData",
-        "Update timetable"
+        "Update timetable",
+        "Update events"
     ]
 
     return (
@@ -71,10 +77,19 @@ const Update = () => {
                 <Update3
                     body={{ ttName, description, editCode }}
                     setEditCodeError={setEditCodeError}
-                    data={data}
-                    setData={setData}
+                    classes={classes}
+                    setClasses={setClasses}
                     ttRoute={ttRoute}
                     disabled={step !== 2}
+                />
+                <Update4
+                    body={{ ttName, description, editCode}}
+                    setEditCodeError={setEditCodeError}
+                    classes={classes}
+                    events={events}
+                    setEvents={setEvents}
+                    ttRoute={ttRoute}
+                    disabled={step !== 4}
                 />
             </Carousel>
         </div>
