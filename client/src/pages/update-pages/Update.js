@@ -27,6 +27,7 @@ const Update = () => {
             setData(response.data.classes);
             setTtName(response.data.ttName);
             setDescription(response.data.description);
+            getEditCodeFromLocalStorage(response.data.ttName, setEditCode);
             console.log(response)
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -78,6 +79,14 @@ const Update = () => {
             </Carousel>
         </div>
     );
+}
+
+const getEditCodeFromLocalStorage = (ttName, setEditCode) => {
+    if (window == undefined)
+        return
+    const storedEditCode = localStorage.getItem(`${ttName}EditCode`);
+    if (storedEditCode)
+        setEditCode(storedEditCode);
 }
 
 export default Update;
