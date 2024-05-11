@@ -37,7 +37,6 @@ const TimeTable = () => {
 
     const getClassesAtDay = (day) => {
         return classes.filter(classElement => classElement.Day == day);
-        return []
     }
 
     const floorMod = (a, b) => {

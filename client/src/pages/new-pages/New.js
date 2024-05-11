@@ -67,7 +67,7 @@ const New = () => {
                             />
                         <New4 
                             uniqueClasses={uniqueClasses}
-                            body={{ ttName, description, editCode }}
+                            body={{ ttName, description, classes , editCode }}
                             setCreated={setCreated}
                             setTtRoute={setTtRoute}
                             disabled={step !== 2}
