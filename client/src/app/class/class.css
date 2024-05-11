@@ -24,8 +24,10 @@
 }
 
 .class {
+    width: 100%;
     margin-top: 10px;
-    padding: 10px;
+    height: 60px;
+    overflow: hidden;
 
     background: rgba(43, 125, 248, 0.272);
     border-radius: 10px;
@@ -34,6 +36,8 @@
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid #2b7df8c7;
     font-family: QuickSandLight;
+    
+    transition: all 0.5s;
 }
 
 .class h2 {
@@ -71,8 +75,26 @@
     text-shadow: none;
 }
 
-.icon {
-    margin-top: -50px;
-    float: right;
-    opacity: 0.9;
+.focused {
+    height: 86px;
+    border: 1px solid #b0d0ff93;
+    width: 110%;
+}
+
+.classButtons{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.classButtons button {
+    width: 50%;
+    height: 100%;
+    background-color: rgb(255, 55, 55);
+    color: white;
+
+    border: none;
+    padding: 5px;
 }

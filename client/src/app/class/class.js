@@ -1,7 +1,7 @@
-import {React,useState,useEffect} from "react";
+import { React, useState, useEffect } from "react";
 import "./class.css";
 
-const Class = ({Subject,Start,End,date}) => {
+const Class = ({ Subject, Start, End, date, handleClick, focused }) => {
     let cssClassName = `class `;
 
     const [currDate, setCurrDate] = useState(new Date());
@@ -30,16 +30,22 @@ const Class = ({Subject,Start,End,date}) => {
     if (Subject === "Recess") {
         cssClassName += " recess";
     }
-    if (date.getTime() < currDate.getTime() && currDate.toDateString() !== date.toDateString()){
+    if (date.getTime() < currDate.getTime() && currDate.toDateString() !== date.toDateString()) {
         cssClassName += " past"
-    }else if (hour >= end && currDate.toDateString() === date.toDateString()){
+    } else if (hour >= end && currDate.toDateString() === date.toDateString()) {
         cssClassName += " past"
     }
 
     return (
-        <div className={cssClassName}>
-            <h2>{Subject}</h2>
-            <p>{Start} - {End}</p>
+        <div className={`${cssClassName} ${focused ? 'focused' : ''}`} onClick={handleClick}>
+            <div style={{ padding: "10px" }}>
+                <h2>{Subject}</h2>
+                <p>{Start} - {End}</p>
+            </div>
+            <div className="classButtons">
+                <button>Add Event</button>
+                <button>View CLass</button>
+            </div>
         </div>
     );
 }
