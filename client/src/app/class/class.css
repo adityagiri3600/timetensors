@@ -52,10 +52,6 @@
     margin: 0;
 }
 
-.active {
-    border: inset 1px #3edd49;
-}
-
 .lab {
     padding-bottom: 70px;
 }

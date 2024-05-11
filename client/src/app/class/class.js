@@ -38,6 +38,17 @@ const Class = ({ Subject, Start, End, date, handleClick, focused }) => {
 
     return (
         <div className={`${cssClassName} ${focused ? 'focused' : ''}`} onClick={handleClick}>
+            {cssClassName.includes("active") &&
+                <div style={{ width: "100%", height: "3px" }}>
+                    <div className="progress" style={{
+                        width: `${(hour - begin) / (end - begin) * 100}%`,
+                        backgroundColor: "white",
+                        height: "100%",
+                        borderRadius: "5px",
+                        boxShadow: "0px 0px 10px 0px white"
+                    }}></div>
+                </div>
+            }
             <div style={{ padding: "10px" }}>
                 <h2>{Subject}</h2>
                 <p>{Start} - {End}</p>
