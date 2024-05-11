@@ -10,31 +10,33 @@ import "./TimeTable.css"
 const TimeTable = () => {
     const { ttRoute } = useParams();
     const [data, setData] = useState([]);
-    const [classes,setClasses] = useState([])
+    const [classes, setClasses] = useState([])
     const [notFound, setNotFound] = useState(false);
+    const [userHasEditCode, setUserHasEditCode] = useState(false);
 
     const fetchData = async () => {
         try {
             const response = await axios.get(`/api/timetable/${ttRoute}`);
             setData(response.data);
             setClasses(response.data.classes);
+            doesUserHaveEditCode(ttRoute,setUserHasEditCode);
             console.log(response)
         } catch (error) {
             setNotFound(true);
             console.error('Error fetching data:', error);
         }
     };
-
+    
     useEffect(() => {
         fetchData();
     }, []);
-
+    
     const [date, setDate] = useState(new Date());
     const [fakeDate, setFakeDate] = useState(date);
-
+    
     const [weekDay, setWeekDay] = useState(date.getDay())
     const [fakeWeekDay, setFakeWeekDay] = useState(weekDay);
-
+    
     const getClassesAtDay = (day) => {
         return classes.filter(classElement => classElement.Day == day);
     }
@@ -76,6 +78,29 @@ const TimeTable = () => {
         }
     }
 
+    const doesUserHaveEditCode = (ttRoute, setUserHasEditCode) => {
+        if (window == undefined)
+            return
+        const editCode = localStorage.getItem(`${ttRoute}EditCode`);
+        if (editCode){
+            setUserHasEditCode(true);
+            console.log("User has edit code for this timetable\nEdit Code: ", editCode);
+        }
+    }
+
+    const postEvent = (event) => {
+        axios.post(`/api/timetable/update/${ttRoute}`,
+            { ...data, editCode: "ec", events : [...data.events, event] },
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        )
+            .catch((e) => console.error(e))
+            .then((r) => console.log(r))
+    }
+
     return (
         <>
             {notFound ? (
@@ -112,6 +137,9 @@ const TimeTable = () => {
                                                 ? "left"
                                                 : "none"
                                 }
+                                events={data.events}
+                                postEvent={postEvent}
+                                userHasEditCode={userHasEditCode}
                             />
                         ))}
                     </Carousel>

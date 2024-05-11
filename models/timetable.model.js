@@ -11,6 +11,10 @@ const timetableSchema = new mongoose.Schema({
         Subject: String,
         Start: String,
         End: String
+    }],
+    events: [{
+        date: Date,
+        event: String
     }]
 });
 

@@ -59,6 +59,7 @@ router.post('/update/:ttid', async (req, res) => {
         delete req.body.editCode;
         await timetable.findOneAndUpdate({ ttid }, req.body);
         res.json('Timetable updated successfully');
+        console.log(req.body);
         console.log(`Timetable updated: ${ttid}`);
     } catch (err) {
         res.status(400).json('Error: ' + err.message);

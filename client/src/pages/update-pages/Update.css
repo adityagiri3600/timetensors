@@ -57,6 +57,13 @@
     justify-content: center;
     align-items: center;
 }
+.update4-container{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .update-btn-container{
     width: 100%;
     display: flex;

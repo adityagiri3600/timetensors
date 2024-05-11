@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import NewClass from "../../app/newClass/newClass";
 import "./timetableCreator.css";
 
-const TimetableCreator = ({ data, setData }) => {
+const TimetableCreator = ({ classes, setClasses }) => {
 
     const [date, setDate] = useState(new Date());
     const [fakeDate, setFakeDate] = useState(date);
@@ -21,7 +21,7 @@ const TimetableCreator = ({ data, setData }) => {
     }
 
     const addClass = () => {
-        setData([...data, { Day: fakeWeekDay, Subject: "", Start: "12:00", End: "13:00" }])
+        setClasses([...classes, { Day: fakeWeekDay, Subject: "", Start: "12:00", End: "13:00" }])
     }
 
     return (
@@ -43,12 +43,12 @@ const TimetableCreator = ({ data, setData }) => {
                 </button>
             </div>
             <div className="newClasslist">
-                {data.map((c, i) =>
+                {classes.map((c, i) =>
                     c.Day == fakeWeekDay ? (
                         <NewClass
                             key={i}
-                            classes={data}
-                            setClasses={setData}
+                            classes={classes}
+                            setClasses={setClasses}
                             index={i}
                             Day={fakeWeekDay}
                         />
