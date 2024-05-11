@@ -10,7 +10,7 @@ import "./TimeTable.css"
 const TimeTable = () => {
     const { ttRoute } = useParams();
     const [data, setData] = useState([]);
-    const [classes,setClasses] = useState([])
+    const [classes, setClasses] = useState([])
     const [notFound, setNotFound] = useState(false);
 
     const fetchData = async () => {
@@ -76,6 +76,19 @@ const TimeTable = () => {
         }
     }
 
+    const postEvent = (event) => {
+        axios.post(`/api/timetable/update/${ttRoute}`,
+            { ...data, editCode: "ec", events : [...data.events, event] },
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        )
+            .catch((e) => console.error(e))
+            .then((r) => console.log(r))
+    }
+
     return (
         <>
             {notFound ? (
@@ -112,6 +125,8 @@ const TimeTable = () => {
                                                 ? "left"
                                                 : "none"
                                 }
+                                events={data.events}
+                                postEvent={postEvent}
                             />
                         ))}
                     </Carousel>

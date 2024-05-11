@@ -94,3 +94,8 @@
     border: none;
     padding: 5px;
 }
+
+.event{
+    font-size: .6rem;
+    color: rgba(0, 0, 137, 0.389);
+}
