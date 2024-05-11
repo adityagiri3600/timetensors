@@ -58,16 +58,20 @@ const Class = ({ Subject, Start, End, date, handleClick, focused, postEvent, eve
                     <p>{Start} - {End}</p>
                     <div>
                         {events.filter(event => (
-                                        new Date(event.date).toDateString()===new Date(date).toDateString())
-                                        &&begin===parseInt(new Date(event.date).getHours())).map((event, i) => (
-                            <div key={i} className="event">
-                                <p>{event.event}</p>
-                            </div>
-                        ))}
+                            new Date(event.date).toDateString() === new Date(date).toDateString())
+                            && begin === parseInt(new Date(event.date).getHours())).map((event, i) => (
+                                <div key={i} className="event">
+                                    <p>{event.event}</p>
+                                </div>
+                            ))}
                     </div>
                 </div>
             </div>
-            <div className="classButtons">
+
+            <div className="classButtons" style={{
+                height: focused ? "39px" : "0px",
+                overflow: "hidden"
+            }}>
                 {footer === "buttons" ? (
                     <>
                         <button onClick={() => setFooter("add event")}>Add Event</button>

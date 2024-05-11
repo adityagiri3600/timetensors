@@ -26,7 +26,6 @@
 .class {
     width: 100%;
     margin-top: 10px;
-    height: 60px;
     overflow: hidden;
 
     background: rgba(43, 125, 248, 0.272);
@@ -72,7 +71,6 @@
 }
 
 .focused {
-    height: 86px;
     border: 1px solid #b0d0ff93;
     width: 110%;
 }
@@ -83,6 +81,7 @@
     width: 100%;
     margin: 0;
     padding: 0;
+    transition: all 0.5s;
 }
 
 .classButtons button {
@@ -97,5 +96,5 @@
 
 .event{
     font-size: .6rem;
-    color: rgba(0, 0, 137, 0.389);
+    color: white;
 }
