@@ -82,6 +82,7 @@ const Class = ({ Subject, Start, End, date, handleClick, focused, postEvent, eve
                         <input type="text" placeholder="Event Name" value={event} onChange={(e) => setEvent(e.target.value)} style={{
                             width: "90%",
                             padding: "5px",
+                            paddingLeft: "15px",
                             margin: "0",
                             borderRadius: "none",
                             border: "none",
