@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import "./class.css";
 
-const Class = ({ Subject, Start, End, date, handleClick, focused, postEvent, events }) => {
+const Class = ({ Subject, Start, End, date, handleClick, focused, postEvent, events, userHasEditCode }) => {
     let cssClassName = `class `;
 
     const [currDate, setCurrDate] = useState(new Date());
@@ -69,7 +69,7 @@ const Class = ({ Subject, Start, End, date, handleClick, focused, postEvent, eve
             </div>
 
             <div className="classButtons" style={{
-                height: focused ? "39px" : "0px",
+                height: focused && userHasEditCode ? "39px" : "0px",
                 overflow: "hidden"
             }}>
                 {footer === "buttons" ? (

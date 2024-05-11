@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Class from "../class/class";
 import "./classList.css"
 
-const ClassList = ({ todaysClasses, date, position, postEvent, events }) => {
+const ClassList = ({ todaysClasses, date, position, postEvent, events, userHasEditCode }) => {
 
     const [focusedClass, setFocusedClass] = useState(-1);
     const setFocusedClassWrapper = (i) => {
@@ -31,6 +31,7 @@ const ClassList = ({ todaysClasses, date, position, postEvent, events }) => {
                         focused={focusedClass === i && position === "center"}
                         events={events} 
                         postEvent={postEvent}
+                        userHasEditCode={userHasEditCode}
                     />
                 ))}
             </div>

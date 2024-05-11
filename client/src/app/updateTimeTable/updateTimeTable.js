@@ -11,7 +11,7 @@ class UpdateTimeTable extends React.Component {
 
             // save body to local storage
             if(window !== undefined)
-                localStorage.setItem(`${this.props.body.ttName}EditCode`, this.props.body.editCode);
+                localStorage.setItem(`${this.props.ttRoute}EditCode`, this.props.body.editCode);
         } else {
             console.error("An error occurred");
         }

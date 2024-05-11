@@ -27,7 +27,7 @@ const Update = () => {
             setData(response.data.classes);
             setTtName(response.data.ttName);
             setDescription(response.data.description);
-            getEditCodeFromLocalStorage(response.data.ttName, setEditCode);
+            getEditCodeFromLocalStorage(ttRoute, setEditCode);
             console.log(response)
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -81,10 +81,10 @@ const Update = () => {
     );
 }
 
-const getEditCodeFromLocalStorage = (ttName, setEditCode) => {
+const getEditCodeFromLocalStorage = (ttRoute, setEditCode) => {
     if (window == undefined)
         return
-    const storedEditCode = localStorage.getItem(`${ttName}EditCode`);
+    const storedEditCode = localStorage.getItem(`${ttRoute}EditCode`);
     if (storedEditCode)
         setEditCode(storedEditCode);
 }
