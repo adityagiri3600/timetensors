@@ -1,4 +1,4 @@
-.step-heading{
+.step-heading {
     text-shadow: none;
     text-align: left;
     font-family: Helvetica;
@@ -7,10 +7,12 @@
     padding-top: 30px;
     font-size: 1.4rem;
 }
-.stepCount{
+
+.stepCount {
     color: grey;
 }
-.editCodeError{
+
+.editCodeError {
     color: red;
     padding: 10px;
     margin: 0;
@@ -20,7 +22,7 @@
 
 
 
-.update1-container{
+.update1-container {
     width: 100vw;
     height: 80vh;
 }
@@ -31,14 +33,15 @@
 
 
 
-.update2-container{
+.update2-container {
     width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: left;
 }
-.description{
+
+.description {
     width: 300px;
     height: 100px;
     font-size: 1rem;
@@ -50,22 +53,53 @@
     color: white;
 }
 
-.update3-container{
+.update3-container {
     width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.update4-container{
+
+.update4-container {
     width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.update-btn-container{
+
+.update-btn-container {
     width: 100%;
     display: flex;
     justify-content: flex-end;
+}
+
+.eventList {
+    display: flex;
+    height: 60px;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    overflow: hidden;
+    border-top: none;
+    font-family: QuickSandLight;
+}
+.eventList input{
+    font-size: 1rem;
+    border: none;
+    background: none;
+    color: white;
+    margin-left: 5px;
+    padding: 3px;
+    border-radius: 5px;
+}
+.eventList input:focus{
+    border: 1px solid #2b7df8;
+    font-weight: bold;
+    outline: none;
+}
+.eventList p{
+    font-size: 0.6rem;
 }
