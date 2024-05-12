@@ -7,7 +7,7 @@ const New3 = ({classes, setClasses}) => {
     return (
         <div className="new3-container">
             <div>
-                <TimetableCreator data={classes} setData={setClasses} />
+                <TimetableCreator classes={classes} setClasses={setClasses} />
             </div>
         </div>
     );
