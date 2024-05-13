@@ -116,15 +116,20 @@ body {
   font-family: QuicksandRegular, "Roboto Medium", sans-serif;
 }
 
-.edit-btn p:hover {
-  color: #2b7df8;
-}
-
 .edit-icon {
   width: 20px;
   margin: 10px;
 }
 
-.edit-icon:hover {
-  color: #2b7df8;
+.rotate {
+  animation: rotation 200ms infinite linear;
+}
+
+@keyframes rotation {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(359deg);
+  }
 }

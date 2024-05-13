@@ -19,24 +19,24 @@ const TimeTable = () => {
             const response = await axios.get(`/api/timetable/${ttRoute}`);
             setData(response.data);
             setClasses(response.data.classes);
-            doesUserHaveEditCode(ttRoute,setUserHasEditCode);
+            doesUserHaveEditCode(ttRoute, setUserHasEditCode);
             console.log(response)
         } catch (error) {
             setNotFound(true);
             console.error('Error fetching data:', error);
         }
     };
-    
+
     useEffect(() => {
         fetchData();
     }, []);
-    
+
     const [date, setDate] = useState(new Date());
     const [fakeDate, setFakeDate] = useState(date);
-    
+
     const [weekDay, setWeekDay] = useState(date.getDay())
     const [fakeWeekDay, setFakeWeekDay] = useState(weekDay);
-    
+
     const getClassesAtDay = (day) => {
         return classes.filter(classElement => classElement.Day == day);
     }
@@ -82,7 +82,7 @@ const TimeTable = () => {
         if (window == undefined)
             return
         const editCode = localStorage.getItem(`${ttRoute}EditCode`);
-        if (editCode){
+        if (editCode) {
             setUserHasEditCode(true);
             console.log("User has edit code for this timetable\nEdit Code: ", editCode);
         }
@@ -90,7 +90,7 @@ const TimeTable = () => {
 
     const postEvent = (event) => {
         axios.post(`/api/timetable/update/${ttRoute}`,
-            { ...data, editCode: "ec", events : [...data.events, event] },
+            { ...data, editCode: "ec", events: [...data.events, event] },
             {
                 headers: {
                     'Content-Type': 'application/json'
@@ -112,7 +112,15 @@ const TimeTable = () => {
                     </h1>
                     <div className="date-edit-container">
                         <Datetime date={date} />
-                        <a href={`/update/${ttRoute}`} className="edit-btn">
+                        <a href={`/update/${ttRoute}`} className="edit-btn" onClick={(e) => {
+                            // animate edit icon rotation
+                            e.preventDefault();
+                            const icon = e.currentTarget.querySelector('.edit-icon');
+                            icon.classList.add('rotate');
+                            setTimeout(() => {
+                                window.location.href = `/update/${ttRoute}`;
+                            }, 200); 
+                        }}>
                             <img src="/editIcon.svg" alt="Edit" className="edit-icon" />
                             <p>Edit</p>
                         </a>
