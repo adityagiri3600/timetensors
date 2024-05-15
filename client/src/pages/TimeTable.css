@@ -122,7 +122,7 @@ body {
 }
 
 .rotate {
-  animation: rotation 200ms infinite linear;
+  animation: rotation 200ms 1 linear;
 }
 
 @keyframes rotation {
