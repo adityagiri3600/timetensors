@@ -118,6 +118,7 @@ const TimeTable = () => {
                             const icon = e.currentTarget.querySelector('.edit-icon');
                             icon.classList.add('rotate');
                             setTimeout(() => {
+                                icon.classList.remove('rotate');
                                 window.location.href = `/update/${ttRoute}`;
                             }, 200);
                         }}>
