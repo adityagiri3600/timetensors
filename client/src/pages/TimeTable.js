@@ -107,7 +107,7 @@ const TimeTable = () => {
                 <NotFound ttRoute={ttRoute} />
             ) : (
                 <div className="timetable-container">
-                    <h1 className={"title"}>
+                    <h1 className="title">
                         <a href="/">TimeTrack</a>
                     </h1>
                     <div className="date-edit-container">
@@ -119,7 +119,7 @@ const TimeTable = () => {
                             icon.classList.add('rotate');
                             setTimeout(() => {
                                 window.location.href = `/update/${ttRoute}`;
-                            }, 200); 
+                            }, 200);
                         }}>
                             <img src="/editIcon.svg" alt="Edit" className="edit-icon" />
                             <p>Edit</p>

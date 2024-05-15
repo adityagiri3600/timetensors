@@ -29,7 +29,7 @@ const ClassList = ({ todaysClasses, date, position, postEvent, events, userHasEd
                         date={date}
                         handleClick={() => setFocusedClassWrapper(i)}
                         focused={focusedClass === i && position === "center"}
-                        events={events} 
+                        events={events}
                         postEvent={postEvent}
                         userHasEditCode={userHasEditCode}
                     />

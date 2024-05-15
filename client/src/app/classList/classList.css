@@ -1,7 +1,7 @@
 .classList{
     width: 70%;
     margin: 2vw auto;
-    margin-top: 20px;
+    margin-top: 5px;
     background: radial-gradient(circle,#2b7df8b8 -30%, #99bdefd7 0%, #2b7df8b8 30%);
     background-size: 400% 400%;
     animation: gradientAnimation 10s ease infinite;
@@ -36,11 +36,11 @@
     
 }
 
-.left{
+.classList.left{
     transform: translateX(35%) rotateY(30deg) translateY(10%);
     transform-style: preserve-3d;
 }
-.right{
+.classList.right{
     transform: translateX(-35%) rotateY(-30deg) translateY(10%);
     transform-style: preserve-3d;
 }

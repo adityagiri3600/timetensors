@@ -9,8 +9,7 @@
 .datetime h2{
     font-weight: 100;
     font-size: 3rem;
-    margin-bottom: -12px;
-    margin: 0 0  -12px 0;
+    margin: 0 0  -5px 0;
     padding: 0;
 }
 .datetime h3{
