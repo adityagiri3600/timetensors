@@ -31,14 +31,25 @@ const TimeTable = () => {
         fetchData();
     }, []);
 
-    const [date, setDate] = useState(new Date());
+    const dateInitalValue = new Date();
+    dateInitalValue.setHours(0, 0, 0, 0);
+    const [date, setDate] = useState(dateInitalValue);
     const [fakeDate, setFakeDate] = useState(date);
 
     const [weekDay, setWeekDay] = useState(date.getDay())
     const [fakeWeekDay, setFakeWeekDay] = useState(weekDay);
 
-    const getClassesAtDay = (day) => {
-        return classes.filter(classElement => classElement.Day == day);
+    const getClassesAtDate = (date_param) => {
+        if (data.classesAtSpecificDate) {
+            for (let i = 0; i < data.classesAtSpecificDate.length; i++) {
+                let casdDate = new Date(data.classesAtSpecificDate[i].date);
+                casdDate.setHours(0, 0, 0, 0);
+                if (casdDate.valueOf() == date_param.valueOf()) {
+                    return data.classesAtSpecificDate[i].classes;
+                }
+            }
+        }
+        return classes.filter(classElement => classElement.Day == date_param.getDay());
     }
 
     const floorMod = (a, b) => {
@@ -64,6 +75,11 @@ const TimeTable = () => {
             }
         }
     }
+    const incrementDateByDays = (date, days) => {
+        let result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
+    };
 
     const handleCarouselChange = (index) => {
         index += weekDay;
@@ -129,7 +145,15 @@ const TimeTable = () => {
                     <Carousel onChange={handleCarouselChange} loopback={true}>
                         {[...Array(7).keys()].map((day) => (
                             <ClassList
-                                todaysClasses={getClassesAtDay((day + weekDay) % 7)}
+                                todaysClasses={
+                                    getClassesAtDate(
+                                        (weekDay + day) % 7 == fakeWeekDay
+                                            ? fakeDate
+                                            : new Date(fakeDate.getFullYear(),
+                                                fakeDate.getMonth(),
+                                                fakeDate.getDate() + diffmod7(floorMod(day + weekDay, 7), fakeWeekDay))
+                                    )
+                                }
                                 date={
                                     (weekDay + day) % 7 == fakeWeekDay
                                         ? fakeDate

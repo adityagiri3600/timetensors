@@ -15,6 +15,15 @@ const timetableSchema = new mongoose.Schema({
     events: [{
         date: Date,
         event: String
+    }],
+    classesAtSpecificDate: [{
+        date: Date,
+        classes: [{
+            Day: String,
+            Subject: String,
+            Start: String,
+            End: String
+        }]
     }]
 });
 
