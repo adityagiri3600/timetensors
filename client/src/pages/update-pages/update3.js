@@ -1,17 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TimetableCreator from "../../app/timetableCreator/timetableCreator";
 import UpdateTimeTable from "../../app/updateTimeTable/updateTimeTable";
 
-const Update3 = ({ body, setEditCodeError, classes, setClasses, ttRoute }) => {
+const Update3 = ({ body, setEditCodeError, classes, classesAtSpecificDate, ttRoute }) => {
+    
+    const [editingSpecificDate, setEditingSpecificDate] = useState(false);
+    const [newClasses, setNewClasses] = useState(classes);
+    useEffect(() => {
+        setNewClasses(classes);
+    }, [classes])
+    const [newClassesAtSpecificDate, setNewClassesAtSpecificDate] = useState({ date: new Date(), classes: [] });
+
+    const updateClassesAtSpecificDate = (casd, ncasd) => {
+        for (let i = 0; i < casd.length; i++) {
+            let casdDate = new Date(casd[i].date);
+            casdDate.setHours(0, 0, 0, 0);
+            let ncasdDate = new Date(ncasd.date);
+            ncasdDate.setHours(0, 0, 0, 0);
+            if (casdDate.valueOf() == ncasdDate.valueOf()) {
+                casd[i].classes = ncasd.classes;
+                return casd;
+            }
+        }
+        return [...casd, ncasd];
+    }
 
     return (
         <div className="update3-container">
-            <TimetableCreator classes={classes} setClasses={setClasses} />
+            <TimetableCreator 
+                classes={newClasses}
+                setClasses={setNewClasses}
+                classesAtSpecificDate={classesAtSpecificDate}
+                setNewClassesAtSpecificDate={setNewClassesAtSpecificDate}
+                editingSpecificDate={editingSpecificDate}
+                setEditingSpecificDate={setEditingSpecificDate}
+            />
             <div className="update-btn-container">
                 <UpdateTimeTable
                     body={{
                         ...body,
-                        classes,
+                        classes: 
+                            editingSpecificDate
+                                ? classes
+                                : newClasses,
+                        classesAtSpecificDate: 
+                            editingSpecificDate
+                                ? updateClassesAtSpecificDate(classesAtSpecificDate, newClassesAtSpecificDate)
+                                : classesAtSpecificDate
                     }}
                     ttRoute={ttRoute}
                     setEditCodeError={setEditCodeError}

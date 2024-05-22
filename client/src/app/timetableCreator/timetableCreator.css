@@ -44,3 +44,14 @@
 .newClass-btn:active{
     background-color: #1a58b3;
 }
+.editingSpecificDatebtn{
+    background: none;
+    color: white;
+    font-size: 0.7rem;
+    padding: 11px;
+    margin: 0;
+    border: none;
+}
+.editingSpecificDatebtn:active{
+    color: rgba(255, 255, 255, 0.5);
+}

@@ -14,6 +14,7 @@ const Update = () => {
     const { ttRoute } = useParams();
     const [data, setData] = useState([]);
     const [classes, setClasses] = useState([]);
+    const [classesAtSpecificDate, setClassesAtSpecificDate] = useState([]);
     const [events, setEvents] = useState([]);
 
     const [editCode, setEditCode] = useState("")
@@ -30,6 +31,7 @@ const Update = () => {
             setData(response.data);
             setTtName(response.data.ttName);
             setClasses(response.data.classes);
+            setClassesAtSpecificDate(response.data.classesAtSpecificDate);
             setEvents(response.data.events);
             setDescription(response.data.description);
             getEditCodeFromLocalStorage(ttRoute, setEditCode);
@@ -79,6 +81,7 @@ const Update = () => {
                     setEditCodeError={setEditCodeError}
                     classes={classes}
                     setClasses={setClasses}
+                    classesAtSpecificDate={classesAtSpecificDate}
                     ttRoute={ttRoute}
                     disabled={step !== 2}
                 />
