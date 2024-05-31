@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { response } = require('express');
 let timetable = require('../models/timetable.model');
+let classObject = require('../models/classObject.model');
 const { read } = require('fs');
 
 router.get('/:ttid', async (req, res) => {
@@ -14,6 +15,17 @@ router.get('/:ttid', async (req, res) => {
 
         const timetableData = { ...tt._doc };
         delete timetableData.editCode;
+
+        const classObjectsPromises = timetableData.classes.map(async (classItem) => {
+            const classData = await classObject.findOne({ classid: classItem.classid });
+            return {
+                ...classItem._doc,
+                ...classData._doc
+            };
+        });
+        
+        timetableData.classes = await Promise.all(classObjectsPromises);
+
         res.json(timetableData);
     } catch (err) {
         res.status(400).json('Error: ' + err.message);
@@ -28,6 +40,8 @@ router.post('/new', async (req, res) => {
             ttid,
             ...req.body
         });
+
+        await classObject.insertMany(req.body.classObjects);
 
         await newTimetable.save();
 

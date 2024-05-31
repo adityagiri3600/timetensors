@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import TimetableCreator from "../../app/timetableCreator/timetableCreator";
 import UpdateTimeTable from "../../app/updateTimeTable/updateTimeTable";
 
-const Update3 = ({ body, setEditCodeError, classes, classesAtSpecificDate, ttRoute }) => {
+const Update3 = ({ body, setEditCodeError, classes, classObjects , classesAtSpecificDate, ttRoute }) => {
     
     const [editingSpecificDate, setEditingSpecificDate] = useState(false);
     const [newClasses, setNewClasses] = useState(classes);
@@ -30,6 +30,7 @@ const Update3 = ({ body, setEditCodeError, classes, classesAtSpecificDate, ttRou
             <TimetableCreator 
                 classes={newClasses}
                 setClasses={setNewClasses}
+                classObjects={classObjects}
                 classesAtSpecificDate={classesAtSpecificDate}
                 setNewClassesAtSpecificDate={setNewClassesAtSpecificDate}
                 editingSpecificDate={editingSpecificDate}

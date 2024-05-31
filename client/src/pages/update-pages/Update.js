@@ -15,6 +15,7 @@ const Update = () => {
     const [data, setData] = useState([]);
     const [classes, setClasses] = useState([]);
     const [classesAtSpecificDate, setClassesAtSpecificDate] = useState([]);
+    const [classObjects, setClassObjects] = useState([])
     const [events, setEvents] = useState([]);
 
     const [editCode, setEditCode] = useState("")
@@ -32,6 +33,7 @@ const Update = () => {
             setTtName(response.data.ttName);
             setClasses(response.data.classes);
             setClassesAtSpecificDate(response.data.classesAtSpecificDate);
+            setClassObjects(response.data.classObjects);
             setEvents(response.data.events);
             setDescription(response.data.description);
             getEditCodeFromLocalStorage(ttRoute, setEditCode);
@@ -80,7 +82,7 @@ const Update = () => {
                     body={{ ttName, description, editCode }}
                     setEditCodeError={setEditCodeError}
                     classes={classes}
-                    setClasses={setClasses}
+                    classObjects={classObjects}
                     classesAtSpecificDate={classesAtSpecificDate}
                     ttRoute={ttRoute}
                     disabled={step !== 2}
@@ -92,7 +94,7 @@ const Update = () => {
                     events={events}
                     setEvents={setEvents}
                     ttRoute={ttRoute}
-                    disabled={step !== 4}
+                    disabled={step !== 3}
                 />
             </Carousel>
         </div>

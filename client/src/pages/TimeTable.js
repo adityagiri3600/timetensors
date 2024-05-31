@@ -114,7 +114,10 @@ const TimeTable = () => {
             }
         )
             .catch((e) => console.error(e))
-            .then((r) => console.log(r))
+            .then((r) => {
+                console.log(r)
+                fetchData();
+            })
     }
 
     return (
@@ -143,8 +146,9 @@ const TimeTable = () => {
                         </a>
                     </div>
                     <Carousel onChange={handleCarouselChange} loopback={true}>
-                        {[...Array(7).keys()].map((day) => (
+                        {[...Array(7).keys()].map((day,i) => (
                             <ClassList
+                                key={i}
                                 todaysClasses={
                                     getClassesAtDate(
                                         (weekDay + day) % 7 == fakeWeekDay

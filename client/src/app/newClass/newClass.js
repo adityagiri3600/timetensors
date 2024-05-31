@@ -1,7 +1,9 @@
 import { React, useState } from "react";
 import "./newClass.css";
 
-const NewClass = ({ classes, setClasses, index, Day }) => {
+const NewClass = ({ classes, setClasses, classObjects, index, Day }) => {
+
+    const [classid, setClassid] = useState(classes[index].classid);
 
     const deleteClass = () => {
         setClasses(classes.filter((c, i) => i !== index))
@@ -9,48 +11,57 @@ const NewClass = ({ classes, setClasses, index, Day }) => {
 
     return (
         <div className="newClass">
-            <input
-                type="text"
-                placeholder="Class Name"
-                value={classes[index].Subject}
-                onChange={(e) =>
+            <select
+                onChange={(e) => {
+                    setClassid(e.target.value)
                     setClasses(
                         classes.map((c, i) =>
-                            i === index ? { ...c, Subject: e.target.value, Day: Day } : c
+                            i === index ? { ...c, classid: e.target.value } : c
                         )
                     )
-                }
-                className="classNameField"
-            />
-            <div className="timeField">
-                <input
-                    type="time"
-                    value={classes[index].Start}
-                    onChange={(e) =>
-                        setClasses(
-                            classes.map((c, i) =>
-                                i === index ? { ...c, Start: e.target.value, Day: Day } : c
+                }}
+                value={classid}
+            >
+                {classObjects.map((c, i) =>
+                    <option key={c.classid} value={c.classid}>{c.Name}</option>
+                )}
+            </select>
+            <div style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center"
+            
+            }}>
+                <div className="timeField">
+                    <input
+                        type="time"
+                        value={classes[index].Start}
+                        onChange={(e) =>
+                            setClasses(
+                                classes.map((c, i) =>
+                                    i === index ? { ...c, Start: e.target.value, Day: Day } : c
+                                )
                             )
-                        )
-                    }
-                    className="startTimeField"
-                />
-                <input
-                    type="time"
-                    value={classes[index].End}
-                    onChange={(e) =>
-                        setClasses(
-                            classes.map((c, i) =>
-                                i === index ? { ...c, End: e.target.value, Day: Day } : c
+                        }
+                        className="startTimeField"
+                    />
+                    <input
+                        type="time"
+                        value={classes[index].End}
+                        onChange={(e) =>
+                            setClasses(
+                                classes.map((c, i) =>
+                                    i === index ? { ...c, End: e.target.value, Day: Day } : c
+                                )
                             )
-                        )
-                    }
-                    className="endTimeField"
-                />
+                        }
+                        className="endTimeField"
+                    />
+                </div>
+                <button onClick={deleteClass} className="deleteClass-btn">
+                    <img src="/delete.svg" alt="delete" className="deleteIcon" />
+                </button>
             </div>
-            <button onClick={deleteClass} className="deleteClass-btn">
-                <img src="/delete.svg" alt="delete" className="deleteIcon" />
-            </button>
         </div>
     );
 };
