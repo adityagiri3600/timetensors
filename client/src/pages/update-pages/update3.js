@@ -1,60 +1,51 @@
-import React, { useEffect, useState } from "react";
-import TimetableCreator from "../../app/timetableCreator/timetableCreator";
-import UpdateTimeTable from "../../app/updateTimeTable/updateTimeTable";
+import { React, useState } from "react";
+import InputField from "../../app/inputField/InputField";
 
-const Update3 = ({ body, setEditCodeError, classes, classObjects , classesAtSpecificDate, ttRoute }) => {
-    
-    const [editingSpecificDate, setEditingSpecificDate] = useState(false);
-    const [newClasses, setNewClasses] = useState(classes);
-    useEffect(() => {
-        setNewClasses(classes);
-    }, [classes])
-    const [newClassesAtSpecificDate, setNewClassesAtSpecificDate] = useState({ date: new Date(), classes: [] });
+const Update3 = ({ classObjects, setClassObjects, disabled }) => {
 
-    const updateClassesAtSpecificDate = (casd, ncasd) => {
-        for (let i = 0; i < casd.length; i++) {
-            let casdDate = new Date(casd[i].date);
-            casdDate.setHours(0, 0, 0, 0);
-            let ncasdDate = new Date(ncasd.date);
-            ncasdDate.setHours(0, 0, 0, 0);
-            if (casdDate.valueOf() == ncasdDate.valueOf()) {
-                casd[i].classes = ncasd.classes;
-                return casd;
-            }
-        }
-        return [...casd, ncasd];
-    }
+    const [name, setName] = useState("");
 
     return (
         <div className="update3-container">
-            <TimetableCreator 
-                classes={newClasses}
-                setClasses={setNewClasses}
-                classObjects={classObjects}
-                classesAtSpecificDate={classesAtSpecificDate}
-                setNewClassesAtSpecificDate={setNewClassesAtSpecificDate}
-                editingSpecificDate={editingSpecificDate}
-                setEditingSpecificDate={setEditingSpecificDate}
-            />
-            <div className="update-btn-container">
-                <UpdateTimeTable
-                    body={{
-                        ...body,
-                        classes: 
-                            editingSpecificDate
-                                ? classes
-                                : newClasses,
-                        classesAtSpecificDate: 
-                            editingSpecificDate
-                                ? updateClassesAtSpecificDate(classesAtSpecificDate, newClassesAtSpecificDate)
-                                : classesAtSpecificDate
-                    }}
-                    ttRoute={ttRoute}
-                    setEditCodeError={setEditCodeError}
+            <div>
+                <InputField
+                    state={name}
+                    setState={setName}
+                    label="Class Name:"
+                    disabled={disabled}
                 />
+                <button onClick={() => setClassObjects([...classObjects, { Name: name, classid: Math.random().toString(36).substring(7) }])}>Add Class</button>
             </div>
+            {classObjects.map((c, i) =>
+                <div 
+                    key={i}
+                    style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        width: "90%",
+                        height: "50px",
+                    }}
+                >
+                    <p style={{paddingLeft:"40px"}}>{c.Name}</p>
+                    <button onClick={() => setClassObjects(classObjects.filter((c, index) => index !== i))}
+                        style={{
+                            height: "80%",
+                            border: "none",
+                            padding: "0",
+                            background: "rgb(255, 55, 55)",
+                            borderRadius: "5px"
+                        }}>
+                        <img src="/delete.svg" alt="delete" style={{
+                            background: "rgb(255, 55, 55)",
+                            width: "60%",
+                            height: "90%"
+                        }} />
+                    </button>
+                </div>
+            )}
         </div>
-    )
+    );
 }
 
 export default Update3;

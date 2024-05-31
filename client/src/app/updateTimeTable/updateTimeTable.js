@@ -10,7 +10,7 @@ class UpdateTimeTable extends React.Component {
             window.location.replace(`/${this.props.ttRoute}`);
 
             // save body to local storage
-            if(window !== undefined)
+            if (window !== undefined)
                 localStorage.setItem(`${this.props.ttRoute}EditCode`, this.props.body.editCode);
         } else {
             console.error("An error occurred");
@@ -23,22 +23,26 @@ class UpdateTimeTable extends React.Component {
     }
 
 
-    handleClick = () => {
-        axios.post(`/api/timetable/update/${this.props.ttRoute}`,
-            this.props.body,
-            {
-                headers: {
-                    'Content-Type': 'application/json'
+    handleClick = async () => {
+        try {
+            const response = await axios.post(
+                `/api/timetable/update/${this.props.ttRoute}`,
+                this.props.body,
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
                 }
-            }
-        )
-            .catch(this.handleErrorResponse)
-            .then(this.handleResponse)
+            );
+            this.handleResponse(response);
+        } catch (error) {
+            this.handleErrorResponse(error);
+        }
     };
 
     render() {
         return (
-            <button onClick={this.handleClick} className='updateTimeTable-btn' disabled={this.props.disabled}  tabIndex={-1}>
+            <button onClick={this.handleClick} className='updateTimeTable-btn' disabled={this.props.disabled} tabIndex={-1}>
                 Update
             </button>
         );

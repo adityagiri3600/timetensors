@@ -69,12 +69,19 @@ router.post('/update/:ttid', async (req, res) => {
             return res.status(401).json('Invalid edit code');
         }
 
+        for(let i = 0; i < req.body.classObjects.length; i++) {
+            const classItem = req.body.classObjects[i];
+            const existingClass = await classObject.findOne({ classid: classItem.classid });
+            if (!existingClass) await classObject.create(classItem);
+        }
+
         delete req.body.editCode;
         await timetable.findOneAndUpdate({ ttid }, req.body);
         res.json('Timetable updated successfully');
         console.log(req.body);
         console.log(`Timetable updated: ${ttid}`);
     } catch (err) {
+        console.log(err.message)
         res.status(400).json('Error: ' + err.message);
     }
 });

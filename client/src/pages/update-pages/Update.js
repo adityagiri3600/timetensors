@@ -5,6 +5,7 @@ import Update1 from "./update1";
 import Update2 from "./update2";
 import Update3 from "./update3";
 import Update4 from "./update4";
+import Update5 from "./update5";
 import StepProgress from "../../app/step-progress/step-progress";
 import "./Update.css"
 import { useParams } from "react-router-dom";
@@ -51,8 +52,9 @@ const Update = () => {
     const steps = [
         "Enter the Edit Code:",
         "Change MetaData",
+        "Update classes",
         "Update timetable",
-        "Update events"
+        "Update events",
     ]
 
     return (
@@ -63,7 +65,7 @@ const Update = () => {
                 fontSize: "0.8rem",
                 color: "#FFFFFFAA"
             }} >Swipe to Navigate</p>
-            <StepProgress step={step} n={steps.length}/>
+            <StepProgress step={step} n={steps.length} />
             {editCodeError ? <p className="editCodeError">Invalid Edit Code</p> : null}
             <Carousel getIndex={setStep}>
                 <Update1
@@ -79,22 +81,27 @@ const Update = () => {
                     disabled={step !== 1}
                 />
                 <Update3
-                    body={{ ttName, description, editCode }}
+                    classObjects={classObjects}
+                    setClassObjects={setClassObjects}
+                    disabled={step !== 2}
+                />
+                <Update4
+                    body={{ ttName, description, editCode, classObjects, events}}
                     setEditCodeError={setEditCodeError}
                     classes={classes}
                     classObjects={classObjects}
                     classesAtSpecificDate={classesAtSpecificDate}
                     ttRoute={ttRoute}
-                    disabled={step !== 2}
+                    disabled={step !== 3}
                 />
-                <Update4
-                    body={{ ttName, description, editCode}}
+                <Update5
+                    body={{ ttName, description, editCode, classObjects, events}}
                     setEditCodeError={setEditCodeError}
                     classes={classes}
                     events={events}
                     setEvents={setEvents}
                     ttRoute={ttRoute}
-                    disabled={step !== 3}
+                    disabled={step !== 4}
                 />
             </Carousel>
         </div>

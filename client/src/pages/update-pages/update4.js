@@ -1,58 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import TimetableCreator from "../../app/timetableCreator/timetableCreator";
 import UpdateTimeTable from "../../app/updateTimeTable/updateTimeTable";
 
-const Update4 = ({ body, setEditCodeError, classes, events, setEvents, ttRoute }) => {
+const Update4 = ({ body, setEditCodeError, classes, classObjects , classesAtSpecificDate, ttRoute }) => {
+    
+    const [editingSpecificDate, setEditingSpecificDate] = useState(false);
+    const [newClasses, setNewClasses] = useState(classes);
+    useEffect(() => {
+        setNewClasses(classes);
+    }, [classes])
+    const [newClassesAtSpecificDate, setNewClassesAtSpecificDate] = useState({ date: new Date(), classes: [] });
 
-    events.sort((a, b) => {
-        const aDate = new Date(a.date);
-        const bDate = new Date(b.date);
-        return aDate - bDate;
-    });
+    const updateClassesAtSpecificDate = (casd, ncasd) => {
+        for (let i = 0; i < casd.length; i++) {
+            let casdDate = new Date(casd[i].date);
+            casdDate.setHours(0, 0, 0, 0);
+            let ncasdDate = new Date(ncasd.date);
+            ncasdDate.setHours(0, 0, 0, 0);
+            if (casdDate.valueOf() == ncasdDate.valueOf()) {
+                casd[i].classes = ncasd.classes;
+                return casd;
+            }
+        }
+        return [...casd, ncasd];
+    }
 
     return (
         <div className="update4-container">
-            {events.map((event, i) => (
-                <div key={i} className="eventList" style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    width: "90%"
-                }}>
-                    <input
-                        type="text"
-                        value={event.event}
-                        onChange={(e) => {
-                            const newEvents = [...events];
-                            newEvents[i].event = e.target.value;
-                            setEvents(newEvents);
-                        }}
-                    />
-                    <p style={{padding:"5px"}}>{new Date(event.date).toDateString()}, {new Date(event.date).getHours()}:00</p>
-                    <button onClick={() => {
-                        const newEvents = [...events];
-                        newEvents.splice(i, 1);
-                        setEvents(newEvents);
-                    }} style={{
-                        height: "80%",
-                        border: "none",
-                        padding: "0",
-                        background: "rgb(255, 55, 55)",
-                        borderRadius: "5px"
-                    }}>
-                        <img src="/delete.svg" alt="delete" style={{
-                                background: "rgb(255, 55, 55)",
-                                width: "60%",
-                                height: "90%"
-                        }} />
-                    </button>
-                </div>
-            ))}
+            <TimetableCreator 
+                classes={newClasses}
+                setClasses={setNewClasses}
+                classObjects={classObjects}
+                classesAtSpecificDate={classesAtSpecificDate}
+                setNewClassesAtSpecificDate={setNewClassesAtSpecificDate}
+                editingSpecificDate={editingSpecificDate}
+                setEditingSpecificDate={setEditingSpecificDate}
+            />
             <div className="update-btn-container">
                 <UpdateTimeTable
                     body={{
                         ...body,
-                        classes,
-                        events
+                        classes: 
+                            editingSpecificDate
+                                ? classes
+                                : newClasses,
+                        classesAtSpecificDate: 
+                            editingSpecificDate
+                                ? updateClassesAtSpecificDate(classesAtSpecificDate, newClassesAtSpecificDate)
+                                : classesAtSpecificDate
                     }}
                     ttRoute={ttRoute}
                     setEditCodeError={setEditCodeError}
