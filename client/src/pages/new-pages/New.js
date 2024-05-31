@@ -17,22 +17,14 @@ const New = () => {
     const [ttRoute, setTtRoute] = useState("");
     const [created, setCreated] = useState(false);
 
-    const [classes, setClasses] = useState([
-        { Day: new Date().getDay(), Subject: "", Start: "12:00", End: "13:00" }
-    ]);
-    const [uniqueClasses, setUniqueClasses] = useState([]);
-
-    useEffect(() => {
-        const unique = [...new Set(classes.map(c => c.Subject))];
-        unique.sort();
-        setUniqueClasses(unique);
-    }, [classes]);
+    const [classes, setClasses] = useState([]);
+    const [classObjects, setClassObjects] = useState([]);
 
     const steps = [
         "Give a name!",
         "Write a secret edit code",
-        "Make your schedule",
-        "Verify"
+        "Add your classes",
+        "Make your schedule"
     ]
 
     return (
@@ -61,16 +53,18 @@ const New = () => {
                             setEditCode={setEditCode}
                             disabled={step !== 1}
                         />
-                        <New3
+                        <New3 
+                            classObjects={classObjects}
+                            setClassObjects={setClassObjects}
+                            disabled={step !== 2}
+                        />
+                        <New4
                             classes={classes}
                             setClasses={setClasses}
-                            />
-                        <New4 
-                            uniqueClasses={uniqueClasses}
-                            body={{ ttName, description, classes , editCode }}
+                            classObjects={classObjects}
+                            body={{ ttName, description, classes, classObjects , editCode }}
                             setCreated={setCreated}
                             setTtRoute={setTtRoute}
-                            disabled={step !== 2}
                         />
                     </Carousel>
                 </>

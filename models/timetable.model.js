@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+let classObject = require('./classObject.model');
 
 const timetableSchema = new mongoose.Schema({
     ttid: String,
@@ -8,7 +9,7 @@ const timetableSchema = new mongoose.Schema({
     viewCode: String,
     classes: [{
         Day: String,
-        Subject: String,
+        classid: String,
         Start: String,
         End: String
     }],
@@ -24,7 +25,8 @@ const timetableSchema = new mongoose.Schema({
             Start: String,
             End: String
         }]
-    }]
+    }],
+    classObjects: [classObject.schema]
 });
 
 const timetable = mongoose.model('TimeTable', timetableSchema);

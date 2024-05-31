@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import "./class.css";
 
-const Class = ({ Subject, Start, End, date, handleClick, focused, postEvent, events, userHasEditCode }) => {
+const Class = ({  Name, Start, End, date, handleClick, focused, postEvent, events, userHasEditCode }) => {
     let cssClassName = `class `;
 
     const [currDate, setCurrDate] = useState(new Date());
@@ -29,7 +29,7 @@ const Class = ({ Subject, Start, End, date, handleClick, focused, postEvent, eve
     if (begin + 2 === end) {
         cssClassName += " lab";
     }
-    if (Subject === "Recess") {
+    if (Name === "Recess") {
         cssClassName += " recess";
     }
     if (date.getTime() < currDate.getTime() && currDate.toDateString() !== date.toDateString()) {
@@ -41,7 +41,10 @@ const Class = ({ Subject, Start, End, date, handleClick, focused, postEvent, eve
 
     return (
         <div className={`${cssClassName} ${focused ? 'focused' : ''}`}>
-            <div onClick={handleClick}>
+            <div onClick={()=>{
+                if(!focused)setFooter("buttons");
+                handleClick();
+            }}>
                 {cssClassName.includes("active") && !focused &&
                     <div style={{ width: "100%", height: "3px" }}>
                         <div className="progress" style={{
@@ -54,7 +57,7 @@ const Class = ({ Subject, Start, End, date, handleClick, focused, postEvent, eve
                     </div>
                 }
                 <div style={{ padding: "10px" }}>
-                    <h2>{Subject}</h2>
+                    <h2>{Name}</h2>
                     <p>{Start} - {End}</p>
                     <div>
                         {events.filter(event => (
@@ -90,7 +93,10 @@ const Class = ({ Subject, Start, End, date, handleClick, focused, postEvent, eve
                             backgroundColor: "#000000AA",
                             color: "white"
                         }} />
-                        <button onClick={() => postEvent({ date: new Date(date).setHours(parseInt(Start)), event: event })}>Add Event</button>
+                        <button onClick={() => {
+                            postEvent({ date: new Date(date).setHours(parseInt(Start)), event: event })
+                            handleClick();
+                        }}>Add Event</button>
                     </>
                 ) : null}
             </div>

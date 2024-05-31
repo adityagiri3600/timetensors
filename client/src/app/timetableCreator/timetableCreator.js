@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import NewClass from "../../app/newClass/newClass";
 import "./timetableCreator.css";
 
-const TimetableCreator = ({ classes, setClasses, classesAtSpecificDate, setNewClassesAtSpecificDate, editingSpecificDate, setEditingSpecificDate }) => {
+const TimetableCreator = ({ classes, setClasses, classObjects, classesAtSpecificDate, setNewClassesAtSpecificDate, editingSpecificDate, setEditingSpecificDate }) => {
 
     const [date, setDate] = useState(new Date());
     const [fakeDate, setFakeDate] = useState(date);
@@ -89,6 +89,7 @@ const TimetableCreator = ({ classes, setClasses, classesAtSpecificDate, setNewCl
                             key={i}
                             classes={editingSpecificDate ? getClassesAtDate(fakeDate) : classes}
                             setClasses={setClasses}
+                            classObjects={classObjects}
                             index={i}
                             Day={fakeWeekDay}
                         />
