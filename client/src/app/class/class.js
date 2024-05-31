@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import "./class.css";
 
-const Class = ({  Name, Start, End, date, handleClick, focused, postEvent, events, userHasEditCode }) => {
+const Class = ({  classid, Name, Start, End, date, handleClick, focused, postEvent, events, userHasEditCode }) => {
     let cssClassName = `class `;
 
     const [currDate, setCurrDate] = useState(new Date());
@@ -78,7 +78,7 @@ const Class = ({  Name, Start, End, date, handleClick, focused, postEvent, event
                 {footer === "buttons" ? (
                     <>
                         <button onClick={() => setFooter("add event")}>Add Event</button>
-                        <button>View Class</button>
+                        <button onClick={() => window.location.href = `/class/${classid}`}>View Class</button>
                     </>
                 ) : footer === "add event" ? (
                     <>

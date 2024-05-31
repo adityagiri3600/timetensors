@@ -10,6 +10,7 @@
 }
 .updateTimeTable-btn:disabled{
     background-color: #0f3c80;
+    color: rgba(255, 255, 255, 0.322);
 }
 .updateTimeTable-btn:hover{
     background-color: #107710;
