@@ -123,7 +123,7 @@ const TimeTable = () => {
     return (
         <>
             {notFound ? (
-                <NotFound ttRoute={ttRoute} />
+                <NotFound thing={"timetable"} name={ttRoute} />
             ) : (
                 <div className="timetable-container">
                     <h1 className="title">

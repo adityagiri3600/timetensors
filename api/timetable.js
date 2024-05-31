@@ -2,7 +2,6 @@ const router = require('express').Router();
 const { response } = require('express');
 let timetable = require('../models/timetable.model');
 let classObject = require('../models/classObject.model');
-const { read } = require('fs');
 
 router.get('/:ttid', async (req, res) => {
     try {

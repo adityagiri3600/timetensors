@@ -17,6 +17,7 @@ connection.once('open', () => {
 });
 
 app.use('/api/timetable', require('./api/timetable'));
+app.use('/api/classObject', require('./api/classObject'));
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/client/build/index.html'));

@@ -39,7 +39,7 @@ const TimetableCreator = ({ classes, setClasses, classObjects, classesAtSpecific
     }
 
     const addClass = () => {
-        setClasses([...classes, { Day: fakeWeekDay, Subject: "", Start: "12:00", End: "13:00" }])
+        setClasses([...classes, { Day: fakeWeekDay, classid: classObjects[0]?.classid, Start: "12:00", End: "13:00" }])
     }
 
     return (
