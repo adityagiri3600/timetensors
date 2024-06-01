@@ -23,9 +23,9 @@ const ClassList = ({ todaysClasses, date, position, postEvent, events, userHasEd
     return (
         <div className="classList-container" style={{ width: "100vw" }}>
             <div className={"classList " + position}>
-                {todaysClasses.map((props, i) => (
+                {todaysClasses.map((classItem, i) => (
                     <Class key={i}
-                        {...props}
+                        classItem={classItem}
                         date={date}
                         handleClick={() => setFocusedClassWrapper(i)}
                         focused={focusedClass === i && position === "center"}

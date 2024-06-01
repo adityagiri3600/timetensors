@@ -14,7 +14,7 @@ const New3 = ({ classObjects, setClassObjects, disabled }) => {
                     label="Class Name:"
                     disabled={disabled}
                 />
-                <button onClick={() => setClassObjects([...classObjects, { Name: name, classid: Math.random().toString(36).substring(7) }])}>Add Class</button>
+                <button onClick={() => setClassObjects([...classObjects, { Name: name, classid: Math.random().toString(36).substring(7), color: "#2b7df8" }])}>Add Class</button>
             </div>
             {classObjects.map((c, i) =>
                 <div 

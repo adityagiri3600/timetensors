@@ -2,6 +2,7 @@ import React from 'react';
 import {Routes, Route} from "react-router-dom";
 import Home from './pages/Home';
 import New from './pages/new-pages/New';
+import AddExtraClasses from './pages/update-pages/AddExtraClasses';
 import Update from './pages/update-pages/Update';
 import ClassObject from './pages/ClassObject';
 import TimeTable from './pages/TimeTable';
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/new' element={<New />} />
+        <Route path='/update/extraclass/:ttRoute' element={<AddExtraClasses />} />
         <Route path='/update/:ttRoute' element={<Update />} />
         <Route path='/class/:classRoute' element={<ClassObject />} />
         <Route path=':ttRoute' element={<TimeTable />} />

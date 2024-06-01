@@ -9,3 +9,19 @@ body{
     padding: 0 15px;
     color: rgba(255, 255, 255, 0.5);
 }
+.datepicker{
+    width: 60%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem;
+    margin: 10px 0;
+    outline: none;
+    cursor: pointer;
+}
+.datepicker::-webkit-calendar-picker-indicator{
+    background: #2b7df8;
+    border-radius: 50%;
+}

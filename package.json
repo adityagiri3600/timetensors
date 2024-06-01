@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "concurrently \"npm run dev\" \"npm run client\"",
+    "client": "cd client && npm start",
     "dev": "nodemon index.js"
   },
   "author": "Aditya Giri",
@@ -14,5 +15,8 @@
     "express": "^4.18.3",
     "fs": "^0.0.1-security",
     "mongoose": "^8.2.4"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }

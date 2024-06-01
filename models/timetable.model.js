@@ -13,6 +13,7 @@ const timetableSchema = new mongoose.Schema({
         Start: String,
         End: String
     }],
+    classObjects: [classObject.schema],
     events: [{
         date: Date,
         event: String
@@ -21,12 +22,17 @@ const timetableSchema = new mongoose.Schema({
         date: Date,
         classes: [{
             Day: String,
-            Subject: String,
+            classid: String,
             Start: String,
             End: String
         }]
     }],
-    classObjects: [classObject.schema]
+    extraClasses: [{
+        date: Date,
+        classid: String,
+        Start: String,
+        End: String
+    }],
 });
 
 const timetable = mongoose.model('TimeTable', timetableSchema);

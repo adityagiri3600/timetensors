@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { getClassDetails } from "../app/timetrackFunctions";
 import ClassList from "../app/classList/classList";
 import Datetime from "../app/datetime/datetime";
 import NotFound from "./NotFound";
@@ -40,16 +41,54 @@ const TimeTable = () => {
     const [fakeWeekDay, setFakeWeekDay] = useState(weekDay);
 
     const getClassesAtDate = (date_param) => {
+        let extraClasses = [];
+        if (data.extraClasses){
+            for (let i = 0; i < data.extraClasses.length; i++) {
+                let ecDate = new Date(data.extraClasses[i].date);
+                ecDate.setHours(0, 0, 0, 0);
+                if (ecDate.valueOf() == date_param.valueOf()) {
+                    extraClasses.push({...data.extraClasses[i], isExtraClass : true});
+                }
+            }
+        }
         if (data.classesAtSpecificDate) {
             for (let i = 0; i < data.classesAtSpecificDate.length; i++) {
                 let casdDate = new Date(data.classesAtSpecificDate[i].date);
                 casdDate.setHours(0, 0, 0, 0);
                 if (casdDate.valueOf() == date_param.valueOf()) {
-                    return data.classesAtSpecificDate[i].classes;
+                    return [
+                        ...data.classesAtSpecificDate[i].classes,
+                        ...extraClasses
+                    ].sort((a, b) =>{
+                        if (a.Start < b.Start) {
+                            return -1;
+                        }
+                        if (a.Start > b.Start) {
+                            return 1;
+                        }
+                        return 0;
+                    })
+                    .map(classElement => {
+                        return getClassDetails(data.classObjects, classElement);
+                    });
                 }
             }
         }
-        return classes.filter(classElement => classElement.Day == date_param.getDay());
+        return [
+            ...classes.filter(classElement => classElement.Day == date_param.getDay()),
+            ...extraClasses
+        ].sort((a, b) =>{
+            if (a.Start < b.Start) {
+                return -1;
+            }
+            if (a.Start > b.Start) {
+                return 1;
+            }
+            return 0;
+        })
+        .map(classElement => {
+            return getClassDetails(data.classObjects, classElement);
+        });
     }
 
     const floorMod = (a, b) => {

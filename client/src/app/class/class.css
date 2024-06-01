@@ -94,3 +94,18 @@
     font-size: .6rem;
     color: white;
 }
+
+.extraClass{
+    font-size: 0.6rem;
+    position: absolute;
+    top: 19px;
+    right: -18px;
+    transform: rotate(45deg);
+    z-index: 2;
+    background: yellow;
+    color: black;
+    font-family: 'QuickSandRegular';
+    font-weight: bold;
+    width: 90px;
+    text-align: center;
+}

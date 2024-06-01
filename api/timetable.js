@@ -15,7 +15,14 @@ router.get('/:ttid', async (req, res) => {
         const timetableData = { ...tt._doc };
         delete timetableData.editCode;
 
-        const classObjectsPromises = timetableData.classes.map(async (classItem) => {
+        const classesPromises = timetableData.classes.map(async (classItem) => {
+            const classData = await classObject.findOne({ classid: classItem.classid });
+            return {
+                ...classItem._doc,
+                ...classData._doc
+            };
+        });
+        const classObjectsPromises = timetableData.classObjects.map(async (classItem) => {
             const classData = await classObject.findOne({ classid: classItem.classid });
             return {
                 ...classItem._doc,
@@ -23,7 +30,8 @@ router.get('/:ttid', async (req, res) => {
             };
         });
         
-        timetableData.classes = await Promise.all(classObjectsPromises);
+        timetableData.classes = await Promise.all(classesPromises);
+        timetableData.classObjects = await Promise.all(classObjectsPromises);
 
         res.json(timetableData);
     } catch (err) {
@@ -69,10 +77,12 @@ router.post('/update/:ttid', async (req, res) => {
             return res.status(401).json('Invalid edit code');
         }
 
-        for(let i = 0; i < req.body.classObjects.length; i++) {
-            const classItem = req.body.classObjects[i];
-            const existingClass = await classObject.findOne({ classid: classItem.classid });
-            if (!existingClass) await classObject.create(classItem);
+        if(req.body.classObjects) {
+            for(let i = 0; i < req.body.classObjects.length; i++) {
+                const classItem = req.body.classObjects[i];
+                const existingClass = await classObject.findOne({ classid: classItem.classid });
+                if (!existingClass) await classObject.create(classItem);
+            }
         }
 
         delete req.body.editCode;

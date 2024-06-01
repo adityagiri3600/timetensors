@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import "./class.css";
 
-const Class = ({  classid, Name, Start, End, date, handleClick, focused, postEvent, events, userHasEditCode }) => {
+const Class = ({ classItem, date, handleClick, focused, events, postEvent, userHasEditCode }) => {
     let cssClassName = `class `;
 
     const [currDate, setCurrDate] = useState(new Date());
@@ -20,8 +20,8 @@ const Class = ({  classid, Name, Start, End, date, handleClick, focused, postEve
         return () => clearInterval(intervalId);
     }, [hour]);
 
-    const begin = parseInt(Start);
-    const end = parseInt(End);
+    const begin = parseInt(classItem.Start);
+    const end = parseInt(classItem.End);
 
     if (begin <= hour && hour < end && currDate.toDateString() === date.toDateString()) {
         cssClassName += " active";
@@ -29,7 +29,7 @@ const Class = ({  classid, Name, Start, End, date, handleClick, focused, postEve
     if (begin + 2 === end) {
         cssClassName += " lab";
     }
-    if (Name === "Recess") {
+    if (classItem.Name === "Recess") {
         cssClassName += " recess";
     }
     if (date.getTime() < currDate.getTime() && currDate.toDateString() !== date.toDateString()) {
@@ -40,67 +40,70 @@ const Class = ({  classid, Name, Start, End, date, handleClick, focused, postEve
 
 
     return (
-        <div className={`${cssClassName} ${focused ? 'focused' : ''}`}>
-            <div onClick={()=>{
-                if(!focused)setFooter("buttons");
-                handleClick();
-            }}>
-                {cssClassName.includes("active") && !focused &&
-                    <div style={{ width: "100%", height: "3px" }}>
-                        <div className="progress" style={{
-                            width: `${(hour - begin) / (end - begin) * 100}%`,
-                            backgroundColor: "white",
-                            height: "100%",
-                            borderRadius: "5px",
-                            boxShadow: "0px 0px 10px 0px white"
-                        }}></div>
-                    </div>
-                }
-                <div style={{ padding: "10px" }}>
-                    <h2>{Name}</h2>
-                    <p>{Start} - {End}</p>
-                    <div>
-                        {events.filter(event => (
-                            new Date(event.date).toDateString() === new Date(date).toDateString())
-                            && begin === parseInt(new Date(event.date).getHours())).map((event, i) => (
-                                <div key={i} className="event">
-                                    <p>{event.event}</p>
-                                </div>
-                            ))}
+        <>
+            <div className={`${cssClassName} ${focused ? 'focused' : ''}`}>
+            {classItem.isExtraClass && <div className="extraClass">Extra Class</div>}
+                <div onClick={() => {
+                    if (!focused) setFooter("buttons");
+                    handleClick();
+                }}>
+                    {cssClassName.includes("active") && !focused &&
+                        <div style={{ width: "100%", height: "3px" }}>
+                            <div className="progress" style={{
+                                width: `${(hour - begin) / (end - begin) * 100}%`,
+                                backgroundColor: "white",
+                                height: "100%",
+                                borderRadius: "5px",
+                                boxShadow: "0px 0px 10px 0px white"
+                            }}></div>
+                        </div>
+                    }
+                    <div style={{ padding: "10px" }}>
+                        <h2>{classItem.Name}</h2>
+                        <p>{classItem.Start} - {classItem.End}</p>
+                        <div>
+                            {events.filter(event => (
+                                new Date(event.date).toDateString() === new Date(date).toDateString())
+                                && begin === parseInt(new Date(event.date).getHours())).map((event, i) => (
+                                    <div key={i} className="event">
+                                        <p>{event.event}</p>
+                                    </div>
+                                ))}
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div className="classButtons" style={{
-                height: focused && userHasEditCode ? "39px" : "0px",
-                overflow: "hidden"
-            }}>
-                {footer === "buttons" ? (
-                    <>
-                        <button onClick={() => setFooter("add event")}>Add Event</button>
-                        <button onClick={() => window.location.href = `/class/${classid}`}>View Class</button>
-                    </>
-                ) : footer === "add event" ? (
-                    <>
-                        <input type="text" placeholder="Event Name" value={event} onChange={(e) => setEvent(e.target.value)} style={{
-                            width: "90%",
-                            padding: "5px",
-                            paddingLeft: "15px",
-                            margin: "0",
-                            borderRadius: "none",
-                            border: "none",
-                            outline: "none",
-                            backgroundColor: "#000000AA",
-                            color: "white"
-                        }} />
-                        <button onClick={() => {
-                            postEvent({ date: new Date(date).setHours(parseInt(Start)), event: event })
-                            handleClick();
-                        }}>Add Event</button>
-                    </>
-                ) : null}
+                <div className="classButtons" style={{
+                    height: focused && userHasEditCode ? "39px" : "0px",
+                    overflow: "hidden"
+                }}>
+                    {footer === "buttons" ? (
+                        <>
+                            <button onClick={() => setFooter("add event")}>Add Event</button>
+                            <button onClick={() => window.location.href = `/class/${classItem.classid}`}>View Class</button>
+                        </>
+                    ) : footer === "add event" ? (
+                        <>
+                            <input type="text" placeholder="Event Name" value={event} onChange={(e) => setEvent(e.target.value)} style={{
+                                width: "90%",
+                                padding: "5px",
+                                paddingLeft: "15px",
+                                margin: "0",
+                                borderRadius: "none",
+                                border: "none",
+                                outline: "none",
+                                backgroundColor: "#000000AA",
+                                color: "white"
+                            }} />
+                            <button onClick={() => {
+                                postEvent({ date: new Date(date).setHours(parseInt(classItem.Start)), event: event })
+                                handleClick();
+                            }}>Add Event</button>
+                        </>
+                    ) : null}
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 
