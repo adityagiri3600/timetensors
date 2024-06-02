@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { getClassDetails } from "../app/timetrackFunctions";
+import { getClassDetails, getEditCodeFromLocalStorage } from "../app/timetrackFunctions";
 import ClassList from "../app/classList/classList";
 import Datetime from "../app/datetime/datetime";
 import NotFound from "./NotFound";
@@ -145,7 +145,7 @@ const TimeTable = () => {
 
     const postEvent = (event) => {
         axios.post(`/api/timetable/update/${ttRoute}`,
-            { ...data, editCode: "ec", events: [...data.events, event] },
+            { ...data, editCode: getEditCodeFromLocalStorage(ttRoute), events: [...data.events, event] },
             {
                 headers: {
                     'Content-Type': 'application/json'

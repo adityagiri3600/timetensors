@@ -94,6 +94,11 @@ const Class = ({ classItem, date, handleClick, focused, events, postEvent, userH
                                 outline: "none",
                                 backgroundColor: "#000000AA",
                                 color: "white"
+                            }} onKeyUp={(e) => {
+                                if (e.key === "Enter") {
+                                    postEvent({ date: new Date(date).setHours(parseInt(classItem.Start)), event: event })
+                                    handleClick();
+                                }
                             }} />
                             <button onClick={() => {
                                 postEvent({ date: new Date(date).setHours(parseInt(classItem.Start)), event: event })
