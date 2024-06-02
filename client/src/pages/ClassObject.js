@@ -13,6 +13,8 @@ const ClassObject = () => {
     const [editCode, setEditCode] = useState("");
     const [properties, setProperties] = useState([]);
     const [notFound, setNotFound] = useState(false);
+    const [saved, setSaved] = useState(false);
+    const [editCodeError, setEditCodeError] = useState(false);
 
     const fetchData = async () => {
         try {
@@ -61,34 +63,6 @@ const ClassObject = () => {
                         <p style={{ fontSize: '1rem', margin: 0, color: "#FFFFFFAA" }}>{color} </p>
                     </div>
                     <div style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                    }}>
-                        <p style={{ fontSize: '1rem', margin: 0 }}>edit code : </p>
-                        <input
-                            type="text"
-                            value={editCode}
-                            style={{
-                                background: "none",
-                                width: "70px",
-                                height: "17px",
-                                border: "none",
-                                borderBottom: `1px solid ${color}`,
-                                color: color,
-                                fontSize: "1rem",
-                                outline: "none",
-                                padding: "5px",
-                                marginLeft: "10px",
-                            }}
-                            onChange={(e) => { setEditCode(e.target.value) }}
-                        />
-                    </div>
-                    <p style={{
-                        fontSize: '0.5rem',
-                        margin: 0,
-                        color: "#FFFFFFAA",
-                    }}>Same as timetable edit code if this class was created automatically</p>
-                    <div style={{
                         paddingTop: '10px',
                     }}>
                         {properties && properties.map((property, i) => (
@@ -134,6 +108,16 @@ const ClassObject = () => {
                                     placeholder="Value"
                                     onChange={(e) => { setProperties(properties.map((p, j) => j === i ? { ...p, Value: e.target.value } : p)) }}
                                 />
+                                <button onClick={() => { setProperties(properties.map((p, j) => j === i ? { ...p, Shown: !p.Shown } : p)) }}
+                                    style={{
+                                        border: "none",
+                                        padding: "5px",
+                                        background: "none",
+                                        color: "white",
+                                    }}
+                                >
+                                    {property.Shown ? "Shown" : "Hidden"}
+                                </button>
                                 <button
                                     onClick={() => {
                                         setProperties(properties.filter((p, j) => j !== i))
@@ -168,35 +152,92 @@ const ClassObject = () => {
                                 setProperties([...properties, { Name: "", Value: "" }])
                             }}>+</button>
                     </div>
-                    <button
-                        style={{
-                            border: "none",
-                            borderRadius: "5px",
-                            backgroundColor: "#159215",
-                            color: properties.some(p => p.Name === "" || p.Value === "") ? "#FFFFFF55" : "white",
-                            padding: "10px",
-                            margin: "20px",
-                            position: 'fixed',
-                            bottom: '0',
-                            right: '0',
-                            width: '100px',
-                            fontSize: '1rem',
-                        }}
-                        onClick={async () => {
-                            try {
-                                await axios.post(`/api/classObject/update/${classRoute}`, {
-                                    editCode: editCode,
+                    {editCodeError && (
+                        <p style={{
+                            color: "red",
+                            fontSize: "1rem",
+                        }}>Invalid edit code</p>
+                    )}
+                    {saved && (
+                        <p style={{
+                            color: "green",
+                            fontSize: "1rem",
+                        }}>Saved!</p>
+                    )}
+                    <div style={{
+                        position: 'fixed',
+                        bottom: '0',
+                        right: '0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        backgroundColor: "#000000AA",
+                    }}>
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                            flexDirection: 'column',
+                        }}>
+                            <input
+                                type="text"
+                                value={editCode}
+                                style={{
+                                    background: "none",
+                                    width: "70px",
+                                    height: "17px",
+                                    border: "none",
+                                    borderBottom: `1px solid ${color}`,
                                     color: color,
-                                    Properties: properties,
-                                });
-                                window.location.href = `/class/${classRoute}`;
-                            } catch (error) {
-                                console.error('Error updating data:', error);
-                            }
-                        }}
-                        disabled={properties.some(p => p.Name === "" || p.Value === "")}
-                    >Save</button>
-
+                                    fontSize: "1rem",
+                                    outline: "none",
+                                    padding: "5px",
+                                    marginLeft: "10px",
+                                }}
+                                placeholder="Edit Code"
+                                onChange={(e) => { setEditCode(e.target.value) }}
+                            />
+                        <p style={{
+                            fontSize: '0.5rem',
+                            marginLeft: "10px",
+                            color: "#FFFFFFAA",
+                        }}>Same as timetable edit code if this class was created automatically</p>
+                        </div>
+                        <button
+                            style={{
+                                border: "none",
+                                borderRadius: "5px",
+                                backgroundColor: "#159215",
+                                color: properties.some(p => p.Name === "" || p.Value === "") ? "#FFFFFF55" : "white",
+                                padding: "10px",
+                                margin: "20px",
+                                width: '100px',
+                                fontSize: '1rem',
+                            }}
+                            onClick={async () => {
+                                try {
+                                    const response = await axios.post(`/api/classObject/update/${classRoute}`, {
+                                        editCode: editCode,
+                                        color: color,
+                                        Properties: properties,
+                                    })
+                                    if (response.status === 200) {
+                                        setSaved(true);
+                                        setTimeout(() => {
+                                            setSaved(false);
+                                        }, 2000);
+                                    }
+                                } catch (error) {
+                                    if (error.response.status === 401) {
+                                        setEditCodeError(true);
+                                        setTimeout(() => {
+                                            setEditCodeError(false);
+                                        }, 2000);
+                                    }
+                                    console.error('Error updating data:', error);
+                                }
+                            }}
+                            disabled={properties.some(p => p.Name === "" || p.Value === "")}
+                        >Save</button>
+                    </div>
                 </div>
             )}
         </>

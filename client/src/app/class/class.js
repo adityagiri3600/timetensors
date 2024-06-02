@@ -61,6 +61,17 @@ const Class = ({ classItem, date, handleClick, focused, events, postEvent, userH
                     <div style={{ padding: "10px" }}>
                         <h2>{classItem.Name}</h2>
                         <p>{classItem.Start} - {classItem.End}</p>
+                        {
+                            classItem.Properties.map((property, i) => (
+                                property.Shown && <p key={i} className="event">{property.Name}: {property.Value}</p>
+                            ))
+                        }
+                        { events.filter(event => (
+                                new Date(event.date).toDateString() === new Date(date).toDateString())
+                                && begin === parseInt(new Date(event.date).getHours())).length > 0 
+                                && classItem.Properties.length > 0
+                                && <hr style={{margin:"4px 0px"}}/>
+                        }
                         <div>
                             {events.filter(event => (
                                 new Date(event.date).toDateString() === new Date(date).toDateString())

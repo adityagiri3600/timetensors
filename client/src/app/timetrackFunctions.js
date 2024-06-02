@@ -26,6 +26,14 @@ const getClassDetails = (classObjects, classItem) => {
             };
         }
     }
+    if (classObjects.length > 0)
+        return classObjects[0];
+    return {
+        Name: "Class not found",
+        color: "#2b7df8",
+        Properties: [],
+        ...classItem
+    };
 }
 
 export { getTimetable, getEditCodeFromLocalStorage, getClassDetails };

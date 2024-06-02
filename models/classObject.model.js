@@ -5,7 +5,7 @@ const classObjectSchema = new mongoose.Schema({
     editCode: String,
     Name: String,
     color: String,
-    Properties: [{Name: String, Value: String}],
+    Properties: [{Name: String, Value: String, Shown: Boolean}],
 });
 
 const classObject = mongoose.model('ClassObject', classObjectSchema);
