@@ -79,9 +79,10 @@
     padding: 0;
     transition: all 0.5s;
 }
-
+.classButtons > *{
+    flex: 1 1 auto;
+}
 .classButtons button {
-    width: 50%;
     height: 100%;
     background-color: black;
     color: white;

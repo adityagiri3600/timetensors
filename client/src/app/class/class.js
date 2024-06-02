@@ -74,12 +74,12 @@ const Class = ({ classItem, date, handleClick, focused, events, postEvent, userH
                 </div>
 
                 <div className="classButtons" style={{
-                    height: focused && userHasEditCode ? "39px" : "0px",
+                    height: focused ? "39px" : "0px",
                     overflow: "hidden"
                 }}>
                     {footer === "buttons" ? (
                         <>
-                            <button onClick={() => setFooter("add event")}>Add Event</button>
+                            {userHasEditCode && <button onClick={() => setFooter("add event")}>Add Event</button>}
                             <button onClick={() => window.location.href = `/class/${classItem.classid}`}>View Class</button>
                         </>
                     ) : footer === "add event" ? (
@@ -91,7 +91,6 @@ const Class = ({ classItem, date, handleClick, focused, events, postEvent, userH
                                 value={event} 
                                 onChange={(e) => setEvent(e.target.value)} 
                                 style={{
-                                    width: "100%",
                                     padding: "5px",
                                     paddingLeft: "15px",
                                     margin: "0",
