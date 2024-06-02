@@ -91,7 +91,7 @@ const Class = ({ classItem, date, handleClick, focused, events, postEvent, userH
                                 value={event} 
                                 onChange={(e) => setEvent(e.target.value)} 
                                 style={{
-                                    width: "90%",
+                                    width: "100%",
                                     padding: "5px",
                                     paddingLeft: "15px",
                                     margin: "0",
@@ -108,10 +108,6 @@ const Class = ({ classItem, date, handleClick, focused, events, postEvent, userH
                                         setEvent("")
                                     }
                                 }} />
-                            <button onClick={() => {
-                                postEvent({ date: new Date(date).setHours(parseInt(classItem.Start)), event: event })
-                                handleClick();
-                            }}>Add Event</button>
                         </>
                     ) : null}
                 </div>
