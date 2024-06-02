@@ -42,7 +42,7 @@ const Class = ({ classItem, date, handleClick, focused, events, postEvent, userH
     return (
         <>
             <div className={`${cssClassName} ${focused ? 'focused' : ''}`}>
-            {classItem.isExtraClass && <div className="extraClass">Extra Class</div>}
+                {classItem.isExtraClass && <div className="extraClass">Extra Class</div>}
                 <div onClick={() => {
                     if (!focused) setFooter("buttons");
                     handleClick();
@@ -60,30 +60,32 @@ const Class = ({ classItem, date, handleClick, focused, events, postEvent, userH
                     }
                     <div style={{ padding: "10px" }}>
                         <h2>{classItem.Name}</h2>
-                        <p>{classItem.Start} - {classItem.End}</p>
-                        {
-                            classItem.Properties.map((property, i) => (
-                                property.Shown && <p key={i} className="event">{property.Name}: {property.Value}</p>
-                            ))
-                        }
-                        { events.filter(event => (
-                                new Date(event.date).toDateString() === new Date(date).toDateString())
-                                && begin === parseInt(new Date(event.date).getHours())).length > 0 
-                                && classItem.Properties.length > 0
-                                && <hr style={{margin:"4px 0px"}}/>
-                        }
-                        <div>
-                            {events.filter(event => (
-                                new Date(event.date).toDateString() === new Date(date).toDateString())
-                                && begin === parseInt(new Date(event.date).getHours())).map((event, i) => (
-                                    <div key={i} className="event">
-                                        <p>{event.event}</p>
-                                    </div>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                            <div>
+                                {classItem.Properties.map((property, i) => (
+                                    property.Shown && <p key={i} style={{ fontSize: "0.6rem" }}>{property.Name}: {property.Value}</p>
                                 ))}
+                            </div>
+                            <p>{classItem.Start} - {classItem.End}</p>
                         </div>
+                        {
+                            events.filter(event => (
+                                new Date(event.date).toDateString() === new Date(date).toDateString())
+                                && begin === parseInt(new Date(event.date).getHours())).length > 0
+                            &&
+
+                            <div className="eventBox">
+                                {events.filter(event => (
+                                    new Date(event.date).toDateString() === new Date(date).toDateString())
+                                    && begin === parseInt(new Date(event.date).getHours())).map((event, i) => (
+                                        <ul key={i} className="event">
+                                            <li>{event.event}</li>
+                                        </ul>
+                                    ))}
+                            </div>}
                     </div>
                 </div>
-            
+
                 <div className="classButtons" style={{
                     height: focused ? "39px" : "0px",
                     overflow: "hidden"
@@ -97,10 +99,10 @@ const Class = ({ classItem, date, handleClick, focused, events, postEvent, userH
                         <>
                             <input
                                 autoFocus
-                                type="text" 
-                                placeholder="Event Name" 
-                                value={event} 
-                                onChange={(e) => setEvent(e.target.value)} 
+                                type="text"
+                                placeholder="Event Name"
+                                value={event}
+                                onChange={(e) => setEvent(e.target.value)}
                                 style={{
                                     padding: "5px",
                                     paddingLeft: "15px",
