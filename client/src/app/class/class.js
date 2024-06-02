@@ -84,22 +84,30 @@ const Class = ({ classItem, date, handleClick, focused, events, postEvent, userH
                         </>
                     ) : footer === "add event" ? (
                         <>
-                            <input type="text" placeholder="Event Name" value={event} onChange={(e) => setEvent(e.target.value)} style={{
-                                width: "90%",
-                                padding: "5px",
-                                paddingLeft: "15px",
-                                margin: "0",
-                                borderRadius: "none",
-                                border: "none",
-                                outline: "none",
-                                backgroundColor: "#000000AA",
-                                color: "white"
-                            }} onKeyUp={(e) => {
-                                if (e.key === "Enter") {
-                                    postEvent({ date: new Date(date).setHours(parseInt(classItem.Start)), event: event })
-                                    handleClick();
-                                }
-                            }} />
+                            <input
+                                autoFocus
+                                type="text" 
+                                placeholder="Event Name" 
+                                value={event} 
+                                onChange={(e) => setEvent(e.target.value)} 
+                                style={{
+                                    width: "90%",
+                                    padding: "5px",
+                                    paddingLeft: "15px",
+                                    margin: "0",
+                                    borderRadius: "none",
+                                    border: "none",
+                                    outline: "none",
+                                    backgroundColor: "#000000AA",
+                                    color: "white"
+                                }}
+                                onKeyUp={(e) => {
+                                    if (e.key === "Enter") {
+                                        postEvent({ date: new Date(date).setHours(parseInt(classItem.Start)), event: event })
+                                        handleClick();
+                                        setEvent("")
+                                    }
+                                }} />
                             <button onClick={() => {
                                 postEvent({ date: new Date(date).setHours(parseInt(classItem.Start)), event: event })
                                 handleClick();

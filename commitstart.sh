@@ -5,6 +5,7 @@ if [ -n "$1" ]
   then
     git add .
     git commit -m "$1"
+    git push
 fi
 
 ssh -i ~/.ssh/Ubuntu_server.pem ubuntu@$IPADDRESS "$REMOTE_COMMANDS"
