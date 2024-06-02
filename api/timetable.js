@@ -48,7 +48,7 @@ router.post('/new', async (req, res) => {
             ...req.body
         });
 
-        await classObject.insertMany(req.body.classObjects);
+        await classObject.insertMany(req.body.classObjects.map(co => ({ ...co, editCode: req.body.editCode })));
 
         await newTimetable.save();
 
@@ -79,7 +79,7 @@ router.post('/update/:ttid', async (req, res) => {
 
         if(req.body.classObjects) {
             for(let i = 0; i < req.body.classObjects.length; i++) {
-                const classItem = req.body.classObjects[i];
+                const classItem = {...req.body.classObjects[i], editCode: req.body.editCode};
                 const existingClass = await classObject.findOne({ classid: classItem.classid });
                 if (!existingClass) await classObject.create(classItem);
             }

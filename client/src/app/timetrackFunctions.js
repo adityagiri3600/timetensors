@@ -1,11 +1,12 @@
 import axios from 'axios';
 
-const getTimetable = async (route) => {
+const getTimetable = async (route, setNotFound = () => {}) => {
     try {
         const response = await axios.get(`/api/timetable/${route}`);
         console.log(response.data);
         return response.data;
     } catch (error) {
+        setNotFound(true);
         console.error('Error fetching data:', error);
     }
 }

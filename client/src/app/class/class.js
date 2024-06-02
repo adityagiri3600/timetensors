@@ -72,7 +72,7 @@ const Class = ({ classItem, date, handleClick, focused, events, postEvent, userH
                         </div>
                     </div>
                 </div>
-
+            
                 <div className="classButtons" style={{
                     height: focused ? "39px" : "0px",
                     overflow: "hidden"
