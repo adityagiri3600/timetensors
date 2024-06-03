@@ -1,7 +1,7 @@
 import React from "react";
 import UpdateTimeTable from "../../app/updateTimeTable/updateTimeTable";
 
-const Update5 = ({ body, setEditCodeError, classes, events, setEvents, ttRoute }) => {
+const Events = ({ body, setEditCodeError, classes, events, setEvents, ttRoute }) => {
 
     events.sort((a, b) => {
         const aDate = new Date(a.date);
@@ -62,4 +62,4 @@ const Update5 = ({ body, setEditCodeError, classes, events, setEvents, ttRoute }
     )
 }
 
-export default Update5;
+export default Events;

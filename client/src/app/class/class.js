@@ -38,11 +38,9 @@ const Class = ({ classItem, date, handleClick, focused, events, postEvent, userH
         cssClassName += " past"
     }
 
-
     return (
         <>
-            <div className={`${cssClassName} ${focused ? 'focused' : ''}`}>
-                {classItem.isExtraClass && <div className="extraClass">Extra Class</div>}
+            <div className={`${cssClassName} ${focused ? 'focused' : ''}`} >
                 <div onClick={() => {
                     if (!focused) setFooter("buttons");
                     handleClick();
@@ -63,7 +61,7 @@ const Class = ({ classItem, date, handleClick, focused, events, postEvent, userH
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                             <div>
                                 {classItem.Properties.map((property, i) => (
-                                    property.Shown && <p key={i} style={{ fontSize: "0.6rem" }}>{property.Name}: {property.Value}</p>
+                                    property.Shown && <p key={i} style={{ fontSize: "0.6rem" }}>{property.Value}</p>
                                 ))}
                             </div>
                             <p>{classItem.Start} - {classItem.End}</p>

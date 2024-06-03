@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import TimetableCreator from "../../app/timetableCreator/timetableCreator";
 import UpdateTimeTable from "../../app/updateTimeTable/updateTimeTable";
 
-const Update4 = ({ body, setEditCodeError, classes, classObjects , classesAtSpecificDate, ttRoute }) => {
+const Regular = ({ body, setEditCodeError, classes, classObjects , classesAtSpecificDate, ttRoute }) => {
     
     const [editingSpecificDate, setEditingSpecificDate] = useState(false);
     const [newClasses, setNewClasses] = useState(classes);
@@ -57,4 +57,4 @@ const Update4 = ({ body, setEditCodeError, classes, classObjects , classesAtSpec
     )
 }
 
-export default Update4;
+export default Regular;

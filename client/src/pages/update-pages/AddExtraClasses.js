@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getTimetable, getEditCodeFromLocalStorage } from '../../app/timetrackFunctions';
+import { getTimetable, getEditCodeFromLocalStorage, determineTextColor } from '../../app/timetrackFunctions';
 import { useParams } from 'react-router-dom';
 import UpdateTimeTable from '../../app/updateTimeTable/updateTimeTable';
 
@@ -43,8 +43,8 @@ const AddExtraClasses = () => {
             <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(3, 1fr)',
-                gridGap: '10px'
-
+                gridGap: '10px',
+                marginTop: '20px'
             }}>
                 {data?.classObjects?.map((classObject, index) => (
                     <div
@@ -55,6 +55,7 @@ const AddExtraClasses = () => {
                             cursor: 'pointer',
                             WebkitTapHighlightColor: 'transparent',
                             backgroundColor: classObject.color,
+                            color: determineTextColor(classObject.color),
                             borderRadius: '5px',
                             outline: selectedClass === classObject.classid ? '2px dashed white' : 'none'
                         }}

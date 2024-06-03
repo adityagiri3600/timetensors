@@ -17,6 +17,17 @@ const getEditCodeFromLocalStorage = (route) => {
     }
 }
 
+const doesUserHaveEditCode = (ttRoute, setUserHasEditCode=()=>{}) => {
+    if (window == undefined)
+        return
+    const editCode = localStorage.getItem(`${ttRoute}EditCode`);
+    if (editCode) {
+        setUserHasEditCode(true);
+        console.log("User has edit code for this timetable\nEdit Code: ", editCode);
+    }
+    return true;
+}
+
 const getClassDetails = (classObjects, classItem) => {
     for (let i = 0; i < classObjects.length; i++) {
         if (classObjects[i].classid === classItem.classid) {
@@ -36,4 +47,12 @@ const getClassDetails = (classObjects, classItem) => {
     };
 }
 
-export { getTimetable, getEditCodeFromLocalStorage, getClassDetails };
+const determineTextColor = (hex) => {
+    let r = parseInt(hex.substr(1, 2), 16);
+    let g = parseInt(hex.substr(3, 2), 16);
+    let b = parseInt(hex.substr(5, 2), 16);
+    let brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    return brightness < 155 ? "white" : "black";
+}
+
+export { getTimetable, getEditCodeFromLocalStorage, doesUserHaveEditCode, getClassDetails, determineTextColor };

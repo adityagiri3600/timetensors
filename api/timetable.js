@@ -96,4 +96,22 @@ router.post('/update/:ttid', async (req, res) => {
     }
 });
 
+
+router.post('/verify/:ttid', async (req, res) => {
+    const { ttid } = req.params;
+    const editCode = req.body.editCode;
+    try {
+        const tt = await timetable.findOne({ ttid });
+        if (!tt) {
+            return res.status(404).json('Timetable not found');
+        }
+        if (tt.editCode !== editCode) {
+            return res.status(401).json('Invalid edit code');
+        }
+        res.json('Edit code verified');
+    } catch (err) {
+        res.status(400).json('Error: ' + err.message);
+    }
+});
+
 module.exports = router;

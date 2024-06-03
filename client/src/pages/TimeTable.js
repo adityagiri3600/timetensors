@@ -42,12 +42,12 @@ const TimeTable = () => {
 
     const getClassesAtDate = (date_param) => {
         let extraClasses = [];
-        if (data.extraClasses){
+        if (data.extraClasses) {
             for (let i = 0; i < data.extraClasses.length; i++) {
                 let ecDate = new Date(data.extraClasses[i].date);
                 ecDate.setHours(0, 0, 0, 0);
                 if (ecDate.valueOf() == date_param.valueOf()) {
-                    extraClasses.push({...data.extraClasses[i], isExtraClass : true});
+                    extraClasses.push({ ...data.extraClasses[i], isExtraClass: true });
                 }
             }
         }
@@ -59,7 +59,7 @@ const TimeTable = () => {
                     return [
                         ...data.classesAtSpecificDate[i].classes,
                         ...extraClasses
-                    ].sort((a, b) =>{
+                    ].sort((a, b) => {
                         if (a.Start < b.Start) {
                             return -1;
                         }
@@ -68,16 +68,16 @@ const TimeTable = () => {
                         }
                         return 0;
                     })
-                    .map(classElement => {
-                        return getClassDetails(data.classObjects, classElement);
-                    });
+                        .map(classElement => {
+                            return getClassDetails(data.classObjects, classElement);
+                        });
                 }
             }
         }
         return [
             ...classes.filter(classElement => classElement.Day == date_param.getDay()),
             ...extraClasses
-        ].sort((a, b) =>{
+        ].sort((a, b) => {
             if (a.Start < b.Start) {
                 return -1;
             }
@@ -86,9 +86,9 @@ const TimeTable = () => {
             }
             return 0;
         })
-        .map(classElement => {
-            return getClassDetails(data.classObjects, classElement);
-        });
+            .map(classElement => {
+                return getClassDetails(data.classObjects, classElement);
+            });
     }
 
     const floorMod = (a, b) => {
@@ -133,7 +133,7 @@ const TimeTable = () => {
         }
     }
 
-    const doesUserHaveEditCode = (ttRoute, setUserHasEditCode) => {
+    const doesUserHaveEditCode = (ttRoute, setUserHasEditCode=()=>{}) => {
         if (window == undefined)
             return
         const editCode = localStorage.getItem(`${ttRoute}EditCode`);
@@ -141,6 +141,7 @@ const TimeTable = () => {
             setUserHasEditCode(true);
             console.log("User has edit code for this timetable\nEdit Code: ", editCode);
         }
+        return true;
     }
 
     const postEvent = (event) => {
@@ -165,9 +166,37 @@ const TimeTable = () => {
                 <NotFound thing={"timetable"} name={ttRoute} />
             ) : (
                 <div className="timetable-container">
-                    <h1 className="title">
-                        <a href="/">TimeTrack</a>
-                    </h1>
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        paddingTop: "15px",
+                    }}>
+                        <h1 className="title">
+                            <a href="/">TimeTrack</a>
+                        </h1>
+                        <button
+                            onClick={(e) => {
+                                fetchData();
+                                const icon = e.currentTarget.querySelector('.refresh-icon');
+                                icon.classList.add('rotate');
+                                setTimeout(() => {
+                                    icon.classList.remove('rotate');
+                                }, 200);
+                            }}
+                            style={{
+                                backgroundColor: "transparent",
+                                border: "none",
+                                cursor: "pointer",
+                                padding: "0",
+                            }}
+                        >
+                            <img src="/refresh.svg" alt="Refresh" className="refresh-icon" style={{
+                                width: "20px",
+                                height: "20px",
+                                marginLeft: "10px"
+                            }} />
+                        </button>
+                    </div>
                     <div className="date-edit-container">
                         <Datetime date={date} />
                         <a href={`/update/${ttRoute}`} className="edit-btn" onClick={(e) => {
@@ -185,7 +214,7 @@ const TimeTable = () => {
                         </a>
                     </div>
                     <Carousel onChange={handleCarouselChange} loopback={true}>
-                        {[...Array(7).keys()].map((day,i) => (
+                        {[...Array(7).keys()].map((day, i) => (
                             <ClassList
                                 key={i}
                                 todaysClasses={

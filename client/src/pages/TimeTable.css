@@ -61,7 +61,6 @@ h1 {
 
 .title {
   font-size: 2rem;
-  padding-top: 15px;
 }
 
 a {
@@ -130,6 +129,6 @@ body {
       transform: rotate(0deg);
   }
   to {
-      transform: rotate(359deg);
+      transform: rotate(-359deg);
   }
 }

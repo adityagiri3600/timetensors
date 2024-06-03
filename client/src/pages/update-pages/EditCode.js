@@ -1,7 +1,7 @@
 import React from "react";
 import InputField from "../../app/inputField/InputField";
 
-const Update1 = ({ editCode, setEditCode, disabled }) => {
+const EditCode = ({ editCode, setEditCode, disabled }) => {
     return (
         <div className="update1-container">
 
@@ -19,4 +19,4 @@ const Update1 = ({ editCode, setEditCode, disabled }) => {
     );
 }
 
-export default Update1;
+export default EditCode;

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"
 import Carousel from "../../app/carousel/carousel";
-import Update1 from "./update1";
-import Update2 from "./update2";
-import Update3 from "./update3";
-import Update4 from "./update4";
-import Update5 from "./update5";
+import EditCode from "./EditCode";
+import Metadata from "./Metadata";
+import Classes from "./Classes";
+import Regular from "./Regular";
+import Events from "./Events";
 import StepProgress from "../../app/step-progress/step-progress";
 import "./Update.css"
 import { useParams } from "react-router-dom";
@@ -68,24 +68,24 @@ const Update = () => {
             <StepProgress step={step} n={steps.length} />
             {editCodeError ? <p className="editCodeError">Invalid Edit Code</p> : null}
             <Carousel getIndex={setStep}>
-                <Update1
+                <EditCode
                     editCode={editCode}
                     setEditCode={setEditCode}
                     disabled={step !== 0}
                 />
-                <Update2
+                <Metadata
                     ttName={ttName}
                     setTtName={setTtName}
                     description={description}
                     setDescription={setDescription}
                     disabled={step !== 1}
                 />
-                <Update3
+                <Classes
                     classObjects={classObjects}
                     setClassObjects={setClassObjects}
                     disabled={step !== 2}
                 />
-                <Update4
+                <Regular
                     body={{ ttName, description, editCode, classObjects, events}}
                     setEditCodeError={setEditCodeError}
                     classes={classes}
@@ -94,7 +94,7 @@ const Update = () => {
                     ttRoute={ttRoute}
                     disabled={step !== 3}
                 />
-                <Update5
+                <Events
                     body={{ ttName, description, editCode, classObjects, events}}
                     setEditCodeError={setEditCodeError}
                     classes={classes}

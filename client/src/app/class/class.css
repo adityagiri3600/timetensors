@@ -42,7 +42,7 @@
 .class h2 {
     font-family: QuickSandRegular;
     font-size: 1rem;
-    font-weight: 100;
+    font-weight: 100;   
     user-select: text;
     margin: 0;
 }

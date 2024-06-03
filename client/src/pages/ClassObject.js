@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { HexColorPicker } from "react-colorful";
 import axios from "axios";
-import { getTimetable } from "../app/timetrackFunctions";
 import NotFound from "./NotFound";
-import { set } from "mongoose";
 
 const ClassObject = () => {
 
     const { classRoute } = useParams();
     const [data, setData] = useState([]);
     const [color, setColor] = useState("#000000");
+    const [editingColor, setEditingColor] = useState(false);
     const [editCode, setEditCode] = useState("");
     const [properties, setProperties] = useState([]);
     const [notFound, setNotFound] = useState(false);
@@ -43,25 +43,22 @@ const ClassObject = () => {
                 }}>
                     <p style={{ fontSize: '3rem', margin: 0 }}>{data.Name}</p>
                     <p style={{ fontSize: '1rem', margin: 0, color: "#FFFFFFAA" }}>{classRoute}</p>
-                    <div style={{
+                    <div onClick={()=>setEditingColor(!editingColor)} style={{
                         display: 'flex',
                         alignItems: 'center',
                     }}>
                         <p style={{ fontSize: '1rem', margin: 0 }}>color : </p>
-                        <input
-                            type="color"
-                            value={color}
-                            style={{
-                                width: "30px",
-                                height: "30px",
-                                border: "none",
-                                marginLeft: "10px",
-                                background: "none",
-                            }}
-                            onChange={(e) => { setColor(e.target.value) }}
-                        />
+                        <div style={{
+                            width: '20px',
+                            height: '20px',
+                            backgroundColor: color,
+                            borderRadius: '50%',
+                            marginLeft: '10px',
+                            marginRight: '5px',
+                        }}></div>
                         <p style={{ fontSize: '1rem', margin: 0, color: "#FFFFFFAA" }}>{color} </p>
                     </div>
+                    {editingColor && <HexColorPicker color={color} onChange={setColor} style={{marginTop: "5px"}} />}
                     <div style={{
                         paddingTop: '10px',
                     }}>
@@ -195,11 +192,11 @@ const ClassObject = () => {
                                 placeholder="Edit Code"
                                 onChange={(e) => { setEditCode(e.target.value) }}
                             />
-                        <p style={{
-                            fontSize: '0.5rem',
-                            marginLeft: "10px",
-                            color: "#FFFFFFAA",
-                        }}>Same as timetable edit code if this class was created automatically</p>
+                            <p style={{
+                                fontSize: '0.5rem',
+                                marginLeft: "10px",
+                                color: "#FFFFFFAA",
+                            }}>Same as timetable edit code if this class was created automatically</p>
                         </div>
                         <button
                             style={{
