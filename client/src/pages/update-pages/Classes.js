@@ -31,6 +31,7 @@ const Classes = ({ classObjects, setClassObjects, disabled }) => {
                             borderRadius: "5px",
                             cursor: "pointer"
                         }}
+                        disabled={name === ""}
                     >
                         Add Class
                     </button>
