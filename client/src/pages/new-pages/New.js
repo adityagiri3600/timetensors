@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import StepProgress from "../../app/step-progress/step-progress";
 import Carousel from "../../app/carousel/carousel";
 import New1 from "./new1";
 import New2 from "./new2";
-import New3 from "./new3";
 import New4 from "./new4";
 import Created from "../Created";
-import "./New.css";
 import Classes from "../update-pages/Classes";
+import { useAuth } from "../../AuthContext";
+import "./New.css";
 
 const New = () => {
+    const { isLoggedIn } = useAuth();
+    const navigate = useNavigate();
 
     const [step, setStep] = useState(0);
     const [ttName, setTtName] = useState("");
@@ -27,7 +30,10 @@ const New = () => {
         "Add your classes",
         "Make your schedule"
     ]
-
+    if (!isLoggedIn){ 
+        navigate("/login");
+        return null;
+    }
     return (
         <div className="new-container">
             {created ? (

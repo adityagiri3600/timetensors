@@ -13,6 +13,7 @@ import Events from './pages/update-pages/Events';
 import AddExtraClasses from './pages/update-pages/AddExtraClasses';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<LogIn />} />
         <Route path='/signup' element={<SignUp />} />
-        <Route path='/new' element={<New />} />
+        <Route path='/new' element={<ProtectedRoute><New /></ProtectedRoute>} />
         <Route path='/newupdate/:ttRoute' element={<NewUpdate />} />
         <Route path='/update/metadata/:ttRoute' element={<Metadata />} />
         <Route path='/update/regular/:ttRoute' element={<Regular />} />

@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useAuth } from "../AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [usernames, setUsernames] = useState([]);
+    const { login } = useAuth();
+    const navigate = useNavigate();
 
     const getUsernames = async () => {
         try {
@@ -37,6 +41,8 @@ const SignUp = () => {
                         })
                     });
                     console.log(response);
+                    login(response.data)
+                    navigate(-1);
                 } catch (error) {
                     console.error(error);
                 }

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
-import InputField from "../app/inputField/InputField";
+import { useAuth } from "../AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const LogIn = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [invalid, setInvalid] = useState(false);
-
+    const { login } = useAuth();
+    const navigate = useNavigate();
 
     return (
         <div>
@@ -20,6 +22,8 @@ const LogIn = () => {
                         password,
                     });
                     console.log(response);
+                    login(response.data);
+                    navigate(-1);
                 } catch (error) {
                     if (error.response.status === 404) {
                         setInvalid(true);

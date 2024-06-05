@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { getTimetable } from "../app/timetrackFunctions";
+import { useAuth } from "../AuthContext";
 import "./Home.css";
+import { Link } from "react-router-dom";
 
 const Home = () => {
-
+    const { isLoggedIn, logout, userData } = useAuth();
     const [recentlyViewed, setRecentlyViewed] = useState([]);
 
     useEffect(() => {
@@ -33,30 +35,48 @@ const Home = () => {
                 <img src="/TimeTrack.svg" alt="logo" style={{
                     height: "2rem"
                 }}></img>
-                <button
-                    onClick={() => window.location.href = "/login"}
-                    style={{
-                        background : "none",
-                        color: "white",
-                        border: "1px solid #FFFFFFAA",
-                        padding: "10px",
-                        borderRadius: "5px",
-                    }}
-                >
-                    Log in/Sign up
-                </button>
+                {isLoggedIn ?
+                    <>
+                        <p>{userData.username}</p>
+                        <button
+                            onClick={logout}
+                            style={{
+                                background: "none",
+                                color: "white",
+                                border: "1px solid #FFFFFFAA",
+                                padding: "10px",
+                                borderRadius: "5px",
+                                marginLeft: "10px",
+                            }}
+                        >
+                            Log out
+                        </button>
+                    </>
+                    : 
+                    <Link
+                        to="/login"
+                        style={{
+                            background: "none",
+                            color: "white",
+                            border: "1px solid #FFFFFFAA",
+                            padding: "10px",
+                            borderRadius: "5px",
+                        }}
+                    >
+                        Log in/Sign up
+                    </Link>}
             </div>
             {recentlyViewed.length > 0 &&
                 <>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", maxWidth: "600px" }}>
                         <p className="recentlHeading">Recent</p>
-                        <button type="submit" className="newTimeTable" onClick={() => window.location.href = "/new"} style={{
+                        <Link type="submit" className="newTimeTable" to = "/new" style={{
                             display: "flex",
                             alignItems: "center",
                         }}>
                             <img src="/plus.svg" style={{ width: "20px", height: "20px", marginRight: "10px" }} alt="Create New Timetable"></img>
                             new
-                        </button>
+                        </Link>
                     </div>
                     <div style={{
                         overflowY: "scroll",
@@ -68,17 +88,17 @@ const Home = () => {
                                 return null;
                             }
                             return (
-                                <div
+                                <Link
                                     key={index}
                                     className="recentlyViewed"
-                                    onClick={() => window.location.href = `/${timetable.ttid}`}
+                                    to={`/${timetable.ttid}`}
                                 >
                                     <div style={{ display: "flex", alignItems: "center" }}>
                                         <p style={{ margin: 0, textWrap: "nowrap" }}>{timetable?.ttName}</p>
                                         <p style={{ margin: "0 0 0 10px", color: "#FFFFFFAA", fontSize: "0.8rem", }}>{timetable?.ttid}</p>
                                     </div>
                                     <p style={{ margin: 0, color: "#FFFFFFAA" }}>{timetable?.description}</p>
-                                </div>
+                                </Link>
                             )
                         })}
                     </div>
