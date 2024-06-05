@@ -31,8 +31,20 @@ const Home = () => {
                 paddingTop: "20px",
             }}>
                 <img src="/TimeTrack.svg" alt="logo" style={{
-                    height: "3rem"
+                    height: "2rem"
                 }}></img>
+                <button
+                    onClick={() => window.location.href = "/login"}
+                    style={{
+                        background : "none",
+                        color: "white",
+                        border: "1px solid #FFFFFFAA",
+                        padding: "10px",
+                        borderRadius: "5px",
+                    }}
+                >
+                    Log in/Sign up
+                </button>
             </div>
             {recentlyViewed.length > 0 &&
                 <>

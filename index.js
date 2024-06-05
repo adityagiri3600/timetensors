@@ -16,6 +16,8 @@ connection.once('open', () => {
     console.log('MongoDB connection established');
 });
 
+app.use('/api/signup', require('./api/signup'));
+app.use('/api/login', require('./api/login'));
 app.use('/api/timetable', require('./api/timetable'));
 app.use('/api/classObject', require('./api/classObject'));
 
