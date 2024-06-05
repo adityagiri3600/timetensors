@@ -22,6 +22,13 @@ const TimeTable = () => {
             setClasses(response.data.classes);
             doesUserHaveEditCode(ttRoute, setUserHasEditCode);
             console.log(response)
+
+            // Add timetable to recently viewed timetables
+            const recentlyViewedTimetables = JSON.parse(localStorage.getItem("recentlyViewedTimetables")) || [];
+            if (!recentlyViewedTimetables.includes(ttRoute)) {
+                recentlyViewedTimetables.push(ttRoute);
+                localStorage.setItem("recentlyViewedTimetables", JSON.stringify(recentlyViewedTimetables));
+            }
         } catch (error) {
             setNotFound(true);
             console.error('Error fetching data:', error);
@@ -39,6 +46,8 @@ const TimeTable = () => {
 
     const [weekDay, setWeekDay] = useState(date.getDay())
     const [fakeWeekDay, setFakeWeekDay] = useState(weekDay);
+
+
 
     const getClassesAtDate = (date_param) => {
         let extraClasses = [];
@@ -133,7 +142,7 @@ const TimeTable = () => {
         }
     }
 
-    const doesUserHaveEditCode = (ttRoute, setUserHasEditCode=()=>{}) => {
+    const doesUserHaveEditCode = (ttRoute, setUserHasEditCode = () => { }) => {
         if (window == undefined)
             return
         const editCode = localStorage.getItem(`${ttRoute}EditCode`);
