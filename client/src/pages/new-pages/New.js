@@ -7,6 +7,7 @@ import New3 from "./new3";
 import New4 from "./new4";
 import Created from "../Created";
 import "./New.css";
+import Classes from "../update-pages/Classes";
 
 const New = () => {
 
@@ -53,7 +54,7 @@ const New = () => {
                             setEditCode={setEditCode}
                             disabled={step !== 1}
                         />
-                        <New3 
+                        <Classes 
                             classObjects={classObjects}
                             setClassObjects={setClassObjects}
                             disabled={step !== 2}

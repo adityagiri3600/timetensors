@@ -1,7 +1,6 @@
 import { React, useState } from "react";
 import InputField from "../../app/inputField/InputField";
 import { determineTextColor } from "../../app/timetrackFunctions";
-import { setNonce } from "react-colorful";
 
 const Classes = ({ classObjects, setClassObjects, disabled }) => {
 
