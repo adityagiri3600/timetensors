@@ -41,7 +41,7 @@ const Classes = ({ classObjects, setClassObjects, disabled }) => {
                 display: 'grid',
                 gridTemplateColumns: 'repeat(3, 1fr)',
                 gridGap: '10px',
-                marginTop: '20px'
+                padding: '10px'
             }}>
                 {classObjects?.map((classObject, index) => (
                     <div
