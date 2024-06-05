@@ -180,9 +180,17 @@ const TimeTable = () => {
                         justifyContent: "center",
                         paddingTop: "15px",
                     }}>
-                        <h1 className="title">
-                            <a href="/">TimeTrack</a>
-                        </h1>
+                        <div style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }} 
+                        onClick={() => window.location.href = "/"}
+                        >
+                            <img src="/TimeTrack.svg" alt="logo" style={{
+                                height: "3rem"
+                            }}></img>
+                        </div>
                         <button
                             onClick={(e) => {
                                 fetchData();
@@ -202,7 +210,6 @@ const TimeTable = () => {
                             <img src="/refresh.svg" alt="Refresh" className="refresh-icon" style={{
                                 width: "20px",
                                 height: "20px",
-                                marginLeft: "10px"
                             }} />
                         </button>
                     </div>

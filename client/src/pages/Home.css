@@ -1,26 +1,28 @@
 .newTimeTable{
     color: white;
-    background-color: #159215;
+    background-color: #159215c3;
     border: 1px solid rgba(255, 255, 255, 0.525);
     padding: 6px;
     border-radius: 5px;
     font-size: 1rem;
+    margin: 10px;
 }
 .recentlHeading{
     font-family: QuickSandRegular;
     font-size: 1.5rem;
-    margin: 0;
+    margin: 10px;
     background: linear-gradient(90deg, white 0%, #159215 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 .recentlyViewed{
     min-width: auto;
     margin: 10px;
     padding: 10px;
-    background: #2b7df800;
+    background-color: #2b7df800;
     /* blur */
-    backdrop-filter: blur(100px);
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.518);
     cursor: pointer;
     border-radius: 5px;
@@ -28,20 +30,12 @@
     transition: all 0.1s;
 }
 .recentlyViewed:hover{
-    background: rgba(255, 255, 255, 0.284);
+    background-color: rgba(255, 255, 255, 0.284);
 }
 .recentlyViewedContainer {
-    padding: 10px;
     padding-bottom: 20px;
-    animation: gradientAnimation 1s infinite;
-    background: radial-gradient(ellipse at 284px 210px, #15921473, transparent), radial-gradient(ellipse at 0px 160px, #2b7df88c, transparent);
-}
+    background:
+        radial-gradient(circle at right, #2b7df856, transparent 100%),
+        radial-gradient(circle at left, #ff004856, transparent 100%)
 
-@keyframes gradientAnimation {
-    0% {
-        background: radial-gradient(ellipse at 284px 210px, #15921473, transparent), radial-gradient(ellipse at 0px 160px, #2b7df88c, transparent);
-    }
-    100% {
-        background: radial-gradient(ellipse at 284px 210px, #92141473, transparent), radial-gradient(ellipse at 0px 160px, #2b7df88c, transparent);
-    }
 }

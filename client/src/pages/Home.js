@@ -13,7 +13,6 @@ const Home = () => {
                 recentlyViewedIds = JSON.parse(recentlyViewedIds);
                 const recentlyViewedTimetables = await Promise.all(recentlyViewedIds.map(id => getTimetable(id)));
                 setRecentlyViewed(recentlyViewedTimetables);
-                console.log(recentlyViewedTimetables);
             }
         };
 
@@ -22,14 +21,22 @@ const Home = () => {
 
 
     return (
-        <div>
-            <h1 style={{
-                padding: "20px",
-            }}>TimeTrack</h1>
+        <div className="recentlyViewedContainer" style={{
+            height: "100vh",
+        }}>
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                paddingTop: "20px",
+            }}>
+                <img src="/TimeTrack.svg" alt="logo" style={{
+                    height: "3rem"
+                }}></img>
+            </div>
             {recentlyViewed.length > 0 &&
-                <div className="recentlyViewedContainer">
-
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", maxWidth: "600px" }}>
                         <p className="recentlHeading">Recent</p>
                         <button type="submit" className="newTimeTable" onClick={() => window.location.href = "/new"} style={{
                             display: "flex",
@@ -41,6 +48,7 @@ const Home = () => {
                     </div>
                     <div style={{
                         overflowY: "scroll",
+                        scrollbarWidth: "none",
                         display: "flex",
                     }}>
                         {recentlyViewed.map((timetable, index) => {
@@ -62,9 +70,9 @@ const Home = () => {
                             )
                         })}
                     </div>
-                </div>
+                </>
             }
-        </div >
+        </div>
     );
 }
 

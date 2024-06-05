@@ -1,6 +1,9 @@
 body{
     padding: 0px;
 }
+html{
+    scrollbar-width: none;
+}
 *{
     font-family: QuickSandLight;
 }
