@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../AuthContext";
 import { getClassDetails, getEditCodeFromLocalStorage } from "../app/timetrackFunctions";
 import ClassList from "../app/classList/classList";
 import Datetime from "../app/datetime/datetime";
@@ -10,6 +11,8 @@ import "./TimeTable.css"
 
 const TimeTable = () => {
     const { ttRoute } = useParams();
+    const navigate = useNavigate();
+    const { isLoggedIn, userData, updateUserData } = useAuth();
     const [data, setData] = useState([]);
     const [classes, setClasses] = useState([])
     const [notFound, setNotFound] = useState(false);
@@ -22,13 +25,6 @@ const TimeTable = () => {
             setClasses(response.data.classes);
             doesUserHaveEditCode(ttRoute, setUserHasEditCode);
             console.log(response)
-
-            // Add timetable to recently viewed timetables
-            const recentlyViewedTimetables = JSON.parse(localStorage.getItem("recentlyViewedTimetables")) || [];
-            if (!recentlyViewedTimetables.includes(ttRoute)) {
-                recentlyViewedTimetables.push(ttRoute);
-                localStorage.setItem("recentlyViewedTimetables", JSON.stringify(recentlyViewedTimetables));
-            }
         } catch (error) {
             setNotFound(true);
             console.error('Error fetching data:', error);
@@ -38,6 +34,21 @@ const TimeTable = () => {
     useEffect(() => {
         fetchData();
     }, []);
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            updateUserData({ recentlyViewed: [...userData.recentlyViewed?.filter(x => x !== ttRoute), ttRoute] });
+            axios.post(`/api/user/update/${userData.username}`,
+                userData,
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            )
+                .catch((e) => console.error(e))
+        }
+    }, [isLoggedIn])
 
     const dateInitalValue = new Date();
     dateInitalValue.setHours(0, 0, 0, 0);
@@ -184,8 +195,8 @@ const TimeTable = () => {
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
-                        }} 
-                        onClick={() => window.location.href = "/"}
+                        }}
+                            onClick={() => navigate("/")}
                         >
                             <img src="/TimeTrack.svg" alt="logo" style={{
                                 height: "3rem"
@@ -215,19 +226,19 @@ const TimeTable = () => {
                     </div>
                     <div className="date-edit-container">
                         <Datetime date={date} />
-                        <a href={`/update/${ttRoute}`} className="edit-btn" onClick={(e) => {
+                        <div className="edit-btn" onClick={(e) => {
                             // animate edit icon rotation
                             e.preventDefault();
                             const icon = e.currentTarget.querySelector('.edit-icon');
                             icon.classList.add('rotate');
                             setTimeout(() => {
                                 icon.classList.remove('rotate');
-                                window.location.href = `/update/${ttRoute}`;
+                                navigate(`/update/${ttRoute}`);
                             }, 200);
                         }}>
                             <img src="/editIcon.svg" alt="Edit" className="edit-icon" />
                             <p>Edit</p>
-                        </a>
+                        </div>
                     </div>
                     <Carousel onChange={handleCarouselChange} loopback={true}>
                         {[...Array(7).keys()].map((day, i) => (

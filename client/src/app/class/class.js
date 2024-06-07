@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from "react";
 import "./class.css";
+import { useNavigate } from "react-router-dom";
 
 const Class = ({ classItem, date, handleClick, focused, events, postEvent, userHasEditCode }) => {
     let cssClassName = `class `;
@@ -8,6 +9,7 @@ const Class = ({ classItem, date, handleClick, focused, events, postEvent, userH
     const [hour, setHour] = useState(currDate.getHours() + currDate.getMinutes() / 60 + currDate.getSeconds() / 3600);
     const [footer, setFooter] = useState("buttons");
     const [event, setEvent] = useState("")
+    const navigate = useNavigate();
 
     const updateTime = () => {
         const newDateTime = new Date();
@@ -91,7 +93,7 @@ const Class = ({ classItem, date, handleClick, focused, events, postEvent, userH
                     {footer === "buttons" ? (
                         <>
                             {userHasEditCode && <button onClick={() => setFooter("add event")}>Add Event</button>}
-                            <button onClick={() => window.location.href = `/class/${classItem.classid}`}>View Class</button>
+                            <button onClick={() => navigate(`/class/${classItem.classid}`)}>View Class</button>
                         </>
                     ) : footer === "add event" ? (
                         <>

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useAuth } from "../../AuthContext";
 import axios from "axios"
 import Carousel from "../../app/carousel/carousel";
 import EditCode from "./EditCode";
@@ -8,10 +10,10 @@ import Regular from "./Regular";
 import Events from "./Events";
 import StepProgress from "../../app/step-progress/step-progress";
 import "./Update.css"
-import { useParams } from "react-router-dom";
 
 const Update = () => {
 
+    const { isLoggedIn, userData } = useAuth();
     const { ttRoute } = useParams();
     const [data, setData] = useState([]);
     const [classes, setClasses] = useState([]);
@@ -37,7 +39,6 @@ const Update = () => {
             setClassObjects(response.data.classObjects);
             setEvents(response.data.events);
             setDescription(response.data.description);
-            getEditCodeFromLocalStorage(ttRoute, setEditCode);
             console.log(response)
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -47,6 +48,12 @@ const Update = () => {
     useEffect(() => {
         fetchData();
     }, []);
+
+    useEffect(() => {
+        if (isLoggedIn){
+            setEditCode(userData.editCodes.find(code => code.id === ttRoute)?.code);
+        }
+    }, [userData]);
 
 
     const steps = [
@@ -106,14 +113,6 @@ const Update = () => {
             </Carousel>
         </div>
     );
-}
-
-const getEditCodeFromLocalStorage = (ttRoute, setEditCode) => {
-    if (window == undefined)
-        return
-    const storedEditCode = localStorage.getItem(`${ttRoute}EditCode`);
-    if (storedEditCode)
-        setEditCode(storedEditCode);
 }
 
 export default Update;
