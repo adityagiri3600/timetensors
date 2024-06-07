@@ -1,52 +1,68 @@
 import React from 'react';
 import axios from 'axios';
+import { useAuth } from '../../AuthContext';
+import { useNavigate } from 'react-router-dom';
 import './updateTimeTable.css';
 
-class UpdateTimeTable extends React.Component {
+const UpdateTimeTable = ({ ttRoute, body, setEditCodeError, disabled, text }) => {
+    
+    const { isLoggedIn, userData, updateUserData } = useAuth();
+    const navigate = useNavigate();
 
-    handleResponse = (response) => {
+    const handleResponse = (response) => {
         if (response.status === 200) {
             console.log("Time table updated");
-            window.location.replace(`/${this.props.ttRoute}`);
+            navigate(-1);
 
-            // save body to local storage
-            if (window !== undefined)
-                localStorage.setItem(`${this.props.ttRoute}EditCode`, this.props.body.editCode);
+            if (isLoggedIn) {
+                updateUserData({
+                    editCodes : [...userData.editCodes.filter(code => code.id !== ttRoute), {
+                        id: ttRoute,
+                        code: body.editCode
+                    }]
+                });
+            }else{
+                // Save edit code to local storage
+                let userData = JSON.parse(localStorage.getItem('userData')) || {};
+                let editCodes = userData.editCodes || [];
+                editCodes = [...editCodes.filter(code => code.id !== ttRoute), {
+                    id: ttRoute,
+                    code: body.editCode
+                }];
+                localStorage.setItem('userData', JSON.stringify({ ...userData, editCodes }));
+            }
         } else {
             console.error("An error occurred");
         }
     };
 
-    handleErrorResponse = (error) => {
+    const handleErrorResponse = (error) => {
         console.error("Invalid edit code");
-        this.props.setEditCodeError(true);
+        setEditCodeError(true);
     }
 
-
-    handleClick = async () => {
+    const handleClick = async () => {
         try {
             const response = await axios.post(
-                `/api/timetable/update/${this.props.ttRoute}`,
-                this.props.body,
+                `/api/timetable/update/${ttRoute}`,
+                body,
                 {
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 }
             );
-            this.handleResponse(response);
+            handleResponse(response);
         } catch (error) {
-            this.handleErrorResponse(error);
+            handleErrorResponse(error);
         }
     };
 
-    render() {
-        return (
-            <button onClick={this.handleClick} className='updateTimeTable-btn' disabled={this.props.disabled} tabIndex={-1}>
-                {this.props.text || 'Update'}
-            </button>
-        );
-    }
-}
+    return (
+        <button onClick={handleClick} className='updateTimeTable-btn' disabled={disabled} tabIndex={-1}>
+            {text || 'Update'}
+        </button>
+    );
+};
 
 export default UpdateTimeTable;

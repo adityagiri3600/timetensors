@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
         code: String,
     }],
     recentlyViewed: [String],
+    createdTimetables: [String],
 });
 
 const user = mongoose.model('User', userSchema);

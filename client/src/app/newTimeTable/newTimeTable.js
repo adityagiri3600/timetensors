@@ -1,33 +1,46 @@
 import React from 'react';
 import axios from 'axios';
+import { useAuth } from '../../AuthContext';
 import './newTimeTable.css';
 
-class NewTimeTable extends React.Component {
-  handleResponse = (response) => {
+const NewTimeTable = ({ body, setTtRoute, setCreated, disabled }) => {
+
+  const { isLoggedIn, userData, updateUserData } = useAuth();
+
+  const handleResponse = (response) => {
     if (response.status === 200) {
-      this.props.setTtRoute(response.data.ttRoute);
-      this.props.setCreated(true);
+      updateUserData({
+        editCodes: [...userData.editCodes, {
+          id: response.data.ttRoute,
+          code: body.editCode
+        }],
+        createdTimetables: [...userData.createdTimetables || [], response.data.ttRoute]
+      });
+      setTtRoute(response.data.ttRoute);
+      setCreated(true);
     }
   };
 
-  handleClick = () => {
+  const handleClick = () => {
     axios.post('api/timetable/new',
-      this.props.body, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(this.handleResponse)
+      {
+        ...body,
+        creator : isLoggedIn ? userData.username : ''
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(handleResponse)
       .catch(error => console.error('Error:', error));
   };
 
-  render() {
-    return (
-      <button onClick={this.handleClick} className='newTimeTable-btn' disabled={this.props.disabled}>
-        Create
-      </button>
-    );
-  }
-}
+  return (
+    <button onClick={handleClick} className='newTimeTable-btn' disabled={disabled}>
+      Create
+    </button>
+  );
+};
 
 export default NewTimeTable;

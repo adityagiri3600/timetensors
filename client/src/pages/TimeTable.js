@@ -25,19 +25,6 @@ const TimeTable = () => {
             setClasses(response.data.classes);
             doesUserHaveEditCode(ttRoute, setUserHasEditCode);
             console.log(response)
-            console.log(userData)
-            updateUserData({recentlyViewed: [ttRoute ]});
-            axios.post(`/api/user/update/${userData.username}`,
-                userData,
-                {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }
-            )
-                .catch((e) => console.error(e))
-                .then((r) => console.log(r))
-            // updateUserData({recentlyViewed: [...userData.recentlyViewed?.filter(tt => tt.ttRoute !== ttRoute),ttRoute ]});
         } catch (error) {
             setNotFound(true);
             console.error('Error fetching data:', error);
@@ -47,6 +34,21 @@ const TimeTable = () => {
     useEffect(() => {
         fetchData();
     }, []);
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            updateUserData({ recentlyViewed: [...userData.recentlyViewed?.filter(x => x !== ttRoute), ttRoute] });
+            axios.post(`/api/user/update/${userData.username}`,
+                userData,
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            )
+                .catch((e) => console.error(e))
+        }
+    }, [isLoggedIn])
 
     const dateInitalValue = new Date();
     dateInitalValue.setHours(0, 0, 0, 0);
@@ -193,8 +195,8 @@ const TimeTable = () => {
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
-                        }} 
-                        onClick={() => navigate("/")}   
+                        }}
+                            onClick={() => navigate("/")}
                         >
                             <img src="/TimeTrack.svg" alt="logo" style={{
                                 height: "3rem"
@@ -224,7 +226,7 @@ const TimeTable = () => {
                     </div>
                     <div className="date-edit-container">
                         <Datetime date={date} />
-                        <p className="edit-btn" onClick={(e) => {
+                        <div className="edit-btn" onClick={(e) => {
                             // animate edit icon rotation
                             e.preventDefault();
                             const icon = e.currentTarget.querySelector('.edit-icon');
@@ -236,7 +238,7 @@ const TimeTable = () => {
                         }}>
                             <img src="/editIcon.svg" alt="Edit" className="edit-icon" />
                             <p>Edit</p>
-                        </p>
+                        </div>
                     </div>
                     <Carousel onChange={handleCarouselChange} loopback={true}>
                         {[...Array(7).keys()].map((day, i) => (

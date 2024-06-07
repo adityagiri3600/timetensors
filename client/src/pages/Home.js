@@ -10,16 +10,15 @@ const Home = () => {
 
     useEffect(() => {
         const fetchTimetables = async () => {
-            let recentlyViewedIds = localStorage.getItem("recentlyViewedTimetables");
+            let recentlyViewedIds = userData?.recentlyViewed;
             if (recentlyViewedIds) {
-                recentlyViewedIds = JSON.parse(recentlyViewedIds);
                 const recentlyViewedTimetables = await Promise.all(recentlyViewedIds.map(id => getTimetable(id)));
-                setRecentlyViewed(recentlyViewedTimetables);
+                setRecentlyViewed(recentlyViewedTimetables.reverse());
             }
         };
 
         fetchTimetables();
-    }, []);
+    }, [userData]);
 
 
     return (

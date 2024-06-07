@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setIsLoggedIn(false);
     localStorage.removeItem('userData');
-    setUserData({ username: '', email: '' });
+    setUserData({ });
   };
 
   const updateUserData = (data) => {

@@ -5,6 +5,7 @@ const timetableSchema = new mongoose.Schema({
     ttid: String,
     ttName: String,
     description: String,
+    creator: String,
     editCode: String,
     viewCode: String,
     classes: [{

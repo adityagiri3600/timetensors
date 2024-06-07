@@ -28,7 +28,7 @@ function App() {
         <Route path='/update/regular/:ttRoute' element={<Regular />} />
         <Route path='/update/events/:ttRoute' element={<Events />} />
         <Route path='/update/extraclass/:ttRoute' element={<AddExtraClasses />} />
-        <Route path='/update/:ttRoute' element={<Update />} />
+        <Route path='/update/:ttRoute' element={<ProtectedRoute><Update /></ProtectedRoute>} />
         <Route path='/class/:classRoute' element={<ClassObject />} />
         <Route path=':ttRoute' element={<TimeTable />} />
       </Routes>

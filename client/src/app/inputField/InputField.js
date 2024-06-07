@@ -4,11 +4,11 @@ import "./InputField.css";
 const InputField = ({ state, setState, disabled, label, textarea }) => {
     return (
         <div>
-            <label htmlFor="inputFieldid" style={{ color: "#ffffff80", marginLeft: "15px" }}>{label}</label>
+            <label htmlFor={`inputFieldid-${label}`} style={{ color: "#ffffff80", marginLeft: "15px" }}>{label}</label>
             {
                 textarea ?
                     <textarea
-                        id="inputFieldid"
+                        id= {`inputFieldid-${label}`}
                         value={state}
                         onChange={(e) => setState(e.target.value)}
                         onKeyDown={(e) => {
@@ -34,7 +34,7 @@ const InputField = ({ state, setState, disabled, label, textarea }) => {
                     />
                     :
                     <input
-                        id="inputFieldid"
+                        id={`inputFieldid-${label}`}
                         type="text"
                         value={state}
                         onChange={(e) => setState(e.target.value)}
