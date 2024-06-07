@@ -92,8 +92,8 @@ const Class = ({ classItem, date, handleClick, focused, events, postEvent, userH
                 }}>
                     {footer === "buttons" ? (
                         <>
-                            {userHasEditCode && <button onClick={() => setFooter("add event")}>Add Event</button>}
-                            <button onClick={() => navigate(`/class/${classItem.classid}`)}>View Class</button>
+                            {userHasEditCode && <button className="btn-press" onClick={() => setFooter("add event")}>Add Event</button>}
+                            <button className="btn-press" onClick={() => navigate(`/class/${classItem.classid}`)}>View Class</button>
                         </>
                     ) : footer === "add event" ? (
                         <>

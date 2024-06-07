@@ -9,9 +9,13 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const storedUserData = localStorage.getItem('userData');
     if (storedUserData) {
-      const parsedUserData = JSON.parse(storedUserData);
-      setIsLoggedIn(true);
-      setUserData(parsedUserData);
+      try{
+        const parsedUserData = JSON.parse(storedUserData);
+        setIsLoggedIn(true);
+        setUserData(parsedUserData);
+      } catch (error) {
+        console.error(error);
+      }
     }
   }, []);
 

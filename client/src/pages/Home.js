@@ -55,6 +55,7 @@ const Home = () => {
                             <p>{userData.username}</p>
                             <button
                                 onClick={logout}
+                                className="btn-press"
                                 style={{
                                     background: "none",
                                     color: "white",
@@ -70,6 +71,7 @@ const Home = () => {
                         :
                         <Link
                             to="/login"
+                            className="btn-press"
                             style={{
                                 background: "none",
                                 color: "white",
@@ -85,7 +87,7 @@ const Home = () => {
                     <>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", maxWidth: "600px" }}>
                             <p className="recentlHeading">Recent</p>
-                            <Link type="submit" className="newTimeTable" to="/new" style={{
+                            <Link type="submit" className="newTimeTable btn-press" to="/new" style={{
                                 display: "flex",
                                 alignItems: "center",
                             }}>
@@ -105,7 +107,7 @@ const Home = () => {
                                 return (
                                     <Link
                                         key={index}
-                                        className="recentlyViewed"
+                                        className="recentlyViewed btn-press"
                                         to={`/${timetable.ttid}`}
                                     >
                                         <div style={{ display: "flex", alignItems: "center" }}>

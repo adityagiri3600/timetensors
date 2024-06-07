@@ -238,7 +238,7 @@ const TimeTable = () => {
                     </div>
                     <div className="date-edit-container">
                         <Datetime date={date} />
-                        <div className="edit-btn" onClick={(e) => {
+                        <div className="edit-btn btn-press" onClick={(e) => {
                             // animate edit icon rotation
                             e.preventDefault();
                             const icon = e.currentTarget.querySelector('.edit-icon');

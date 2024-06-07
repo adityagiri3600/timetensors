@@ -28,3 +28,9 @@ html{
     background: #2b7df8;
     border-radius: 50%;
 }
+.btn-press{
+    transition: transform 0.2s;
+}
+.btn-press:active{
+    transform: scale(0.9);
+}

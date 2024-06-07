@@ -59,7 +59,7 @@ const UpdateTimeTable = ({ ttRoute, body, setEditCodeError, disabled, text }) =>
     };
 
     return (
-        <button onClick={handleClick} className='updateTimeTable-btn' disabled={disabled} tabIndex={-1}>
+        <button onClick={handleClick} className='updateTimeTable-btn btn-press' disabled={disabled} tabIndex={-1}>
             {text || 'Update'}
         </button>
     );
