@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const LogIn = () => {
     const [username, setUsername] = useState("");
@@ -11,7 +12,18 @@ const LogIn = () => {
     const navigate = useNavigate();
 
     return (
-        <div>
+        <motion.div
+            exit={{
+                height: "0px",
+                transition: {
+                    duration: 0.3,
+                }
+            }}
+            style={{
+                height: "100vh",
+                overflow: "hidden",
+            }}
+        >
             <h2>Login</h2>
             {invalid && <p>Invalid username or password</p>}
             <form onSubmit={async (e) => {
@@ -66,7 +78,7 @@ const LogIn = () => {
                     <button type="submit">Log In</button>
                 </div>
             </form>
-        </div>
+        </motion.div>
     );
 }
 

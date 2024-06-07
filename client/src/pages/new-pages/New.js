@@ -8,6 +8,7 @@ import New4 from "./new4";
 import Created from "../Created";
 import Classes from "../update-pages/Classes";
 import { useAuth } from "../../AuthContext";
+import { motion } from "framer-motion";
 import "./New.css";
 
 const New = () => {
@@ -30,53 +31,66 @@ const New = () => {
         "Add your classes",
         "Make your schedule"
     ]
-    if (!isLoggedIn){ 
+    if (!isLoggedIn) {
         navigate("/login");
         return null;
     }
     return (
-        <div className="new-container">
-            {created ? (
-                <Created ttName={ttName} ttRoute={ttRoute} />
-            ) :
-                <>
-                    <h1 className="step-heading"> <span className="step-count">Step {step + 1}:</span> {steps[step]}</h1>
-                    <p style={{
-                        margin: "0 10px",
-                        fontSize: "0.8rem",
-                        color: "#FFFFFFAA"
-                    }} >Swipe to Navigate</p>
-                    <StepProgress step={step} n={steps.length} />
-                    <Carousel getIndex={setStep}>
-                        <New1
-                            ttName={ttName}
-                            setTtName={setTtName}
-                            description={description}
-                            setDescription={setDescription}
-                            disabled={step !== 0}
-                        />
-                        <New2
-                            editCode={editCode}
-                            setEditCode={setEditCode}
-                            disabled={step !== 1}
-                        />
-                        <Classes 
-                            classObjects={classObjects}
-                            setClassObjects={setClassObjects}
-                            disabled={step !== 2}
-                        />
-                        <New4
-                            classes={classes}
-                            setClasses={setClasses}
-                            classObjects={classObjects}
-                            body={{ ttName, description, classes, classObjects , editCode }}
-                            setCreated={setCreated}
-                            setTtRoute={setTtRoute}
-                        />
-                    </Carousel>
-                </>
-            }
-        </div>
+        <motion.div
+            exit={{
+                height: "0px",
+                transition: {
+                    duration: 0.3,
+                }
+            }}
+            style={{
+                height: "100vh",
+                overflow: "hidden",
+            }}
+        >
+            <div className="new-container">
+                {created ? (
+                    <Created ttName={ttName} ttRoute={ttRoute} />
+                ) :
+                    <>
+                        <h1 className="step-heading"> <span className="step-count">Step {step + 1}:</span> {steps[step]}</h1>
+                        <p style={{
+                            margin: "0 10px",
+                            fontSize: "0.8rem",
+                            color: "#FFFFFFAA"
+                        }} >Swipe to Navigate</p>
+                        <StepProgress step={step} n={steps.length} />
+                        <Carousel getIndex={setStep}>
+                            <New1
+                                ttName={ttName}
+                                setTtName={setTtName}
+                                description={description}
+                                setDescription={setDescription}
+                                disabled={step !== 0}
+                            />
+                            <New2
+                                editCode={editCode}
+                                setEditCode={setEditCode}
+                                disabled={step !== 1}
+                            />
+                            <Classes
+                                classObjects={classObjects}
+                                setClassObjects={setClassObjects}
+                                disabled={step !== 2}
+                            />
+                            <New4
+                                classes={classes}
+                                setClasses={setClasses}
+                                classObjects={classObjects}
+                                body={{ ttName, description, classes, classObjects, editCode }}
+                                setCreated={setCreated}
+                                setTtRoute={setTtRoute}
+                            />
+                        </Carousel>
+                    </>
+                }
+            </div>
+        </motion.div>
     )
 }
 

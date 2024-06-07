@@ -7,6 +7,7 @@ import ClassList from "../app/classList/classList";
 import Datetime from "../app/datetime/datetime";
 import NotFound from "./NotFound";
 import Carousel from "../app/carousel/carousel";
+import { motion } from "framer-motion";
 import "./TimeTable.css"
 
 const TimeTable = () => {
@@ -181,7 +182,18 @@ const TimeTable = () => {
     }
 
     return (
-        <>
+        <motion.div
+            exit={{
+                height: "0px",
+                transition: {
+                    duration: 0.3,
+                }
+            }}
+            style={{
+                height: "100vh",
+                overflow: "hidden",
+            }}
+        >
             {notFound ? (
                 <NotFound thing={"timetable"} name={ttRoute} />
             ) : (
@@ -277,7 +289,7 @@ const TimeTable = () => {
                     </Carousel>
                 </div>
             )}
-        </>
+        </motion.div>
     );
 }
 

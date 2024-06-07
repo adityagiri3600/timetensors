@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { HexColorPicker } from "react-colorful";
 import axios from "axios";
 import NotFound from "./NotFound";
+import { motion } from "framer-motion";
 
 const ClassObject = () => {
 
@@ -34,7 +35,18 @@ const ClassObject = () => {
     }, []);
 
     return (
-        <>
+        <motion.div
+            exit={{
+                height: "0px",
+                transition: {
+                    duration: 0.3,
+                }
+            }}
+            style={{
+                height: "100vh",
+                overflow: "hidden",
+            }}
+        >
             {notFound ? (
                 <NotFound thing="class" name={classRoute} />
             ) : (
@@ -237,7 +249,7 @@ const ClassObject = () => {
                     </div>
                 </div>
             )}
-        </>
+        </motion.div>
     );
 }
 

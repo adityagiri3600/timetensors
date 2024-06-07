@@ -9,6 +9,7 @@ import Classes from "./Classes";
 import Regular from "./Regular";
 import Events from "./Events";
 import StepProgress from "../../app/step-progress/step-progress";
+import { motion } from "framer-motion";
 import "./Update.css"
 
 const Update = () => {
@@ -50,7 +51,7 @@ const Update = () => {
     }, []);
 
     useEffect(() => {
-        if (isLoggedIn){
+        if (isLoggedIn) {
             setEditCode(userData.editCodes.find(code => code.id === ttRoute)?.code);
         }
     }, [userData]);
@@ -65,53 +66,66 @@ const Update = () => {
     ]
 
     return (
-        <div className="update-container">
-            <h1 className="step-heading"> <span className="step-count">Step {step + 1}:</span> {steps[step]}</h1>
-            <p style={{
-                margin: "0 10px",
-                fontSize: "0.8rem",
-                color: "#FFFFFFAA"
-            }} >Swipe to Navigate</p>
-            <StepProgress step={step} n={steps.length} />
-            {editCodeError ? <p className="editCodeError">Invalid Edit Code</p> : null}
-            <Carousel getIndex={setStep}>
-                <EditCode
-                    editCode={editCode}
-                    setEditCode={setEditCode}
-                    disabled={step !== 0}
-                />
-                <Metadata
-                    ttName={ttName}
-                    setTtName={setTtName}
-                    description={description}
-                    setDescription={setDescription}
-                    disabled={step !== 1}
-                />
-                <Classes
-                    classObjects={classObjects}
-                    setClassObjects={setClassObjects}
-                    disabled={step !== 2}
-                />
-                <Regular
-                    body={{ ttName, description, editCode, classObjects, events}}
-                    setEditCodeError={setEditCodeError}
-                    classes={classes}
-                    classObjects={classObjects}
-                    classesAtSpecificDate={classesAtSpecificDate}
-                    ttRoute={ttRoute}
-                    disabled={step !== 3}
-                />
-                <Events
-                    body={{ ttName, description, editCode, classObjects, events}}
-                    setEditCodeError={setEditCodeError}
-                    classes={classes}
-                    events={events}
-                    setEvents={setEvents}
-                    ttRoute={ttRoute}
-                    disabled={step !== 4}
-                />
-            </Carousel>
-        </div>
+        <motion.div
+            exit={{
+                height: "0px",
+                transition: {
+                    duration: 0.3,
+                }
+            }}
+            style={{
+                height: "100vh",
+                overflow: "hidden",
+            }}
+        >
+            <div className="update-container">
+                <h1 className="step-heading"> <span className="step-count">Step {step + 1}:</span> {steps[step]}</h1>
+                <p style={{
+                    margin: "0 10px",
+                    fontSize: "0.8rem",
+                    color: "#FFFFFFAA"
+                }} >Swipe to Navigate</p>
+                <StepProgress step={step} n={steps.length} />
+                {editCodeError ? <p className="editCodeError">Invalid Edit Code</p> : null}
+                <Carousel getIndex={setStep}>
+                    <EditCode
+                        editCode={editCode}
+                        setEditCode={setEditCode}
+                        disabled={step !== 0}
+                    />
+                    <Metadata
+                        ttName={ttName}
+                        setTtName={setTtName}
+                        description={description}
+                        setDescription={setDescription}
+                        disabled={step !== 1}
+                    />
+                    <Classes
+                        classObjects={classObjects}
+                        setClassObjects={setClassObjects}
+                        disabled={step !== 2}
+                    />
+                    <Regular
+                        body={{ ttName, description, editCode, classObjects, events }}
+                        setEditCodeError={setEditCodeError}
+                        classes={classes}
+                        classObjects={classObjects}
+                        classesAtSpecificDate={classesAtSpecificDate}
+                        ttRoute={ttRoute}
+                        disabled={step !== 3}
+                    />
+                    <Events
+                        body={{ ttName, description, editCode, classObjects, events }}
+                        setEditCodeError={setEditCodeError}
+                        classes={classes}
+                        events={events}
+                        setEvents={setEvents}
+                        ttRoute={ttRoute}
+                        disabled={step !== 4}
+                    />
+                </Carousel>
+            </div>
+        </motion.div>
     );
 }
 
