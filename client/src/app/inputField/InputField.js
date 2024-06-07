@@ -27,7 +27,8 @@ const InputField = ({ state, setState, disabled, label, textarea }) => {
                             color: "white",
                             borderRadius: "10px",
                             fontSize: "1.3rem",
-                            outline: "none"
+                            outline: "none",
+                            border: "1px solid #3c3c3c"
                         }}
                         className="inputFieldComponent"
                         disabled={disabled}
@@ -53,7 +54,8 @@ const InputField = ({ state, setState, disabled, label, textarea }) => {
                             color: "white",
                             borderRadius: "10px",
                             fontSize: "1.3rem",
-                            outline: "none"
+                            outline: "none",
+                            border: "1px solid #3c3c3c"
                         }}
                         className="inputFieldComponent"
                         disabled={disabled}

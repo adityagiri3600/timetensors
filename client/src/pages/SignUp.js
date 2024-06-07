@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const SignUp = () => {
@@ -36,64 +36,113 @@ const SignUp = () => {
             style={{
                 height: "100vh",
                 overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center"
             }}
         >
-            <div>
-                <h2>Sign up</h2>
-                <form onSubmit={async (e) => {
-                    e.preventDefault();
-                    try {
-                        const response = await fetch("/api/signup", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify({
-                                username,
-                                password
-                            })
-                        });
-                        console.log(response);
-                        login(response.data)
-                        navigate(-1);
-                    } catch (error) {
-                        console.error(error);
-                    }
+            <p style={{
+                textAlign: "center",
+                fontSize: "2rem",
+                padding: "10px",
+            }}>Sign up</p>
+            <form onSubmit={async (e) => {
+                e.preventDefault();
+                try {
+                    const response = await fetch("/api/signup", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            username,
+                            password
+                        })
+                    });
+                    console.log(response);
+                    login(response.data)
+                    navigate(-1);
+                } catch (error) {
+                    console.error(error);
+                }
+            }}>
+                <div>
+                    <label htmlFor="username" style={{ display: "block", marginLeft: "15px" }}>Username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        autoComplete="username"
+                        autoFocus
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                        style={{
+                            backgroundColor: "black",
+                            width: "300px",
+                            margin: "10px",
+                            padding: "10px",
+                            color: "white",
+                            borderRadius: "10px",
+                            fontSize: "1.3rem",
+                            outline: "none",
+                            border: "1px solid #3c3c3c"
+                        }}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="password" style={{ display: "block", marginLeft: "15px" }}>Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        autoComplete="new-password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        style={{
+                            backgroundColor: "black",
+                            width: "300px",
+                            margin: "10px",
+                            padding: "10px",
+                            color: "white",
+                            borderRadius: "10px",
+                            fontSize: "1.3rem",
+                            outline: "none",
+                            border: "1px solid #3c3c3c"
+                        }}
+                    />
+                </div>
+                <Link to="/signup" style={{
+                    textAlign: "center",
+                    color: "#ffffff80",
+                    textDecoration: "underline",
+                    padding: "10px",
+                }}> already a user? Log in instead</Link>
+                <div style={{
+                    display: "flex",
+                    justifyContent: "right"
                 }}>
-                    <div>
-                        <label htmlFor="username">Username</label>
-                        <input
-                            type="text"
-                            id="username"
-                            name="username"
-                            autoComplete="username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            autoComplete="new-password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <a href="/login"> already a user? Log in instead</a>
-                    <div style={{
-                        display: "flex",
-                        justifyContent: "right"
-                    }}>
-                        {usernames.includes(username) && <p>Username already taken</p>}
-                        <button type="submit" disabled={usernames.includes(username)}>Sign Up</button>
-                    </div>
-                </form>
-            </div>
+                    {usernames.includes(username) && <p style={{
+                            color: "red",
+                            fontSize: "0.8rem",
+                            padding: "10px",
+                        }}>Username already taken</p>}
+                    <button 
+                        type="submit" 
+                        style={{
+                            backgroundColor: "#159215",
+                            color: "white",
+                            border: "none",
+                            fontSize: "1.1rem",
+                            padding: "10px",
+                            borderRadius: "5px",
+                            margin: "10px",
+                        }}
+                        disabled={usernames.includes(username)}
+                    >Sign Up</button>
+                </div>
+            </form>
         </motion.div>
     );
 }

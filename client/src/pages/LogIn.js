@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useAuth } from "../AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const LogIn = () => {
@@ -22,44 +22,64 @@ const LogIn = () => {
             style={{
                 height: "100vh",
                 overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center"
             }}
         >
-            <h2>Login</h2>
-            {invalid && <p>Invalid username or password</p>}
-            <form onSubmit={async (e) => {
-                e.preventDefault();
-                try {
-                    const response = await axios.post("/api/login", {
-                        username: username,
-                        password,
-                    });
-                    console.log(response);
-                    login(response.data);
-                    navigate(-1);
-                } catch (error) {
-                    if (error.response.status === 404) {
-                        setInvalid(true);
-                        setInterval(() => {
-                            setInvalid(false);
-                        }, 5000);
+            <p style={{
+                textAlign: "center",
+                fontSize: "2rem",
+                padding: "10px",
+            }}>Login</p>
+            <form
+                onSubmit={async (e) => {
+                    e.preventDefault();
+                    try {
+                        const response = await axios.post("/api/login", {
+                            username: username,
+                            password,
+                        });
+                        console.log(response);
+                        login(response.data);
+                        navigate(-1);
+                    } catch (error) {
+                        if (error.response.status === 404) {
+                            setInvalid(true);
+                            setInterval(() => {
+                                setInvalid(false);
+                            }, 5000);
+                        }
+                        console.error(error);
                     }
-                    console.error(error);
-                }
-            }}>
+                }}
+            >
                 <div>
-                    <label htmlFor="username">Username</label>
+                    <label htmlFor="username" style={{ display: "block", marginLeft: "15px" }}>Username</label>
                     <input
                         type="text"
                         id="username"
                         name="username"
                         autoComplete="username"
+                        autoFocus
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
+                        style={{
+                            backgroundColor: "black",
+                            width: "300px",
+                            margin: "10px",
+                            padding: "10px",
+                            color: "white",
+                            borderRadius: "10px",
+                            fontSize: "1.3rem",
+                            outline: "none",
+                            border: "1px solid #3c3c3c"
+                        }}
                     />
                 </div>
                 <div>
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password" style={{ display: "block", marginLeft: "15px" }}>Password</label>
                     <input
                         type="password"
                         id="password"
@@ -68,14 +88,47 @@ const LogIn = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
+                        style={{
+                            backgroundColor: "black",
+                            width: "300px",
+                            margin: "10px",
+                            padding: "10px",
+                            color: "white",
+                            borderRadius: "10px",
+                            fontSize: "1.3rem",
+                            outline: "none",
+                            border: "1px solid #3c3c3c"
+                        }}
                     />
                 </div>
-                <a href="/signup">Not a user? Sign up instead</a>
+                <Link to="/signup" style={{
+                    textAlign: "center",
+                    color: "#ffffff80",
+                    textDecoration: "underline",
+                    padding: "10px",
+                }}>Not a user? Sign up instead</Link>
                 <div style={{
                     display: "flex",
                     justifyContent: "right"
                 }}>
-                    <button type="submit">Log In</button>
+                    {invalid &&
+                        <p style={{
+                            color: "red",
+                            fontSize: "0.8rem",
+                            padding: "10px",
+                        }}>Invalid username or password</p>}
+                    <button
+                        style={{
+                            backgroundColor: "#159215",
+                            color: "white",
+                            border: "none",
+                            fontSize: "1.1rem",
+                            padding: "10px",
+                            borderRadius: "5px",
+                            margin: "10px",
+                        }}
+                        type="submit"
+                    >Log In</button>
                 </div>
             </form>
         </motion.div>
