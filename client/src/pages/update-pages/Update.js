@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios"
+import { useParams } from "react-router-dom";
 import { useAuth } from "../../AuthContext";
+import axios from "axios"
 import Carousel from "../../app/carousel/carousel";
 import EditCode from "./EditCode";
 import Metadata from "./Metadata";
@@ -9,7 +10,6 @@ import Regular from "./Regular";
 import Events from "./Events";
 import StepProgress from "../../app/step-progress/step-progress";
 import "./Update.css"
-import { useParams } from "react-router-dom";
 
 const Update = () => {
 
