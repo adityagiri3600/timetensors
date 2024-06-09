@@ -22,30 +22,5 @@ jobs:
         node-version: 20.x
         cache: 'npm'
 
-    - name: Reset to origin/master
-      run: git reset --hard origin/master
-
-    - name: Pull latest changes
-      run: git pull
-      
-    - name: Install root dependencies
-      run: npm ci
-
-    - name: Install client dependencies
-      working-directory: ./client
-      run: npm ci
-
-    - name: Build client
-      working-directory: ./client
-      run: npm run build
-      env:
-        CI: false
-
-    - name: Update port in index.js
-      run: sed -i 's/const port = [0-9]\+;/const port = 80;/' index.js
-
-    - name: Install pm2
-      run: sudo npm install -g pm2
-
-    - name: Start application with pm2
-      run: sudo pm2 start npm -- start
+    - name: Deploy
+      run: ssh -i ~/.ssh/Ubuntu_server.pem ubuntu@35.154.205.209 "cd ~/timetrack2 && bash pullstart.sh"
