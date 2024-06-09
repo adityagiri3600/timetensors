@@ -27,24 +27,21 @@ jobs:
 
     - name: Pull latest changes
       run: git pull
-
-    - name: Change directory to client
-      run: cd client
-
-    - name: Install client dependencies
-      run: npm install
-
-    - name: Build client
-      run: npm run build
-
-    - name: Return to root directory
-      run: cd ..
-
+      
     - name: Install root dependencies
       run: npm install
 
+    - name: Install client dependencies
+      run: cd ~/timetrack2/client;npm install
+
+    - name: Build client
+      run: cd ~/timetrack2/client;npm run build
+
+    - name: cd to root
+      run: cd ~/timetrack2
+
     - name: Update port in index.js
-      run: sed -i 's/const port = [0-9]\+;/const port = 80;/' index.js
+      run: sed -i 's/const port = [0-9]\+;/const port = 80;/' ~/timetrack2/index.js
 
     - name: Start application with pm2
       run: sudo pm2 start npm -- start
