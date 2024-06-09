@@ -44,5 +44,8 @@ jobs:
     - name: Update port in index.js
       run: sed -i 's/const port = [0-9]\+;/const port = 80;/' index.js
 
+    - name: Install pm2
+      run: sudo npm install -g pm2
+
     - name: Start application with pm2
       run: sudo pm2 start npm -- start
