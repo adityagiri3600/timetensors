@@ -1,6 +1,6 @@
+cd ~/timetrack2;
 git reset --hard origin/master;
 git pull;
-cd ~/timetrack2;
 cd client;
 npm install;
 npm run build;
