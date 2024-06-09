@@ -29,15 +29,17 @@ jobs:
       run: git pull
       
     - name: Install root dependencies
-      run: npm install
+      run: npm ci
 
     - name: Install client dependencies
       working-directory: ./client
-      run: npm install
+      run: npm ci
 
     - name: Build client
       working-directory: ./client
       run: npm run build
+      env:
+        CI: false
 
     - name: Update port in index.js
       run: sed -i 's/const port = [0-9]\+;/const port = 80;/' index.js
