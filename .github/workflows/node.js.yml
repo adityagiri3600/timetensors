@@ -23,4 +23,4 @@ jobs:
         cache: 'npm'
 
     - name: Deploy
-      run: ssh -i ~/.ssh/Ubuntu_server.pem ubuntu@35.154.205.209 "cd ~/timetrack2 && bash pullstart.sh"
+      run: bash pullstart.sh
