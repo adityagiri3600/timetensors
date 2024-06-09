@@ -32,13 +32,15 @@ jobs:
       run: npm install
 
     - name: Install client dependencies
-      run: npm install --prefix ~/timetrack2/client
+      working-directory: ./client
+      run: npm install
 
     - name: Build client
-      run: npm run build-client
+      working-directory: ./client
+      run: npm run build
 
     - name: Update port in index.js
-      run: sed -i 's/const port = [0-9]\+;/const port = 80;/' ~/timetrack2/index.js
+      run: sed -i 's/const port = [0-9]\+;/const port = 80;/' index.js
 
     - name: Start application with pm2
       run: sudo pm2 start npm -- start
