@@ -18,4 +18,4 @@ jobs:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: Run deployment script
-      run: ssh -o StrictHostKeyChecking=no ubuntu@35.154.205.209 'bash /home/ubuntu/timetrack2/pullstart.sh'
+      run: ssh -o StrictHostKeyChecking=no ubuntu@35.154.205.209 'bash /home/ubuntu/timetrack2/deploy.sh'
