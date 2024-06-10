@@ -7,7 +7,6 @@ import ClassList from "../app/classList/classList";
 import Datetime from "../app/datetime/datetime";
 import NotFound from "./NotFound";
 import Carousel from "../app/carousel/carousel";
-import { motion } from "framer-motion";
 import "./TimeTable.css"
 
 const TimeTable = () => {
@@ -182,17 +181,8 @@ const TimeTable = () => {
     }
 
     return (
-        <motion.div
-            initial={{
-                scale: 0.5,
-                borderRadius: "50%",
-            }}
-            animate={{
-                scale: 1,
-                borderRadius: "0",
-            }}
+        <div
             style={{
-                position: "absolute",
                 height: "100vh",
                 overflow: "hidden",
             }}
@@ -292,7 +282,7 @@ const TimeTable = () => {
                     </Carousel>
                 </div>
             )}
-        </motion.div>
+        </div>
     );
 }
 
