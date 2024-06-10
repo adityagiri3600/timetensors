@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
-import "./class.css";
 import { useNavigate } from "react-router-dom";
+import "./class.css";
 
 const Class = ({ classItem, date, handleClick, focused, events, postEvent, userHasEditCode }) => {
     let cssClassName = `class `;

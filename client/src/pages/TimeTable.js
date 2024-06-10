@@ -183,7 +183,16 @@ const TimeTable = () => {
 
     return (
         <motion.div
+            initial={{
+                scale: 0.5,
+                borderRadius: "50%",
+            }}
+            animate={{
+                scale: 1,
+                borderRadius: "0",
+            }}
             style={{
+                position: "absolute",
                 height: "100vh",
                 overflow: "hidden",
             }}
