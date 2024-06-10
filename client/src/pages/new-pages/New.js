@@ -37,15 +37,11 @@ const New = () => {
     }
     return (
         <motion.div
-            exit={{
-                height: "0px",
-                transition: {
-                    duration: 0.3,
-                }
-            }}
             style={{
+                position: "absolute",
                 height: "100vh",
                 overflow: "hidden",
+                backgroundColor: "black"
             }}
         >
             <div className="new-container">

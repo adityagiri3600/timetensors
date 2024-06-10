@@ -13,12 +13,6 @@ const LogIn = () => {
 
     return (
         <motion.div
-            exit={{
-                height: "0px",
-                transition: {
-                    duration: 0.3,
-                }
-            }}
             style={{
                 height: "100vh",
                 overflow: "hidden",
