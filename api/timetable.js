@@ -94,7 +94,7 @@ router.get('/today/:ttid', async (req, res) => {
         timetableData.classes = await Promise.all(classesPromises);
         const result = getClassesAtDate(timetableData, new Date());
         res.json({
-            justNames : result.map((item) => item.Name).join(" "),
+            justNames : result.map((item) => item.Name),
             nameWithTime : result.map((item) => item.Name + " " + item.Start + " - " + item.End),
             detailed : result[0].__parentArray
         });
