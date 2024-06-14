@@ -41,7 +41,8 @@ const New = () => {
                 position: "absolute",
                 height: "100vh",
                 overflow: "hidden",
-                backgroundColor: "black"
+                backgroundColor: "black",
+                width: "100vw",
             }}
         >
             <div className="new-container">
