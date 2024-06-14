@@ -13,14 +13,15 @@ const Home = () => {
         const fetchTimetables = async () => {
             let recentlyViewedIds = userData?.recentlyViewed;
             if (recentlyViewedIds) {
-                const recentlyViewedTimetables = await Promise.all(recentlyViewedIds.map(id => getTimetable(id)));
+                const recentlyViewedTimetables = await Promise.all(
+                    recentlyViewedIds.map((id) => getTimetable(id))
+                );
                 setRecentlyViewed(recentlyViewedTimetables.reverse());
             }
         };
 
         fetchTimetables();
     }, [userData]);
-
 
     return (
         <motion.div
@@ -35,16 +36,40 @@ const Home = () => {
                     height: "100vh",
                 }}
             >
-                <div style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    paddingTop: "20px",
-                }}>
-                    <img src="/TimeTrack.svg" alt="logo" style={{
-                        height: "2rem"
-                    }}></img>
-                    {isLoggedIn ?
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        paddingTop: "20px",
+                    }}
+                >
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                        }}
+                    >
+                        <img
+                            src="/TimeTrack.svg"
+                            alt="logo"
+                            style={{
+                                height: "2rem",
+                            }}
+                        ></img>
+                        <p
+                            style={{
+                                color: "#FFFFFFAA",
+                                margin: "0",
+                                fontSize: "0.8rem",
+                                textAlign: "center",
+                            }}
+                        >
+                            pre-release 1.0.0-alpha
+                        </p>
+                    </div>
+                    {isLoggedIn ? (
                         <>
                             <p>{userData.username}</p>
                             <button
@@ -62,7 +87,7 @@ const Home = () => {
                                 Log out
                             </button>
                         </>
-                        :
+                    ) : (
                         <Link
                             to="/login"
                             className="btn-press"
@@ -75,24 +100,49 @@ const Home = () => {
                             }}
                         >
                             Log in/Sign up
-                        </Link>}
+                        </Link>
+                    )}
                 </div>
+
                 <>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", maxWidth: "600px" }}>
-                        <p className="recentlHeading">Recent</p>
-                        <Link type="submit" className="newTimeTable btn-press" to="/new" style={{
+                    <div
+                        style={{
                             display: "flex",
+                            justifyContent: "space-between",
                             alignItems: "center",
-                        }}>
-                            <img src="/plus.svg" style={{ width: "20px", height: "20px", marginRight: "10px" }} alt="Create New Timetable"></img>
+                            width: "100%",
+                            maxWidth: "600px",
+                        }}
+                    >
+                        <p className="recentlHeading">Recent</p>
+                        <Link
+                            type="submit"
+                            className="newTimeTable btn-press"
+                            to="/new"
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                            }}
+                        >
+                            <img
+                                src="/plus.svg"
+                                style={{
+                                    width: "20px",
+                                    height: "20px",
+                                    marginRight: "10px",
+                                }}
+                                alt="Create New Timetable"
+                            ></img>
                             new
                         </Link>
                     </div>
-                    <div style={{
-                        overflowY: "scroll",
-                        scrollbarWidth: "none",
-                        display: "flex",
-                    }}>
+                    <div
+                        style={{
+                            overflowY: "scroll",
+                            scrollbarWidth: "none",
+                            display: "flex",
+                        }}
+                    >
                         {recentlyViewed.map((timetable, index) => {
                             if (!timetable?.ttName || !timetable?.ttid) {
                                 return null;
@@ -103,20 +153,46 @@ const Home = () => {
                                     className="recentlyViewed btn-press"
                                     to={`/${timetable.ttid}`}
                                 >
-                                    <div style={{ display: "flex", alignItems: "center" }}>
-                                        <p style={{ margin: 0, textWrap: "nowrap" }}>{timetable?.ttName}</p>
-                                        <p style={{ margin: "0 0 0 10px", color: "#FFFFFFAA", fontSize: "0.8rem", }}>{timetable?.ttid}</p>
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                        }}
+                                    >
+                                        <p
+                                            style={{
+                                                margin: 0,
+                                                textWrap: "nowrap",
+                                            }}
+                                        >
+                                            {timetable?.ttName}
+                                        </p>
+                                        <p
+                                            style={{
+                                                margin: "0 0 0 10px",
+                                                color: "#FFFFFFAA",
+                                                fontSize: "0.8rem",
+                                            }}
+                                        >
+                                            {timetable?.ttid}
+                                        </p>
                                     </div>
-                                    <p style={{ margin: 0, color: "#FFFFFFAA" }}>{timetable?.description}</p>
+                                    <p
+                                        style={{
+                                            margin: 0,
+                                            color: "#FFFFFFAA",
+                                        }}
+                                    >
+                                        {timetable?.description}
+                                    </p>
                                 </Link>
-                            )
+                            );
                         })}
                     </div>
                 </>
-
             </div>
         </motion.div>
     );
-}
+};
 
 export default Home;
