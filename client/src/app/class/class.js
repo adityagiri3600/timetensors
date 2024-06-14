@@ -11,7 +11,7 @@ const Class = ({ classItem, date, handleClick, focused, events, postEvent, ttRou
     const [footer, setFooter] = useState("buttons");
     const [event, setEvent] = useState("")
     const { userData, isLoggedIn } = useAuth();
-    let userHasEditCode = userData.editCodes.some(code => code.id === ttRoute)
+    let userHasEditCode = isLoggedIn ? userData?.editCodes?.some(code => code.id === ttRoute) : false;
     const navigate = useNavigate();
 
     const updateTime = () => {
