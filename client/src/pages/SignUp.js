@@ -61,7 +61,7 @@ const SignUp = () => {
                     });
                     console.log(response);
                     login(response.data)
-                    navigate(-1);
+                    navigate("/");
                 } catch (error) {
                     console.error(error);
                 }

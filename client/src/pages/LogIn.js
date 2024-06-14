@@ -36,7 +36,7 @@ const LogIn = () => {
                         });
                         console.log(response);
                         login(response.data);
-                        navigate(-1);
+                        navigate("/");
                     } catch (error) {
                         if (error.response.status === 404) {
                             setInvalid(true);
