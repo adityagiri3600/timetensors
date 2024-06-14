@@ -27,12 +27,6 @@ const SignUp = () => {
 
     return (
         <motion.div
-            exit={{
-                height: "0px",
-                transition: {
-                    duration: 0.3,
-                }
-            }}
             style={{
                 height: "100vh",
                 overflow: "hidden",
@@ -41,6 +35,28 @@ const SignUp = () => {
                 alignItems: "center"
             }}
         >
+            <Link to={"/"} style={{width:"100%"}}>
+                <div
+                    className="btn-press"
+                    style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "left",
+                        padding: "10px",
+                        width: "fit-content",
+                    }}
+                >
+                    <img
+                        src="/chevronleft.svg"
+                        alt="logo"
+                        style={{
+                            height: "1rem",
+                            padding: "10px",
+                        }}
+                    ></img>
+                    Home
+                </div>
+            </Link>
             <p style={{
                 textAlign: "center",
                 fontSize: "2rem",

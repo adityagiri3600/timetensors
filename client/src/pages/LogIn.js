@@ -18,14 +18,40 @@ const LogIn = () => {
                 overflow: "hidden",
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center"
+                alignItems: "center",
             }}
         >
-            <p style={{
-                textAlign: "center",
-                fontSize: "2rem",
-                padding: "10px",
-            }}>Login</p>
+            <Link to={"/"} style={{ width: "100%" }}>
+                <div
+                    className="btn-press"
+                    style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "left",
+                        padding: "10px",
+                        width: "fit-content",
+                    }}
+                >
+                    <img
+                        src="/chevronleft.svg"
+                        alt="logo"
+                        style={{
+                            height: "1rem",
+                            padding: "10px",
+                        }}
+                    ></img>
+                    Home
+                </div>
+            </Link>
+            <p
+                style={{
+                    textAlign: "center",
+                    fontSize: "2rem",
+                    padding: "10px",
+                }}
+            >
+                Login
+            </p>
             <form
                 onSubmit={async (e) => {
                     e.preventDefault();
@@ -49,7 +75,12 @@ const LogIn = () => {
                 }}
             >
                 <div>
-                    <label htmlFor="username" style={{ display: "block", marginLeft: "15px" }}>Username</label>
+                    <label
+                        htmlFor="username"
+                        style={{ display: "block", marginLeft: "15px" }}
+                    >
+                        Username
+                    </label>
                     <input
                         type="text"
                         id="username"
@@ -68,12 +99,17 @@ const LogIn = () => {
                             borderRadius: "10px",
                             fontSize: "1.3rem",
                             outline: "none",
-                            border: "1px solid #3c3c3c"
+                            border: "1px solid #3c3c3c",
                         }}
                     />
                 </div>
                 <div>
-                    <label htmlFor="password" style={{ display: "block", marginLeft: "15px" }}>Password</label>
+                    <label
+                        htmlFor="password"
+                        style={{ display: "block", marginLeft: "15px" }}
+                    >
+                        Password
+                    </label>
                     <input
                         type="password"
                         id="password"
@@ -91,26 +127,38 @@ const LogIn = () => {
                             borderRadius: "10px",
                             fontSize: "1.3rem",
                             outline: "none",
-                            border: "1px solid #3c3c3c"
+                            border: "1px solid #3c3c3c",
                         }}
                     />
                 </div>
-                <Link to="/signup" style={{
-                    textAlign: "center",
-                    color: "#ffffff80",
-                    textDecoration: "underline",
-                    padding: "10px",
-                }}>Not a user? Sign up instead</Link>
-                <div style={{
-                    display: "flex",
-                    justifyContent: "right"
-                }}>
-                    {invalid &&
-                        <p style={{
-                            color: "red",
-                            fontSize: "0.8rem",
-                            padding: "10px",
-                        }}>Invalid username or password</p>}
+                <Link
+                    to="/signup"
+                    style={{
+                        textAlign: "center",
+                        color: "#ffffff80",
+                        textDecoration: "underline",
+                        padding: "10px",
+                    }}
+                >
+                    Not a user? Sign up instead
+                </Link>
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "right",
+                    }}
+                >
+                    {invalid && (
+                        <p
+                            style={{
+                                color: "red",
+                                fontSize: "0.8rem",
+                                padding: "10px",
+                            }}
+                        >
+                            Invalid username or password
+                        </p>
+                    )}
                     <button
                         style={{
                             backgroundColor: "#159215",
@@ -122,11 +170,13 @@ const LogIn = () => {
                             margin: "10px",
                         }}
                         type="submit"
-                    >Log In</button>
+                    >
+                        Log In
+                    </button>
                 </div>
             </form>
         </motion.div>
     );
-}
+};
 
 export default LogIn;
