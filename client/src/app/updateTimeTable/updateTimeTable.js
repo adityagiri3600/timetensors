@@ -12,7 +12,7 @@ const UpdateTimeTable = ({ ttRoute, body, setEditCodeError, disabled, text }) =>
     const handleResponse = (response) => {
         if (response.status === 200) {
             console.log("Time table updated");
-            navigate(-1);
+            navigate(`/${ttRoute}`);
 
             if (isLoggedIn) {
                 updateUserData({

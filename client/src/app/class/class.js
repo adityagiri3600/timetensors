@@ -1,14 +1,17 @@
 import { React, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../AuthContext";
 import "./class.css";
 
-const Class = ({ classItem, date, handleClick, focused, events, postEvent, userHasEditCode }) => {
+const Class = ({ classItem, date, handleClick, focused, events, postEvent, ttRoute }) => {
     let cssClassName = `class `;
 
     const [currDate, setCurrDate] = useState(new Date());
     const [hour, setHour] = useState(currDate.getHours() + currDate.getMinutes() / 60 + currDate.getSeconds() / 3600);
     const [footer, setFooter] = useState("buttons");
     const [event, setEvent] = useState("")
+    const { userData, isLoggedIn } = useAuth();
+    let userHasEditCode = userData.editCodes.some(code => code.id === ttRoute)
     const navigate = useNavigate();
 
     const updateTime = () => {

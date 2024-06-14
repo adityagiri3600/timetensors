@@ -13,19 +13,27 @@ const getTimetable = async (route, setNotFound = () => {}) => {
 
 const getEditCodeFromLocalStorage = (route) => {
     if (window !== undefined) {
-        return localStorage.getItem(`${route}EditCode`);
+        const userData = JSON.parse(localStorage.getItem("userData"));
+        if (userData) {
+            const editCode = userData.editCodes.find(code => code.id === route).code;
+            if (editCode) {
+                console.log("Edit Code found in localStorage: ", editCode);
+                return editCode;
+            }
+        }
     }
 }
 
 const doesUserHaveEditCode = (ttRoute, setUserHasEditCode=()=>{}) => {
-    if (window == undefined)
-        return
-    const editCode = localStorage.getItem(`${ttRoute}EditCode`);
-    if (editCode) {
-        setUserHasEditCode(true);
-        console.log("User has edit code for this timetable\nEdit Code: ", editCode);
+    if (window !== undefined) {
+        const userData = JSON.parse(localStorage.getItem("userData"));
+        if (userData) {
+            const userHasEditCode = userData.editCodes.some(code => code.id === ttRoute);
+            setUserHasEditCode(userHasEditCode);
+            return userHasEditCode;
+        }
     }
-    return true;
+    return false;
 }
 
 const getClassDetails = (classObjects, classItem) => {

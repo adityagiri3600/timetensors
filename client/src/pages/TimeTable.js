@@ -16,14 +16,12 @@ const TimeTable = () => {
     const [data, setData] = useState([]);
     const [classes, setClasses] = useState([])
     const [notFound, setNotFound] = useState(false);
-    const [userHasEditCode, setUserHasEditCode] = useState(false);
 
     const fetchData = async () => {
         try {
             const response = await axios.get(`/api/timetable/${ttRoute}`);
             setData(response.data);
             setClasses(response.data.classes);
-            doesUserHaveEditCode(ttRoute, setUserHasEditCode);
             console.log(response)
         } catch (error) {
             setNotFound(true);
@@ -276,7 +274,7 @@ const TimeTable = () => {
                                 }
                                 events={data.events}
                                 postEvent={postEvent}
-                                userHasEditCode={userHasEditCode}
+                                ttRoute={ttRoute}
                             />
                         ))}
                     </Carousel>
