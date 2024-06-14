@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+import Select from "react-select";
 import "./newClass.css";
 
 const NewClass = ({ classes, setClasses, classObjects, index, Day }) => {
@@ -11,21 +12,51 @@ const NewClass = ({ classes, setClasses, classObjects, index, Day }) => {
 
     return (
         <div className="newClass">
-            <select
+            <Select
+                placeholder="Select Class"
+                options={classObjects.map(c => ({ value: c.classid, label: c.Name }))}
                 onChange={(e) => {
-                    setClassid(e.target.value)
+                    setClassid(e.value)
                     setClasses(
                         classes.map((c, i) =>
-                            i === index ? { ...c, classid: e.target.value } : c
+                            i === index ? { ...c, classid: e.value } : c
                         )
                     )
                 }}
-                value={classid}
-            >
-                {classObjects.map((c, i) =>
-                    <option key={c.classid} value={c.classid}>{c.Name}</option>
-                )}
-            </select>
+                styles={{
+                    control: (styles) => ({
+                        ...styles,
+                        backgroundColor: "transparent",
+                        border: "none",
+                    }),
+                    menu: (styles) => ({
+                        ...styles,
+                        backgroundColor: "black"
+                    }),
+                    option: (styles, { isFocused }) => {
+                        return {
+                            ...styles,
+                            backgroundColor: isFocused
+                                ? "#2b7df8"
+                                : "transparent",
+                            color: "white",
+                        };
+                    },
+                    container: (styles) => ({
+                        ...styles,
+                        width: "100%",
+                    }),
+                    singleValue: (styles) => ({
+                        ...styles,
+                        width: "100px",
+                        color: "white",
+                    }),
+                    input: (styles) => ({
+                        ...styles,
+                        color: "white",
+                    }),
+                }}
+            />
             <div style={{
                 display: "flex",
                 justifyContent: "space-between",

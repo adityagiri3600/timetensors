@@ -6,7 +6,6 @@
     background: rgba(255, 255, 255, 0.13);
     margin-left: 10px;
     margin-right: 10px;
-    overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.347);
     border-bottom: none;
     border-top: none;
@@ -30,7 +29,6 @@
     flex-direction: column;
 }
 .newClass input[type="text"]{
-    max-width: 50%;
     background-color: #00000000;
     border: none;
     border-radius: 6px;
@@ -72,13 +70,11 @@
     border: none;
     padding: 2px;
     margin-left: 5px;
-    background: rgb(255, 55, 55);
-    box-shadow: -10px 0 30px 10px rgba(0, 0, 0, 0.45);
+    background: transparent;
 }
 img.deleteIcon{
     width: 30px;
     height: 30px;
-    background: rgb(255, 55, 55);
 }
 
 select{
