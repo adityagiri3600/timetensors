@@ -14,6 +14,7 @@ const NewClass = ({ classes, setClasses, classObjects, index, Day }) => {
         <div className="newClass">
             <Select
                 placeholder="Select Class"
+                value={classObjects.filter(c => c.classid === classid).map(c => ({ value: c.classid, label: c.Name }))}
                 options={classObjects.map(c => ({ value: c.classid, label: c.Name }))}
                 onChange={(e) => {
                     setClassid(e.value)
