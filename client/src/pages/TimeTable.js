@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../AuthContext";
 import { getClassDetails, getEditCodeFromLocalStorage } from "../app/timetrackFunctions";
@@ -194,17 +194,6 @@ const TimeTable = () => {
                         justifyContent: "center",
                         paddingTop: "15px",
                     }}>
-                        <div style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                        }}
-                            onClick={() => navigate("/")}
-                        >
-                            <img src="/TimeTrack.svg" alt="logo" style={{
-                                height: "3rem"
-                            }}></img>
-                        </div>
                         <button
                             onClick={(e) => {
                                 fetchData();
@@ -226,6 +215,26 @@ const TimeTable = () => {
                                 height: "20px",
                             }} />
                         </button>
+                        <div style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
+                            onClick={() => navigate("/")}
+                        >
+                            <img src="/TimeTrack.svg" alt="logo" style={{
+                                height: "3rem"
+                            }}></img>
+                        </div>
+                        <Link to={`/info/${ttRoute}`} style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}>
+                            <div className="btn-press">
+                                <img src="/infoIcon.svg" alt="Info" className="info-icon" />
+                            </div>
+                        </Link>
                     </div>
                     <div className="date-edit-container">
                         <Datetime date={date} />

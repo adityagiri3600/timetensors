@@ -14,6 +14,7 @@ import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
 import ProtectedRoute from './ProtectedRoute';
 import { AnimatePresence } from 'framer-motion';
+import TimeTableInfo from './pages/TimeTableInfo';
 
 const AnimatedRoutes = () => {
     const location = useLocation();
@@ -32,6 +33,7 @@ const AnimatedRoutes = () => {
                 <Route path='/update/extraclass/:ttRoute' element={<AddExtraClasses />} />
                 <Route path='/update/:ttRoute' element={<ProtectedRoute><Update /></ProtectedRoute>} />
                 <Route path='/class/:classRoute' element={<ClassObject />} />
+                <Route path='/info/:ttRoute' element={<TimeTableInfo />} />
                 <Route path=':ttRoute' element={<TimeTable />} />
             </Routes>
         </AnimatePresence>
