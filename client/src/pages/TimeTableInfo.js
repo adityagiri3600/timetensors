@@ -16,8 +16,10 @@ const TimeTableInfo = () => {
     };
     useEffect(() => {
         fetchTimetable();
-        if(isLoggedIn){
-            setEditCode(userData.editCodes.find((code) => code.id === ttRoute).code);
+        if (isLoggedIn) {
+            setEditCode(
+                userData.editCodes.find((code) => code.id === ttRoute).code
+            );
         }
     }, []);
 
@@ -33,7 +35,7 @@ const TimeTableInfo = () => {
         } catch (err) {
             console.error(err);
         }
-    }
+    };
 
     return (
         <div
@@ -52,10 +54,36 @@ const TimeTableInfo = () => {
             </p>
             <p style={{ color: "#ffffffaa", margin: "0 0 0 20px" }}>
                 created by{" "}
-                <span style={{ color: "#2b7df8" }}>{data?.creator}</span>
+                <span style={{ color: "#2b7df8" }}>
+                    {data?.creator || "unknown"}
+                </span>
             </p>
             <p>{data?.description}</p>
-            { editCode && <button onClick={()=>deleteTimeTable()}>Delete TimeTable</button> }
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "right",
+                }}
+            >
+                {editCode && (
+                    <button
+                        style={{
+                            padding: "10px",
+                            backgroundColor: "#ff0000",
+                            fontWeight: "bold",
+                            color: "white",
+                            fontSize: "1rem",
+                            border: "none",
+                            borderRadius: "5px",
+                            cursor: "pointer",
+                            right: "20px",
+                        }}
+                        onClick={() => deleteTimeTable()}
+                    >
+                        Delete TimeTable
+                    </button>
+                )}
+            </div>
             {deleted && <p>TimeTable Deleted Successfully</p>}
         </div>
     );

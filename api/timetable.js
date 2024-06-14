@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { response } = require("express");
 let timetable = require("../models/timetable.model");
 let classObject = require("../models/classObject.model");
+let log = require("../models/log.model");
 
 router.get("/today/:ttid", async (req, res) => {
     const getClassDetails = (classObjects, classItem) => {
@@ -123,7 +124,8 @@ router.get("/:ttid", async (req, res) => {
         if (!tt) {
             return res.status(404).json("Timetable not found");
         }
-
+        const newLog = new log({ action: "view", ttid: ttid, date: new Date(), data: "" });
+        await newLog.save();     
         const timetableData = { ...tt._doc };
         delete timetableData.editCode;
 
