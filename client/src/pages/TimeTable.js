@@ -36,15 +36,6 @@ const TimeTable = () => {
     useEffect(() => {
         if (isLoggedIn) {
             updateUserData({ recentlyViewed: [...userData.recentlyViewed?.filter(x => x !== ttRoute), ttRoute] });
-            axios.post(`/api/user/update/${userData.username}`,
-                userData,
-                {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }
-            )
-                .catch((e) => console.error(e))
         }
     }, [isLoggedIn])
 

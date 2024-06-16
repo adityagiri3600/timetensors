@@ -1,18 +1,29 @@
 const router = require('express').Router();
-const user = require('../models/user.model');
+const User = require('../models/user.model');
+const authMiddleware = require('./authMiddleware');
 
-router.post('/update/:username', async (req, res) => {
+router.get('/', authMiddleware, async (req, res) => {
     try {
-        const { username, password } = req.body;
-        const userToUpdate = await user.findOne({ username, password });
-        if (!userToUpdate) {
-            return res.status(404).json('Invalid username or password');
+        const usr = await User.findById(req.user.id);
+        if (!usr) {
+            return res.status(404).json({ message: 'User not found' });
         }
-        await user.updateOne({ username, password }, req.body);
+        res.json(usr);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+});
 
-        res.status(200).json('User updated successfully');
-    } catch (err) {
-        res.status(400).json('Error: ' + err.message);
+router.put("/update", authMiddleware, async (req, res) => {
+    try {
+        const updates = req.body;
+        const user = await User.findByIdAndUpdate(req.user.id, updates, { new: true });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
     }
 });
 
