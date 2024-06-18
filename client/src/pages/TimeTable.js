@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../AuthContext";
@@ -7,6 +7,7 @@ import ClassList from "../app/classList/classList";
 import Datetime from "../app/datetime/datetime";
 import NotFound from "./NotFound";
 import Carousel from "../app/carousel/carousel";
+import debounce from 'lodash.debounce';
 import "./TimeTable.css"
 
 const TimeTable = () => {
@@ -28,10 +29,20 @@ const TimeTable = () => {
             console.error('Error fetching data:', error);
         }
     };
+    const fetchWithView = async () => {
+        fetchData();
+        await axios.post(`/api/timetable/view/${ttRoute}`);
+    }
+
+    const debouncedFetchData = useCallback(debounce(fetchWithView, 1000), []);
 
     useEffect(() => {
-        fetchData();
-    }, []);
+        debouncedFetchData();
+
+        return () => {
+            debouncedFetchData.cancel();
+        };
+    }, [debouncedFetchData]);
 
     useEffect(() => {
         if (isLoggedIn) {

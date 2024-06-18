@@ -158,6 +158,20 @@ router.get("/:ttid", async (req, res) => {
         res.status(400).json("Error: " + err.message);
     }
 });
+router.post("/view/:ttid", async (req, res) => {
+    const { ttid } = req.params;
+    try {
+        const tt = await timetable.findOne({ ttid });
+        if (!tt) {
+            return res.status(404).json("Timetable not found");
+        }
+        tt.views += 1;
+        await tt.save();
+        res.json("View count updated");
+    } catch (err) {
+        res.status(400).json("Error: " + err.message);
+    }
+});
 
 router.post("/new", async (req, res) => {
     try {

@@ -10,12 +10,26 @@ const TimeTableInfo = () => {
     const [editCode, setEditCode] = useState("");
     const [data, setData] = useState({});
     const [deleted, setDeleted] = useState(false);
+
     const fetchTimetable = async () => {
         setData(await getTimetable(ttRoute));
         console.log(data);
     };
+
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
     useEffect(() => {
-        fetchTimetable();
+        debounce(fetchTimetable(), 1000);
         if (isLoggedIn) {
             setEditCode(
                 userData?.editCodes?.find((code) => code?.id === ttRoute)?.code
@@ -59,6 +73,8 @@ const TimeTableInfo = () => {
                 </span>
             </p>
             <p>{data?.description}</p>
+            <p>views: <span style={{ color: "#2b7df8" }}>{data?.views}</span></p>
+
             <div
                 style={{
                     display: "flex",

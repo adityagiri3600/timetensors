@@ -33,6 +33,7 @@ const timetableSchema = new mongoose.Schema({
         Start: String,
         End: String
     }],
+    views: Number,
 });
 
 const timetable = mongoose.model('TimeTable', timetableSchema);
