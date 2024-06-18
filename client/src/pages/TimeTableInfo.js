@@ -18,7 +18,7 @@ const TimeTableInfo = () => {
         fetchTimetable();
         if (isLoggedIn) {
             setEditCode(
-                userData.editCodes.find((code) => code.id === ttRoute).code
+                userData?.editCodes?.find((code) => code?.id === ttRoute)?.code
             );
         }
     }, []);
