@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
+const https = require('https');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const app = express();
@@ -26,6 +27,23 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/client/build/index.html'));
 });
 
-app.listen(port, () => {
+const privateKey = fs.readFileSync('ssl/private.key.pem', 'utf8');
+const publicKey = fs.readFileSync('ssl/public.key.pem', 'utf8');
+const domainCert = fs.readFileSync('ssl/domain.cert.pem', 'utf8');
+const intermediateCert = fs.readFileSync('ssl/intermediate.cert.pem', 'utf8');
+
+const credentials = {
+    key: privateKey,
+    cert: domainCert,
+    ca: intermediateCert
+};
+
+const httpsServer = https.createServer(credentials, app);
+
+httpsServer.listen(8433, () => {
     console.log(`Server is running on port ${port}`);
 });
+
+// app.listen(port, () => {
+//     console.log(`Server is running on port ${port}`);
+// });
