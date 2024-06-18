@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { getTimetable } from "../app/timetrackFunctions";
 import { useAuth } from "../AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { motion } from "framer-motion";
 import "./Home.css";
 
 const Home = () => {
-    const { isLoggedIn, logout, userData } = useAuth();
+    const { isLoggedIn, login, logout, userData } = useAuth();
     const [recentlyViewed, setRecentlyViewed] = useState([]);
+    const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchTimetables = async () => {
@@ -22,6 +25,26 @@ const Home = () => {
 
         fetchTimetables();
     }, [userData]);
+
+    useEffect(() => {
+        const query = new URLSearchParams(location.search);
+        const token = query.get("token");
+        if (token) {
+            localStorage.setItem("token", token);
+            axios
+                .get("/api/user", {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+                .then((res) => {
+                    login(res.data);
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        }
+    }, [location.search]);
 
     return (
         <motion.div
@@ -73,7 +96,10 @@ const Home = () => {
                         <>
                             <p>{userData.username}</p>
                             <button
-                                onClick={logout}
+                                onClick={() => {
+                                    logout();
+                                    navigate("/");
+                                }}
                                 className="btn-press"
                                 style={{
                                     background: "none",
@@ -89,7 +115,12 @@ const Home = () => {
                         </>
                     ) : (
                         <Link
-                            to="/login"
+                            onClick={() => {
+                                window.location.href =
+                                    process.env.NODE_ENV === "development"
+                                        ? "http://localhost:5000/auth/google"
+                                        : "/auth/google";
+                            }}
                             className="btn-press"
                             style={{
                                 background: "none",

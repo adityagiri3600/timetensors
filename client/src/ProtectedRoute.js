@@ -1,5 +1,4 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
 const ProtectedRoute = ({ children }) => {
@@ -10,7 +9,11 @@ const ProtectedRoute = ({ children }) => {
     }
 
     if (!isLoggedIn) {
-        return <Navigate to="/login" />;
+        window.location.href =
+            process.env.NODE_ENV === "development"
+                ? "http://localhost:5000/auth/google"
+                : "/auth/google";
+        return null;
     }
 
     return children;

@@ -10,8 +10,6 @@ import Metadata from './pages/update-pages/Metadata';
 import Regular from './pages/update-pages/Regular';
 import Events from './pages/update-pages/Events';
 import AddExtraClasses from './pages/update-pages/AddExtraClasses';
-import LogIn from './pages/LogIn';
-import SignUp from './pages/SignUp';
 import ProtectedRoute from './ProtectedRoute';
 import { AnimatePresence } from 'framer-motion';
 import TimeTableInfo from './pages/TimeTableInfo';
@@ -23,8 +21,6 @@ const AnimatedRoutes = () => {
         <AnimatePresence>
             <Routes location={location} key={location.key}>
                 <Route path='/' element={<Home />} />
-                <Route path='/login' element={<LogIn />} />
-                <Route path='/signup' element={<SignUp />} />
                 <Route path='/new' element={<ProtectedRoute><New /></ProtectedRoute>} />
                 <Route path='/newupdate/:ttRoute' element={<NewUpdate />} />
                 <Route path='/update/metadata/:ttRoute' element={<Metadata />} />
