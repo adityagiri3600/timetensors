@@ -40,7 +40,7 @@ const credentials = {
 
 const httpsServer = https.createServer(credentials, app);
 
-httpsServer.listen(8433, () => {
+httpsServer.listen(433, () => {
     console.log(`Server is running on port ${port}`);
 });
 
