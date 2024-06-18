@@ -9,7 +9,7 @@ const session = require('express-session');
 const dotenv = require('dotenv');
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 80;
+const port = 5000;
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, "client/build")));
@@ -17,7 +17,7 @@ app.use(express.json());
 
 app.use(
     session({
-        secret: 'your_secret_key',
+        secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: true,
         cookie: { secure: false }
@@ -54,7 +54,7 @@ const credentials = {
 };
 
 const httpsServer = https.createServer(credentials, app);
-httpsServer.listen(8443, () => {
+httpsServer.listen(443, () => {
     console.log("HTTPS Server running on port 443");
 });
 
