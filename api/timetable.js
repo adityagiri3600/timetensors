@@ -165,6 +165,7 @@ router.post("/view/:ttid", async (req, res) => {
         if (!tt) {
             return res.status(404).json("Timetable not found");
         }
+        if (!tt.views) tt.views = 0;
         tt.views += 1;
         await tt.save();
         res.json("View count updated");
