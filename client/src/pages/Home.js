@@ -4,7 +4,7 @@ import { useAuth } from "../AuthContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
-import { IconTablePlus } from "@tabler/icons-react";
+import { IconHistory, IconTablePlus } from "@tabler/icons-react";
 import "./Home.css";
 
 const Home = () => {

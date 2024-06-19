@@ -175,10 +175,10 @@ const Classes = ({ classObjects, setClassObjects, disabled }) => {
             </div>
             <div
                 style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(3, 1fr)",
-                    gridGap: "10px",
-                    padding: "10px",
+                    display: "flex",
+                    maxWidth: "90%",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
                 }}
             >
                 {classObjects?.map((classObject, index) => (
@@ -186,6 +186,7 @@ const Classes = ({ classObjects, setClassObjects, disabled }) => {
                         key={index}
                         style={{
                             padding: "10px",
+                            margin: "5px",
                             position: "relative",
                             cursor: "pointer",
                             WebkitTapHighlightColor: "transparent",

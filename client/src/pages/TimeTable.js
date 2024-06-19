@@ -249,7 +249,7 @@ const TimeTable = () => {
                                 navigate(`/update/${ttRoute}`);
                             }, 200);
                         }}>
-                            <IconPencil/>
+                            <IconPencil className="edit-icon" />
                             <p style={{marginLeft:"5px"}}>Edit</p>
                         </div>
                     </div>

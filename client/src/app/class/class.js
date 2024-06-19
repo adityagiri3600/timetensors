@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../AuthContext";
 import "./class.css";
+import { IconCalendarEvent, IconListDetails } from "@tabler/icons-react";
 
 const Class = ({ classItem, date, handleClick, focused, events, postEvent, ttRoute }) => {
     let cssClassName = `class `;
@@ -95,8 +96,22 @@ const Class = ({ classItem, date, handleClick, focused, events, postEvent, ttRou
                 }}>
                     {footer === "buttons" ? (
                         <>
-                            {userHasEditCode && <button className="btn-press" onClick={() => setFooter("add event")}>Add Event</button>}
-                            <button className="btn-press" onClick={() => navigate(`/class/${classItem.classid}`)}>View Class</button>
+                            {userHasEditCode && <button className="btn-press" onClick={() => setFooter("add event")} style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center"
+                            }}>
+                                <IconCalendarEvent size={20} />
+                                <p style={{ margin: "0 0 0 5px" }}>Add Event</p>
+                            </button>}
+                            <button className="btn-press" onClick={() => navigate(`/class/${classItem.classid}`)} style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center"
+                            }}>
+                                <IconListDetails size={20} />
+                                <p style={{ margin: "0 0 0 5px" }}>Details</p>
+                            </button>
                         </>
                     ) : footer === "add event" ? (
                         <>

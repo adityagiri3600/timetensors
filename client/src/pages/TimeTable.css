@@ -115,11 +115,6 @@ body {
   font-family: QuicksandRegular, "Roboto Medium", sans-serif;
 }
 
-.edit-icon {
-  width: 20px;
-  margin: 10px;
-}
-
 .rotate {
   animation: rotation 200ms infinite linear;
 }
