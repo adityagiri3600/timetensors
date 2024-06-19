@@ -20,12 +20,14 @@ export const AuthProvider = ({ children }) => {
             }).then(response => {
                 setIsLoggedIn(true);
                 setUserData(response.data);
+                setContextLoaded(true);
             }).catch(error => {
                 console.error('Error fetching user data:', error);
                 localStorage.removeItem('token');
             });
+        }else{
+            setContextLoaded(true);
         }
-        setContextLoaded(true);
     }, []);
 
     const login = (data) => {
