@@ -4,7 +4,7 @@ import { useAuth } from "../AuthContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
-import { IconHistory, IconTablePlus } from "@tabler/icons-react";
+import { IconTablePlus } from "@tabler/icons-react";
 import "./Home.css";
 
 const Home = () => {
@@ -181,7 +181,7 @@ const Home = () => {
                                         maxWidth: "300px",
                                     }}
                                 >
-                                    <div className="textFade">
+                                    <motion.div className="textFade" initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { duration: 0.5 } }}>
                                         <div
                                             style={{
                                                 display: "flex",
@@ -214,7 +214,7 @@ const Home = () => {
                                         >
                                             {timetable?.description}
                                         </p>
-                                    </div>
+                                    </motion.div>
                                 </Link>
                             );
                         })}
