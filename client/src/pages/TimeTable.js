@@ -29,20 +29,20 @@ const TimeTable = () => {
             console.error('Error fetching data:', error);
         }
     };
-    const fetchWithView = async () => {
-        fetchData();
+    const markView = async () => {
         await axios.post(`/api/timetable/view/${ttRoute}`);
     }
 
-    const debouncedFetchData = useCallback(debounce(fetchWithView, 1000), []);
+    const debouncedMarkView = useCallback(debounce(markView, 1000), []);
 
     useEffect(() => {
-        debouncedFetchData();
+        fetchData();
+        debouncedMarkView();
 
         return () => {
-            debouncedFetchData.cancel();
+            debouncedMarkView.cancel();
         };
-    }, [debouncedFetchData]);
+    }, [debouncedMarkView]);
 
     useEffect(() => {
         if (isLoggedIn) {

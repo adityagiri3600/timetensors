@@ -73,7 +73,7 @@ const TimeTableInfo = () => {
                 </span>
             </p>
             <p>{data?.description}</p>
-            <p>views: <span style={{ color: "#2b7df8" }}>{data?.views}</span></p>
+            <p>views: <span style={{ color: "#2b7df8" }}>{data?.views || "0"}</span></p>
 
             <div
                 style={{
