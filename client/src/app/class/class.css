@@ -67,7 +67,8 @@
 
 .focused {
     border: 1px solid #b0d0ff93;
-    width: 110%;
+    transform: scale(1.1);
+    backdrop-filter: none;
 }
 
 .classButtons{
