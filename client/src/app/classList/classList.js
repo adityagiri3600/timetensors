@@ -28,15 +28,15 @@ const ClassList = ({ todaysClasses, date, position, postEvent, events, ttRoute }
             transition: {
                 staggerChildren: 0.2
             }
-        }
+        },
     };
     
     const itemVariants = {
-        hidden: { opacity: 0, x: 100 },
+        hidden: { opacity: 0, x: 40 },
         visible: { opacity: 1, x: 0 ,
             transition: {
                 type: 'spring',
-                stiffness: 30,
+                stiffness: 100,
                 damping: 10
             }
         }

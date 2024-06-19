@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../AuthContext";
 import "./class.css";
 import { IconCalendarEvent, IconListDetails } from "@tabler/icons-react";
+import { determineTextColor } from "../timetrackFunctions";
 
 const Class = ({ classItem, date, handleClick, focused, events, postEvent, ttRoute }) => {
     let cssClassName = `class `;
