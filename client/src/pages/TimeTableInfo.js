@@ -3,6 +3,7 @@ import { getTimetable } from "../app/timetrackFunctions";
 import { useEffect, useState } from "react";
 import { useAuth } from "../AuthContext";
 import axios from "axios";
+import { IconChecks, IconEye, IconSkull } from "@tabler/icons-react";
 
 const TimeTableInfo = () => {
     const { ttRoute } = useParams();
@@ -73,7 +74,10 @@ const TimeTableInfo = () => {
                 </span>
             </p>
             <p>{data?.description}</p>
-            <p>views: <span style={{ color: "#2b7df8" }}>{data?.views || "0"}</span></p>
+            <div style={{display:"flex", alignItems:"center"}}>
+                <IconEye/>
+                <p style={{marginLeft:"5px"}}>views: <span style={{ color: "#2b7df8" }}>{data?.views || "0"}</span></p>
+            </div>
 
             <div
                 style={{
@@ -93,14 +97,26 @@ const TimeTableInfo = () => {
                             borderRadius: "5px",
                             cursor: "pointer",
                             right: "20px",
+                            display: "flex",
+                            alignItems: "center",
                         }}
                         onClick={() => deleteTimeTable()}
                     >
-                        Delete TimeTable
+                        {!deleted
+                            ?(<>
+                                <IconSkull/>
+                                &nbsp;
+                                Delete TimeTable
+                            </>)
+                            :(<>
+                                <IconChecks/>
+                                &nbsp;
+                                Deleted
+                            </>)
+                        }
                     </button>
                 )}
             </div>
-            {deleted && <p>TimeTable Deleted Successfully</p>}
         </div>
     );
 };

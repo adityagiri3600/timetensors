@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NewClass from "../../app/newClass/newClass";
 import "./timetableCreator.css";
+import { IconSquarePlus2 } from "@tabler/icons-react";
 
 const TimetableCreator = ({ classes, setClasses, classObjects, classesAtSpecificDate, setNewClassesAtSpecificDate, editingSpecificDate, setEditingSpecificDate }) => {
 
@@ -95,7 +96,13 @@ const TimetableCreator = ({ classes, setClasses, classObjects, classesAtSpecific
                         />
                     ) : null
                 )}
-                <button onClick={addClass} className="newClass-btn">
+                <button onClick={addClass} className="newClass-btn btn-press" style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}>
+                    <IconSquarePlus2 stroke={1}/>
+                    &nbsp;
                     Add Class
                 </button>
             </div>

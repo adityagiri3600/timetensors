@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import Select from "react-select";
 import "./newClass.css";
+import { IconTrash } from "@tabler/icons-react";
 
 const NewClass = ({ classes, setClasses, classObjects, index, Day }) => {
 
@@ -90,9 +91,9 @@ const NewClass = ({ classes, setClasses, classObjects, index, Day }) => {
                         className="endTimeField"
                     />
                 </div>
-                <button onClick={deleteClass} className="deleteClass-btn">
-                    <img src="/delete.svg" alt="delete" className="deleteIcon" />
-                </button>
+                <div onClick={deleteClass} className="deleteClass-btn">
+                    <IconTrash size={30} />
+                </div>
             </div>
         </div>
     );

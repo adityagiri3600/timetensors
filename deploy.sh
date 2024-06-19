@@ -1,5 +1,6 @@
 cd ~/timetrack2;
 git reset --hard origin/master;
+sudo systemctl start mongod;
 git pull;
 cd client;
 npm install;

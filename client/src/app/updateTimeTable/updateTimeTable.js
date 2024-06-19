@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useAuth } from '../../AuthContext';
 import { useNavigate } from 'react-router-dom';
 import './updateTimeTable.css';
+import { IconChecks } from '@tabler/icons-react';
 
 const UpdateTimeTable = ({ ttRoute, body, setEditCodeError, disabled, text }) => {
     
@@ -61,6 +62,8 @@ const UpdateTimeTable = ({ ttRoute, body, setEditCodeError, disabled, text }) =>
     return (
         <button onClick={handleClick} className='updateTimeTable-btn btn-press' disabled={disabled} tabIndex={-1}>
             {text || 'Update'}
+            &nbsp;
+            <IconChecks stroke={2} size={20} />
         </button>
     );
 };

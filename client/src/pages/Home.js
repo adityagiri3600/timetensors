@@ -179,7 +179,6 @@ const Home = () => {
                                     style={{
                                         maxHeight: "100px",
                                         maxWidth: "300px",
-                                        overflow: "hidden",
                                     }}
                                 >
                                     <div className="textFade">

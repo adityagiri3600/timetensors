@@ -2,10 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import { useAuth } from '../../AuthContext';
 import './newTimeTable.css';
+import { useNavigate } from 'react-router-dom';
 
-const NewTimeTable = ({ body, setTtRoute, setCreated, disabled }) => {
+const NewTimeTable = ({ body, setTtRoute, disabled }) => {
 
   const { isLoggedIn, userData, updateUserData } = useAuth();
+  const navigate = useNavigate();
 
   const handleResponse = (response) => {
     if (response.status === 200) {
@@ -17,7 +19,7 @@ const NewTimeTable = ({ body, setTtRoute, setCreated, disabled }) => {
         createdTimetables: [...userData.createdTimetables || [], response.data.ttRoute]
       });
       setTtRoute(response.data.ttRoute);
-      setCreated(true);
+      navigate(`/${response.data.ttRoute}`);
     }
   };
 

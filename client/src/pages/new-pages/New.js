@@ -20,7 +20,6 @@ const New = () => {
     const [description, setDescription] = useState("");
     const [editCode, setEditCode] = useState("");
     const [ttRoute, setTtRoute] = useState("");
-    const [created, setCreated] = useState(false);
 
     const [classes, setClasses] = useState([]);
     const [classObjects, setClassObjects] = useState([]);
@@ -46,10 +45,6 @@ const New = () => {
             }}
         >
             <div className="new-container">
-                {created ? (
-                    <Created ttName={ttName} ttRoute={ttRoute} />
-                ) :
-                    <>
                         <h1 className="step-heading"> <span className="step-count">Step {step + 1}:</span> {steps[step]}</h1>
                         <p style={{
                             margin: "0 10px",
@@ -80,12 +75,9 @@ const New = () => {
                                 setClasses={setClasses}
                                 classObjects={classObjects}
                                 body={{ ttName, description, classes, classObjects, editCode }}
-                                setCreated={setCreated}
                                 setTtRoute={setTtRoute}
                             />
                         </Carousel>
-                    </>
-                }
             </div>
         </motion.div>
     )

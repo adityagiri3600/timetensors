@@ -220,8 +220,8 @@ const Classes = ({ classObjects, setClassObjects, disabled }) => {
                                 }}
                             />
                         </button>
-                        <p style={{ textAlign: "center" }}>
-                            {classObject.Name}
+                        <p style={{ textAlign: "center"}}>
+                            {classObject.Name.substring(0, 30)}
                         </p>
                     </div>
                 ))}
