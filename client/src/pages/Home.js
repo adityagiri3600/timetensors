@@ -4,6 +4,7 @@ import { useAuth } from "../AuthContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { IconTablePlus } from "@tabler/icons-react";
 import "./Home.css";
 
 const Home = () => {
@@ -155,16 +156,8 @@ const Home = () => {
                                 alignItems: "center",
                             }}
                         >
-                            <img
-                                src="/plus.svg"
-                                style={{
-                                    width: "20px",
-                                    height: "20px",
-                                    marginRight: "10px",
-                                }}
-                                alt="Create New Timetable"
-                            ></img>
-                            new
+                            <IconTablePlus size={20} stroke={1} />
+                            <p style={{ margin: "0 0 0 5px" }}>new</p>
                         </Link>
                     </div>
                     <div
@@ -183,39 +176,46 @@ const Home = () => {
                                     key={index}
                                     className="recentlyViewed btn-press"
                                     to={`/${timetable.ttid}`}
+                                    style={{
+                                        maxHeight: "100px",
+                                        maxWidth: "300px",
+                                        overflow: "hidden",
+                                    }}
                                 >
-                                    <div
-                                        style={{
-                                            display: "flex",
-                                            alignItems: "center",
-                                        }}
-                                    >
+                                    <div className="textFade">
+                                        <div
+                                            style={{
+                                                display: "flex",
+                                                alignItems: "center",
+                                            }}
+                                        >
+                                            <p
+                                                style={{
+                                                    margin: 0,
+                                                    textWrap: "nowrap",
+                                                }}
+                                            >
+                                                {timetable?.ttName}
+                                            </p>
+                                            <p
+                                                style={{
+                                                    margin: "0 0 0 10px",
+                                                    color: "#FFFFFFAA",
+                                                    fontSize: "0.8rem",
+                                                }}
+                                            >
+                                                {timetable?.ttid}
+                                            </p>
+                                        </div>
                                         <p
                                             style={{
                                                 margin: 0,
-                                                textWrap: "nowrap",
-                                            }}
-                                        >
-                                            {timetable?.ttName}
-                                        </p>
-                                        <p
-                                            style={{
-                                                margin: "0 0 0 10px",
                                                 color: "#FFFFFFAA",
-                                                fontSize: "0.8rem",
                                             }}
                                         >
-                                            {timetable?.ttid}
+                                            {timetable?.description}
                                         </p>
                                     </div>
-                                    <p
-                                        style={{
-                                            margin: 0,
-                                            color: "#FFFFFFAA",
-                                        }}
-                                    >
-                                        {timetable?.description}
-                                    </p>
                                 </Link>
                             );
                         })}

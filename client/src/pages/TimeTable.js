@@ -8,6 +8,7 @@ import Datetime from "../app/datetime/datetime";
 import NotFound from "./NotFound";
 import Carousel from "../app/carousel/carousel";
 import debounce from 'lodash.debounce';
+import { IconPencil, IconInfoCircle, IconRefresh } from '@tabler/icons-react';
 import "./TimeTable.css"
 
 const TimeTable = () => {
@@ -33,7 +34,7 @@ const TimeTable = () => {
         await axios.post(`/api/timetable/view/${ttRoute}`);
     }
 
-    const debouncedMarkView = useCallback(debounce(markView, 1000), []);
+    const debouncedMarkView = useCallback(debounce(markView, 5000), []);
 
     useEffect(() => {
         fetchData();
@@ -196,7 +197,7 @@ const TimeTable = () => {
                         justifyContent: "center",
                         paddingTop: "15px",
                     }}>
-                        <button
+                        <div
                             onClick={(e) => {
                                 fetchData();
                                 const icon = e.currentTarget.querySelector('.refresh-icon');
@@ -206,17 +207,15 @@ const TimeTable = () => {
                                 }, 200);
                             }}
                             style={{
-                                backgroundColor: "transparent",
-                                border: "none",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
                                 cursor: "pointer",
-                                padding: "0",
+                                WebkitTapHighlightColor: "transparent",
                             }}
                         >
-                            <img src="/refresh.svg" alt="Refresh" className="refresh-icon" style={{
-                                width: "20px",
-                                height: "20px",
-                            }} />
-                        </button>
+                            <IconRefresh className="refresh-icon" />
+                        </div>
                         <div style={{
                             display: "flex",
                             justifyContent: "center",
@@ -234,7 +233,7 @@ const TimeTable = () => {
                             alignItems: "center",
                         }}>
                             <div className="btn-press">
-                                <img src="/infoIcon.svg" alt="Info" className="info-icon" />
+                                <IconInfoCircle />
                             </div>
                         </Link>
                     </div>
@@ -250,8 +249,8 @@ const TimeTable = () => {
                                 navigate(`/update/${ttRoute}`);
                             }, 200);
                         }}>
-                            <img src="/editIcon.svg" alt="Edit" className="edit-icon" />
-                            <p>Edit</p>
+                            <IconPencil/>
+                            <p style={{marginLeft:"5px"}}>Edit</p>
                         </div>
                     </div>
                     <Carousel onChange={handleCarouselChange} loopback={true}>
