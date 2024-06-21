@@ -96,7 +96,7 @@ router.post('/', upload.single('file'), async (req, res) => {
         fs.unlinkSync(filePath);
 
         const pathParts = filePathParam.split('/');
-        createNestedStructure(uploadedFiles, pathParts, { name: file.originalname, link: fileLink });
+        createNestedStructure(uploadedFiles, pathParts, { name: file.originalname, link: fileLink, id: response.data.id });
         fs.writeFileSync(jsonFilePath, JSON.stringify(uploadedFiles, null, 2));
 
         res.send(response.data);
@@ -117,6 +117,27 @@ router.get('/:filePath', (req, res) => {
         res.json(fileData);
     } else {
         res.status(404).send('File path not found.');
+    }
+});
+
+function removeItemById(json, idToRemove) {
+    for (let key in json.classObject) {
+      if (json.classObject.hasOwnProperty(key)) {
+        json.classObject[key] = json.classObject[key].filter(item => item.id !== idToRemove);
+      }
+    }
+  }
+router.delete('/:id', async (req, res) => {
+    const fileId = req.params.id;
+
+    try {
+        await drive.files.delete({ fileId });
+        removeItemById(uploadedFiles, fileId);
+        fs.writeFileSync(jsonFilePath, JSON.stringify(uploadedFiles, null, 2));
+        res.send('File deleted');
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Failed to delete file.');
     }
 });
 

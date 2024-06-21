@@ -19,9 +19,10 @@ import {
     IconPdf,
     IconPng,
     IconSvg,
+    IconTrash,
     IconTxt,
 } from "@tabler/icons-react";
-const FileView = ({ filePath }) => {
+const FileView = ({ filePath, editMode }) => {
     const [files, setFiles] = React.useState([]);
     const [error, setError] = React.useState("");
 
@@ -98,9 +99,6 @@ const FileView = ({ filePath }) => {
             {files.map((file) => (
                 <div
                     key={Math.random().toString(36).substring(7)}
-                    onClick={() => {
-                        window.open(file.link);
-                    }}
                     style={{
                         display: "flex",
                         alignItems: "center",
@@ -114,9 +112,35 @@ const FileView = ({ filePath }) => {
                             fontSize: "1.2rem",
                             margin: "5px",
                         }}
+                        onClick={() => {
+                            window.open(file.link);
+                        }}
                     >
                         {fileWithoutExtension(file.name)}
                     </p>
+                    {editMode&&<IconTrash
+                        size={30}
+                        style={{
+                            background: "none",
+                            paddingLeft: "10px",
+                            border: "none",
+                            cursor: "pointer",
+                        }}
+                        onClick={() => {
+                            axios
+                                .delete(`/file/${file.id}`)
+                                .then((res) => {
+                                    setFiles(
+                                        files.filter(
+                                            (f) => f.name !== file.name
+                                        )
+                                    );
+                                })
+                                .catch((err) => {
+                                    setError("Failed to delete file. ");
+                                });
+                        }}
+                    />}
                 </div>
             ))}
             {files.length === 0 && <p>No files found.</p>}

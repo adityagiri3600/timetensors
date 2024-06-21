@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { IconChecks, IconUpload } from "@tabler/icons-react";
+import { motion } from "framer-motion";
 
 const FileUpload = ({ filePath }) => {
     const [file, setFile] = useState(null);
@@ -52,7 +53,9 @@ const FileUpload = ({ filePath }) => {
     };
 
     return (
-        <form
+        <motion.form
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { duration: 1.5 } }}
             encType="multipart/form-data"
             method="post"
             onSubmit={handleSubmit}
@@ -118,7 +121,7 @@ const FileUpload = ({ filePath }) => {
                 &nbsp;
                 {loading ? "Uploading..." : uploaded ? "Uploaded !" : "Upload"}
             </button>
-        </form>
+        </motion.form>
     );
 };
 

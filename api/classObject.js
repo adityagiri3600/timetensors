@@ -33,6 +33,7 @@ router.post("/update/:classid", async (req, res) => {
         if (req.body.editCode !== classObj.editCode) {
             return res.status(401).json("Unauthorized");
         }
+        classObj.Name = req.body.Name;
         classObj.color = req.body.color;
         classObj.Properties = req.body.Properties;
 
