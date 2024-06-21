@@ -37,6 +37,7 @@ app.use("/api/user", require("./api/user"));
 app.use("/api/timetable", require("./api/timetable"));
 app.use("/api/classObject", require("./api/classObject"));
 app.use("/auth", require("./api/auth"));
+app.use("/file", require("./api/files"));
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "/client/build/index.html"));
@@ -53,11 +54,11 @@ const credentials = {
     ca: intermediateCert
 };
 
-const httpsServer = https.createServer(credentials, app);
-httpsServer.listen(443, () => {
-    console.log("HTTPS Server running on port 443");
-});
-
-// app.listen(port, () => {
-//     console.log(`Server is running on port ${port}`);
+// const httpsServer = https.createServer(credentials, app);
+// httpsServer.listen(443, () => {
+//     console.log("HTTPS Server running on port 443");
 // });
+
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});

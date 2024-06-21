@@ -4,10 +4,14 @@ import { HexColorPicker } from "react-colorful";
 import axios from "axios";
 import NotFound from "./NotFound";
 import { motion } from "framer-motion";
+import FileUpload from "../app/fileUpload/FileUpload";
+import FileView from "../app/fileView/FileView";
+import { useAuth } from "../AuthContext";
 
 const ClassObject = () => {
 
     const { classRoute } = useParams();
+    const { isLoggedIn } = useAuth();
     const [data, setData] = useState([]);
     const [color, setColor] = useState("#000000");
     const [editingColor, setEditingColor] = useState(false);
@@ -154,6 +158,17 @@ const ClassObject = () => {
                             onClick={() => {
                                 setProperties([...properties, { Name: "", Value: "" }])
                             }}>+</button>
+                    </div>
+                    <p style={{
+                        fontFamily: "QuickSandRegular",
+                        fontSize: '1.5rem',
+                        margin: "5px",
+                        marginLeft: "-5px",
+                        color: color,
+                    }}>Attachments :</p>
+                    <div style={{paddingLeft:"10px", borderLeft: `5px solid ${color}`}}>
+                        <FileView filePath={`classObject/${classRoute}`} />
+                        {isLoggedIn&&<FileUpload filePath={`classObject/${classRoute}`} />}
                     </div>
                     {editCodeError && (
                         <p style={{
