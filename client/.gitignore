@@ -9,6 +9,7 @@
 /coverage
 
 # production
+# build is public to save my server some work 🤪
 
 # misc
 .DS_Store
