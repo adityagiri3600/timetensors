@@ -148,9 +148,8 @@ const FileView = ({ filePath, editMode }) => {
                             file.link.match(/^(.*\/)/)[1] +
                             "/preview?usp=drivesdk"
                         }
-                        width="100vw"
                         frameBorder={0}
-                        style={{ width: "fit-content", aspectRatio: "1" }}
+                        style={{ width: "fit-content", aspectRatio: "1", borderRadius: "20px"}}
                     ></iframe>}
                 </div>
             ))}

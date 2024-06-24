@@ -75,10 +75,9 @@ const ClassObject = () => {
                         onClick={() => {
                             if (!isLoggedIn) {
                                 navigate("/auth/google");
-                            }else if(userData.editCodes.length === 0){
+                            } else if (userData.editCodes.length === 0) {
                                 return;
-                            }
-                            else{
+                            } else {
                                 setEditMode(!editMode);
                             }
                         }}
@@ -317,11 +316,9 @@ const ClassObject = () => {
                             margin: "5px",
                             marginLeft: "-5px",
                             marginTop: "30px",
-                            color: color,
                         }}
                     >
-                        Attachments
-                        &nbsp;
+                        Attachments &nbsp;
                         <IconPaperclip size={30} stroke={1} />
                     </p>
                     <div
@@ -330,7 +327,10 @@ const ClassObject = () => {
                             borderLeft: `5px solid ${color}`,
                         }}
                     >
-                        <FileView filePath={`classObject/${classRoute}`} editMode={editMode} />
+                        <FileView
+                            filePath={`classObject/${classRoute}`}
+                            editMode={editMode}
+                        />
                         {isLoggedIn && editMode && (
                             <FileUpload
                                 filePath={`classObject/${classRoute}`}
