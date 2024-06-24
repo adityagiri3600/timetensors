@@ -13,7 +13,6 @@
 }
 
 * {
-  user-select: none;
 }
 
 *::selection {
