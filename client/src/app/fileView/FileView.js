@@ -31,7 +31,6 @@ const FileView = ({ filePath, editMode }) => {
             .get(`/file/${encodeURIComponent(filePath)}`)
             .then((res) => {
                 setFiles(res.data);
-                console.log(res);
             })
             .catch((err) => {
                 console.log(err);
@@ -97,50 +96,62 @@ const FileView = ({ filePath, editMode }) => {
     return (
         <div>
             {files.map((file) => (
-                <div
-                    key={Math.random().toString(36).substring(7)}
-                    style={{
-                        display: "flex",
-                        alignItems: "center",
-                    }}
-                >
-                    {fileIcon(file.name)}
-                    &nbsp;
-                    <p
+                <div key={Math.random().toString(36).substring(7)}>
+                    <div
                         style={{
-                            cursor: "pointer",
-                            fontSize: "1.2rem",
-                            margin: "5px",
-                        }}
-                        onClick={() => {
-                            window.open(file.link);
+                            display: "flex",
+                            alignItems: "center",
                         }}
                     >
-                        {fileWithoutExtension(file.name)}
-                    </p>
-                    {editMode&&<IconTrash
-                        size={30}
-                        style={{
-                            background: "none",
-                            paddingLeft: "10px",
-                            border: "none",
-                            cursor: "pointer",
-                        }}
-                        onClick={() => {
-                            axios
-                                .delete(`/file/${file.id}`)
-                                .then((res) => {
-                                    setFiles(
-                                        files.filter(
-                                            (f) => f.name !== file.name
-                                        )
-                                    );
-                                })
-                                .catch((err) => {
-                                    setError("Failed to delete file. ");
-                                });
-                        }}
-                    />}
+                        {fileIcon(file.name)}
+                        &nbsp;
+                        <p
+                            style={{
+                                cursor: "pointer",
+                                fontSize: "1.2rem",
+                                margin: "5px",
+                            }}
+                            onClick={() => {
+                                window.open(file.link);
+                            }}
+                        >
+                            {fileWithoutExtension(file.name).substring(0, 20)}
+                        </p>
+                        {editMode && (
+                            <IconTrash
+                                size={30}
+                                style={{
+                                    background: "none",
+                                    paddingLeft: "10px",
+                                    border: "none",
+                                    cursor: "pointer",
+                                }}
+                                onClick={() => {
+                                    axios
+                                        .delete(`/file/${file.id}`)
+                                        .then((res) => {
+                                            setFiles(
+                                                files.filter(
+                                                    (f) => f.name !== file.name
+                                                )
+                                            );
+                                        })
+                                        .catch((err) => {
+                                            setError("Failed to delete file. ");
+                                        });
+                                }}
+                            />
+                        )}
+                    </div>
+                    {!editMode&&<iframe
+                        src={
+                            file.link.match(/^(.*\/)/)[1] +
+                            "/preview?usp=drivesdk"
+                        }
+                        width="100vw"
+                        frameBorder={0}
+                        style={{ width: "fit-content", aspectRatio: "1" }}
+                    ></iframe>}
                 </div>
             ))}
             {files.length === 0 && <p>No files found.</p>}

@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import FileUpload from "../app/fileUpload/FileUpload";
 import FileView from "../app/fileView/FileView";
 import { useAuth } from "../AuthContext";
-import { IconPencil } from "@tabler/icons-react";
+import { IconPaperclip, IconPencil } from "@tabler/icons-react";
 
 const ClassObject = () => {
     const { classRoute } = useParams();
@@ -31,7 +31,6 @@ const ClassObject = () => {
             setName(response.data.Name);
             setColor(response.data.color);
             setProperties(response.data.Properties);
-            console.log(response);
         } catch (error) {
             setNotFound(true);
             console.error("Error fetching data:", error);
@@ -46,7 +45,6 @@ const ClassObject = () => {
         <motion.div
             style={{
                 height: "100vh",
-                overflow: "hidden",
             }}
         >
             {notFound ? (
@@ -318,10 +316,13 @@ const ClassObject = () => {
                             fontSize: "1.5rem",
                             margin: "5px",
                             marginLeft: "-5px",
+                            marginTop: "30px",
                             color: color,
                         }}
                     >
-                        Attachments :
+                        Attachments
+                        &nbsp;
+                        <IconPaperclip size={30} stroke={1} />
                     </p>
                     <div
                         style={{
