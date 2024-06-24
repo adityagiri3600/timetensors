@@ -48,8 +48,8 @@ const Class = ({
         return () => clearInterval(intervalId);
     }, [hour]);
 
-    const begin = parseInt(classItem.Start);
-    const end = parseInt(classItem.End);
+    const begin = parseInt(classItem.Start.split(":")[0]) + parseInt(classItem.Start.split(":")[1]) / 60;
+    const end = parseInt(classItem.End.split(":")[0]) + parseInt(classItem.End.split(":")[1]) / 60;
 
     if (
         begin <= hour &&
