@@ -1,17 +1,17 @@
 .newTimeTable{
     color: white;
-    background-color: #1592157b;
-    border: 1px solid rgba(255, 255, 255, 0.525);
+    background-color: #0000008a;
+    backdrop-filter: blur(2px);
+    /* border: 1px solid rgba(255, 255, 255, 0.525); */
     padding: 6px;
     border-radius: 5px;
     font-size: 1rem;
-    margin: 10px;
 }
 .recentlHeading{
     font-family: QuickSandRegular;
     font-size: 1.5rem;
     margin: 10px;
-    background: linear-gradient(90deg, white 0%, #159215 100%);
+    background: linear-gradient(90deg, white 0%, #ffffff7b 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -20,10 +20,10 @@
     min-width: auto;
     margin: 10px;
     padding: 10px;
-    background-color: #2b7df800;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.224) 0%, #00000000 100%);
     /* blur */
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.518);
+    backdrop-filter: blur(2px);
+    /* border: 1px solid rgba(255, 255, 255, 0.518); */
     cursor: pointer;
     border-radius: 5px;
     -webkit-tap-highlight-color: transparent;
@@ -47,8 +47,18 @@
 }
 .recentlyViewedContainer {
     padding-bottom: 20px;
-    background:
-        radial-gradient(circle at right, #2b7df856, transparent 100%),
-        radial-gradient(circle at left, #ff004856, transparent 100%)
 
+}
+.dottedgrid{
+    animation: moveup 10s linear infinite;
+    transition: all 1s;
+}
+@keyframes moveup {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 92%;
+        /* background-position: 0 0%; */
+    }
 }

@@ -11,6 +11,7 @@ import {
     IconUser,
 } from "@tabler/icons-react";
 import "./Home.css";
+import GlowingBorder from "../app/GlowingBorder";
 
 const Home = () => {
     const { isLoggedIn, login, logout, userData } = useAuth();
@@ -158,29 +159,57 @@ const Home = () => {
                     )}
                 </div>
 
-                <>
+                <motion.div
+                    style={{
+                        border: "1px solid #FFFFFFAA",
+                        margin: "20px",
+                        borderRadius: "5px",
+                        backgroundImage:
+                            "radial-gradient(#ffffffaa 1px, transparent 0)",
+                        backgroundSize: "20px 20px",
+                        maxWidth: "600px",
+                    }}
+                    className="dottedgrid"
+                    initial={{ opacity: 0 }}
+                    animate={{
+                        opacity: 1,
+                        transition: { duration: 3, delay: 1 },
+                    }}
+                >
                     <div
                         style={{
                             display: "flex",
                             justifyContent: "space-between",
                             alignItems: "center",
                             width: "100%",
-                            maxWidth: "600px",
                         }}
                     >
                         <p className="recentlHeading">Recent</p>
-                        <Link
-                            type="submit"
-                            className="newTimeTable btn-press"
-                            to="/new"
+                        <GlowingBorder
+                            width={71}
+                            height={36}
+                            color1="green"
+                            color2="green"
+                            id="new"
+                            animation={"static"}
                             style={{
-                                display: "flex",
-                                alignItems: "center",
+                                marginRight: "10px",
                             }}
                         >
-                            <IconTablePlus size={20} stroke={1} />
-                            <p style={{ margin: "0 0 0 5px" }}>new</p>
-                        </Link>
+                            <Link
+                                type="submit"
+                                className="newTimeTable btn-press"
+                                to="/new"
+                                style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    margin: "2px",
+                                }}
+                            >
+                                <IconTablePlus size={20} stroke={1} />
+                                <p style={{ margin: "0 0 0 5px" }}>new</p>
+                            </Link>
+                        </GlowingBorder>
                     </div>
                     <div
                         style={{
@@ -248,7 +277,7 @@ const Home = () => {
                             );
                         })}
                     </div>
-                </>
+                </motion.div>
                 <div
                     style={{
                         width: "100%",
@@ -260,171 +289,14 @@ const Home = () => {
                         bottom: "10px",
                     }}
                 >
-                    <div>
-                        <div
-                            style={{
-                                filter: "blur(10px)",
-                                position: "absolute",
-                                zIndex: "-1",
-                                opacity: "0.5",
-                            }}
-                        >
-                            <svg
-                                style={{
-                                    position: "absolute",
-                                    zIndex: "-1",
-                                    width: "99px",
-                                    height: "40px",
-                                    borderRadius: "5px",
-                                }}
-                            >
-                                <defs>
-                                    <radialGradient id="redGradient">
-                                        <stop offset="0%" stopColor="#E32636" />
-                                        <stop offset="100%" stopColor="black" />
-                                    </radialGradient>
-                                    <radialGradient id="blueGradient">
-                                        <stop offset="0%" stopColor="#00BFFF" />
-                                        <stop offset="100%" stopColor="black" />
-                                    </radialGradient>
-                                    <filter
-                                        id="blurFilter"
-                                        x="0"
-                                        y="0"
-                                        width="100%"
-                                        height="100%"
-                                    >
-                                        <feGaussianBlur stdDeviation="5" />
-                                    </filter>
-                                    <style>
-                                        {`
-            @keyframes moveRed {
-                0% { cx: 100%; cy: 100%; }
-                25% { cx: 0%; cy: 100%; }
-                50% { cx: 0%; cy: 0%; }
-                75% { cx: 100%; cy: 0%; }
-                100% { cx: 100%; cy: 100%; }
-            }
-            @keyframes moveBlue {
-                0% { cx: 0%; cy: 0%; }
-                25% { cx: 100%; cy: 0%; }
-                50% { cx: 100%; cy: 100%; }
-                75% { cx: 0%; cy: 100%; }
-                100% { cx: 0%; cy: 0%; }
-            }
-            #redCircle {
-              animation: moveRed 8s infinite;
-              filter: saturate(1);
-            }
-            #blueCircle {
-              animation: moveBlue 8s infinite;
-              filter: saturate(1);
-            }
-          `}
-                                    </style>
-                                </defs>
-
-                                <g
-                                    filter="url(#blurFilter)"
-                                    clipPath="url(#textClip)"
-                                >
-                                    <circle
-                                        id="redCircle"
-                                        cx="50"
-                                        cy="50"
-                                        r="50"
-                                        fill="url(#redGradient)"
-                                        style={{ mixBlendMode: "screen" }}
-                                    />
-                                    <circle
-                                        id="blueCircle"
-                                        cx="50"
-                                        cy="50"
-                                        r="50"
-                                        fill="url(#blueGradient)"
-                                        style={{ mixBlendMode: "screen" }}
-                                    />
-                                </g>
-                            </svg>
-                        </div>
-                        <svg
-                            style={{
-                                position: "absolute",
-                                zIndex: "-1",
-                                width: "99px",
-                                height: "40px",
-                                borderRadius: "5px",
-                            }}
-                        >
-                            <defs>
-                                <radialGradient id="redGradient">
-                                    <stop offset="0%" stopColor="#E32636" />
-                                    <stop offset="100%" stopColor="black" />
-                                </radialGradient>
-                                <radialGradient id="blueGradient">
-                                    <stop offset="0%" stopColor="#00BFFF" />
-                                    <stop offset="100%" stopColor="black" />
-                                </radialGradient>
-                                <filter
-                                    id="blurFilter"
-                                    x="0"
-                                    y="0"
-                                    width="100%"
-                                    height="100%"
-                                >
-                                    <feGaussianBlur stdDeviation="5" />
-                                </filter>
-                                <style>
-                                    {`
-            @keyframes moveRed {
-                0% { cx: 100%; cy: 100%; }
-                25% { cx: 0%; cy: 100%; }
-                50% { cx: 0%; cy: 0%; }
-                75% { cx: 100%; cy: 0%; }
-                100% { cx: 100%; cy: 100%; }
-            }
-            @keyframes moveBlue {
-                0% { cx: 0%; cy: 0%; }
-                25% { cx: 100%; cy: 0%; }
-                50% { cx: 100%; cy: 100%; }
-                75% { cx: 0%; cy: 100%; }
-                100% { cx: 0%; cy: 0%; }
-            }
-            #redCircle {
-              animation: moveRed 8s infinite;
-              filter: saturate(1);
-            }
-            #blueCircle {
-              animation: moveBlue 8s infinite;
-              filter: saturate(1);
-            }
-          `}
-                                </style>
-                            </defs>
-
-                            <g
-                                filter="url(#blurFilter)"
-                                clipPath="url(#textClip)"
-                            >
-                                <circle
-                                    id="redCircle"
-                                    cx="50"
-                                    cy="50"
-                                    r="50"
-                                    fill="url(#redGradient)"
-                                    style={{ mixBlendMode: "screen" }}
-                                />
-                                <circle
-                                    id="blueCircle"
-                                    cx="50"
-                                    cy="50"
-                                    r="50"
-                                    fill="url(#blueGradient)"
-                                    style={{ mixBlendMode: "screen" }}
-                                />
-                            </g>
-                        </svg>
-
+                    <GlowingBorder
+                        width={99}
+                        height={40}
+                        color1="#E32636"
+                        color2="#00BFFF"
+                        id="github"
+                        animation={"square"}
+                    >
                         <Link
                             to={"https://github.com/adityagiri3600/timetensors"}
                             target="_blank"
@@ -454,7 +326,7 @@ const Home = () => {
                             </svg>
                             &nbsp; github
                         </Link>
-                    </div>
+                    </GlowingBorder>
                     <img
                         src="/starit.png"
                         style={{
