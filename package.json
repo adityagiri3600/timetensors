@@ -6,9 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "build-client": "cd client && npm run build",
-    "dev": "concurrently \"sudo systemctl start mongod\" \"npm run dev-server\" \"npm run dev-client\"",
+    "dev": "concurrently \"npm run dev-server\" \"npm run dev-client\"",
     "dev-client": "cd client && npm start",
-    "dev-server": "nodemon index.js"
+    "dev-server": "export DEV=true;nodemon index.js"
   },
   "author": "Aditya Giri",
   "license": "ISC",

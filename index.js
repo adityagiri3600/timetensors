@@ -4,9 +4,9 @@ const express = require("express");
 const https = require("https");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const passport = require('passport');
-const session = require('express-session');
-const dotenv = require('dotenv');
+const passport = require("passport");
+const session = require("express-session");
+const dotenv = require("dotenv");
 dotenv.config();
 const app = express();
 const port = 5000;
@@ -20,7 +20,7 @@ app.use(
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: true,
-        cookie: { secure: false }
+        cookie: { secure: false },
     })
 );
 
@@ -51,14 +51,16 @@ const intermediateCert = fs.readFileSync("ssl/intermediate.cert.pem", "utf8");
 const credentials = {
     key: privateKey,
     cert: domainCert,
-    ca: intermediateCert
+    ca: intermediateCert,
 };
 
-const httpsServer = https.createServer(credentials, app);
-httpsServer.listen(443, () => {
-    console.log("HTTPS Server running on port 443");
-});
-
-// app.listen(port, () => {
-//     console.log(`Server is running on port ${port}`);
-// });
+if (process.env.DEV) {
+    app.listen(port, () => {
+        console.log(`Server is running on port ${port}`);
+    });
+} else {
+    const httpsServer = https.createServer(credentials, app);
+    httpsServer.listen(443, () => {
+        console.log("HTTPS Server running on port 443");
+    });
+}
