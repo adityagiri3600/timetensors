@@ -53,7 +53,11 @@ const ClassList = ({
                             left: "50%",
                             transform: "translate(57%, 50%)",
                             boxShadow: "0 0 10px 10px rgba(0, 0, 0, 1)",
-                            filter: "drop-shadow(0 0 5px rgba(0, 0, 0, 1)) drop-shadow(0 0 10px rgba(0, 0, 0, 1)) drop-shadow(0 0 20px rgba(0, 0, 0, 1)) drop-shadow(0 0 40px rgba(0, 0, 0, 1))",
+                            filter: 
+                                theme=="paper"
+                                    ? "invert(1) opacity(0.5)"
+                                    : "drop-shadow(0 0 5px rgba(0, 0, 0, 1)) drop-shadow(0 0 10px rgba(0, 0, 0, 1)) drop-shadow(0 0 20px rgba(0, 0, 0, 1)) drop-shadow(0 0 40px rgba(0, 0, 0, 1))"
+                                ,
                             zIndex: "1",
                         }}
                     />
@@ -87,11 +91,7 @@ const ClassList = ({
     return (
         <div className="classList-container" style={{ width: "100vw" }}>
             <motion.div
-                className={
-                    theme === "classic"
-                    ? "classList " + position
-                    : "classListSimple " + position
-                }
+                className={"classList classList-" + theme + " " + position}
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"

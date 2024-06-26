@@ -50,7 +50,7 @@
 
 }
 .dottedgrid{
-    animation: moveup 10s linear infinite;
+    animation: moveup 1s linear infinite;
     transition: all 1s;
 }
 @keyframes moveup {
@@ -58,7 +58,7 @@
         background-position: 0 0;
     }
     100% {
-        background-position: 0 92%;
+        background-position: 0 40px;
         /* background-position: 0 0%; */
     }
 }

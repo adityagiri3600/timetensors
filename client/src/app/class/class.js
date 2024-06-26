@@ -29,6 +29,7 @@ const Class = ({
     const [footer, setFooter] = useState("buttons");
     const [event, setEvent] = useState("");
     const {theme} = useTheme();
+    cssClassName += "class-" + theme + " ";
     const { userData, isLoggedIn } = useAuth();
     let userHasEditCode = isLoggedIn
         ? userData?.editCodes?.some((code) => code.id === ttRoute)
@@ -171,7 +172,7 @@ const Class = ({
                 </div>
 
                 <div
-                    className= {theme === "classic" ? "classButtons" : "classButtonsSimple"}
+                    className="classButtons"
                     style={{
                         height: focused ? "39px" : "0px",
                         overflow: "hidden",

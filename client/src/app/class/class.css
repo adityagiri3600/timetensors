@@ -22,36 +22,39 @@
     font-family: QuickSandBold;
     src: url(fonts/Quicksand-Bold.ttf);
 }
-
-.class {
+.class{
     width: 100%;
     margin-top: 10px;
-    /* overflow: hidden; */
-
-    /* background: rgba(43, 125, 248, 0.272); */
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.5s;
+}
+.class-classic {
+    width: 100%;
+    margin-top: 10px;
     border-radius: 10px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), 5px 5px 20px #00000093;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    /* border: 1px solid #2b7df8c7; */
     font-family: QuickSandLight;
     
     transition: all 0.5s;
 }
-.classSimple{
+.class-simple{
     width: 100%;
     margin-top: 10px;
-    /* overflow: hidden; */
-
-    /* background: rgba(43, 125, 248, 0.272); */
     border-radius: 10px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), 5px 5px 20px #00000093;
     backdrop-filter: blur(1px);
     -webkit-backdrop-filter: blur(1px);
-    /* border: 1px solid #2b7df8c7; */
     font-family: QuickSandLight;
     
     transition: all 0.5s;
+}
+.class-paper{
+    background-color: rgb(243, 232, 213);
+    color: rgba(0, 0, 0, 0.619);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), 5px 5px 20px #00000093;
 }
 
 .class h2 {
@@ -76,7 +79,7 @@
     backdrop-filter: none;
 }
 
-.classButtons, .classButtonsSimple{
+.classButtons{
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -87,7 +90,7 @@
 .classButtons > *{
     flex: 1 1 auto;
 }
-.classButtons button {
+.class .classButtons button {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.635);
     color: white;
@@ -95,16 +98,8 @@
     border: none;
     padding: 5px;
 }
-.classButtonsSimple > *{
-    flex: 1 1 auto;
-}
-.classButtonsSimple button{
-    height: 100%;
+.class-simple .classButtons button{
     background-color: rgba(0, 0, 0, 0);
-    color: white;
-
-    border: none;
-    padding: 5px;
 }
 .eventBox{
     background-color: rgb(243, 232, 213);

@@ -2,37 +2,27 @@
     width: 70%;
     margin: 2vw auto;
     margin-top: 5px;
-    background: radial-gradient(circle,#2b7df8b8 -30%, #99bdefd7 0%, #2b7df8b8 30%);
-    background-size: 400% 400%;
-    animation: gradientAnimation 10s ease infinite;
-    box-shadow: 0px 0px 20px #2b7df8b8;
-    border-radius: 10px;
-    padding: 1px 10px 10px 10px;
     text-align: left;
     transition: transform 0.5s;
-
+    border-radius: 10px;
+    padding: 1px 10px 10px 10px;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.classListSimple{
-    width: 70%;
-    margin: 2vw auto;
-    margin-top: 5px;
-    /* background: radial-gradient(circle,#2b7df8b8 -30%, #99bdefd7 0%, #2b7df8b8 30%); */
+.classList-classic{
+    background: radial-gradient(circle,#2b7df8b8 -30%, #99bdefd7 0%, #2b7df8b8 30%);
     background-size: 400% 400%;
     animation: gradientAnimation 10s ease infinite;
-    /* box-shadow: 0px 0px 20px #2b7df8b8; */
+    box-shadow: 0px 0px 20px #2b7df8b8;
+}
+.classList-simple{
     border: 1px solid rgba(255, 255, 255, 0.317);
     backdrop-filter: blur(1px);
-    border-radius: 10px;
-    padding: 1px 10px 10px 10px;
-    text-align: left;
-    transition: transform 0.5s;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+}
+.classList-paper{
+    background-color: rgb(243, 232, 213);
 }
 
 .classList-container{
@@ -40,11 +30,6 @@
     min-height: 70vh;
 }
 
-.noclass{
-    text-shadow: none;
-}
-
-/* gradient animation */
 @keyframes gradientAnimation {
     0% {
         background-position: 100% 80%;
@@ -60,14 +45,6 @@
     transform-style: preserve-3d;
 }
 .classList.right{
-    transform: translateX(-35%) rotateY(-30deg) translateY(10%);
-    transform-style: preserve-3d;
-}
-.classListSimple.left{
-    transform: translateX(35%) rotateY(30deg) translateY(10%);
-    transform-style: preserve-3d;
-}
-.classListSimple.right{
     transform: translateX(-35%) rotateY(-30deg) translateY(10%);
     transform-style: preserve-3d;
 }

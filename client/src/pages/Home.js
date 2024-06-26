@@ -16,7 +16,7 @@ import { useTheme } from "../ThemeContext";
 
 const Home = () => {
     const { isLoggedIn, login, logout, userData } = useAuth();
-    const {theme, setTheme} = useTheme();
+    const { theme, setTheme } = useTheme();
     const [recentlyViewed, setRecentlyViewed] = useState([]);
     const location = useLocation();
     const navigate = useNavigate();
@@ -160,25 +160,44 @@ const Home = () => {
                         </Link>
                     )}
                 </div>
-                <select
-                    className="themeSelect"
-                    value={theme}
-                    onChange={(e) => {
-                        setTheme(e.target.value);
-                    }}
+                <div
                     style={{
-                        width: "200px",
-                        fontSize: "1rem",
-                        margin: "20px",
+                        display: "flex",
+                        alignItems: "center",
+                        width: "fit-content",
+                        margin: "20px 22px",
+                        marginBottom: "0",
+                        border: "1px solid #FFFFFFAA",
+                        borderRadius: "5px 5px 0 0",
+                        borderBottom: "none",
+                        padding: "10px",
+                        backgroundImage:
+                            "radial-gradient(#ffffffaa 1px, transparent 0)",
+                        backgroundSize: "20px 20px",
+                        animation: "moveup 1s linear infinite"
                     }}
                 >
-                    <option value="classic">Classic</option>
-                    <option value="simple">Simple</option>
-                </select>
+                    theme:
+                    <select
+                        className="themeSelect"
+                        value={theme}
+                        onChange={(e) => {
+                            setTheme(e.target.value);
+                        }}
+                        style={{
+                            width: "fit-content",
+                            fontSize: "1rem",
+                        }}
+                    >
+                        <option value="classic">Classic</option>
+                        <option value="simple">Simple</option>
+                        <option value="paper">Paper</option>
+                    </select>
+                </div>
                 <div
                     style={{
                         border: "1px solid #FFFFFFAA",
-                        margin: "20px",
+                        margin: "0 20px",
                         borderRadius: "5px",
                         backgroundImage:
                             "radial-gradient(#ffffffaa 1px, transparent 0)",

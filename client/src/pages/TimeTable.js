@@ -10,11 +10,13 @@ import Carousel from "../app/carousel/carousel";
 import debounce from 'lodash.debounce';
 import { IconPencil, IconInfoCircle, IconRefresh } from '@tabler/icons-react';
 import "./TimeTable.css"
+import { useTheme } from "../ThemeContext";
 
 const TimeTable = () => {
     const { ttRoute } = useParams();
     const navigate = useNavigate();
     const { isLoggedIn, userData, updateUserData } = useAuth();
+    const { theme } = useTheme();
     const [data, setData] = useState([]);
     const [classes, setClasses] = useState([])
     const [notFound, setNotFound] = useState(false);
@@ -191,7 +193,7 @@ const TimeTable = () => {
             {notFound ? (
                 <NotFound thing={"timetable"} name={ttRoute} />
             ) : (
-                <div className="timetable-container">
+                <div className={`timetable-container timetable-container-${theme}`}>
                     <div style={{
                         display: "flex",
                         justifyContent: "center",
