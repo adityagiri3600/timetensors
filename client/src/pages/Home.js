@@ -12,9 +12,11 @@ import {
 } from "@tabler/icons-react";
 import "./Home.css";
 import GlowingBorder from "../app/GlowingBorder";
+import { useTheme } from "../ThemeContext";
 
 const Home = () => {
     const { isLoggedIn, login, logout, userData } = useAuth();
+    const {theme, setTheme} = useTheme();
     const [recentlyViewed, setRecentlyViewed] = useState([]);
     const location = useLocation();
     const navigate = useNavigate();
@@ -158,8 +160,22 @@ const Home = () => {
                         </Link>
                     )}
                 </div>
-
-                <motion.div
+                <select
+                    className="themeSelect"
+                    value={theme}
+                    onChange={(e) => {
+                        setTheme(e.target.value);
+                    }}
+                    style={{
+                        width: "200px",
+                        fontSize: "1rem",
+                        margin: "20px",
+                    }}
+                >
+                    <option value="classic">Classic</option>
+                    <option value="simple">Simple</option>
+                </select>
+                <div
                     style={{
                         border: "1px solid #FFFFFFAA",
                         margin: "20px",
@@ -170,11 +186,6 @@ const Home = () => {
                         maxWidth: "600px",
                     }}
                     className="dottedgrid"
-                    initial={{ opacity: 0 }}
-                    animate={{
-                        opacity: 1,
-                        transition: { duration: 3, delay: 1 },
-                    }}
                 >
                     <div
                         style={{
@@ -277,7 +288,7 @@ const Home = () => {
                             );
                         })}
                     </div>
-                </motion.div>
+                </div>
                 <div
                     style={{
                         width: "100%",

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Class from "../class/class";
 import { motion } from "framer-motion";
 import "./classList.css";
+import { useTheme } from "../../ThemeContext";
 
 const ClassList = ({
     todaysClasses,
@@ -11,6 +12,7 @@ const ClassList = ({
     events,
     ttRoute,
 }) => {
+    const {theme} = useTheme();
     const [focusedClass, setFocusedClass] = useState(-1);
     const setFocusedClassWrapper = (i) => {
         if (focusedClass === i) {
@@ -22,9 +24,7 @@ const ClassList = ({
 
     if (todaysClasses.length === 0)
         return (
-            <motion.div
-                initial={{ opacity: 0, }}
-                animate={{ opacity: 1, transition: { duration: 5, delay: 0.5, ease: "easeOut" } }}
+            <div
                 className="classList-container"
                 style={{
                     width: "100vw",
@@ -43,34 +43,6 @@ const ClassList = ({
                     }}
                 >
                     <image
-                        href="/phi.svg"
-                        width="100%"
-                        height="100%"
-                        style={{
-                            position: "absolute",
-                            top: "50%",
-                            left: "50%",
-                            transform: "scale(1.5) translate(-15%, 0%)",
-                            opacity: "0.1",
-                            filter: "blur(3px)",
-                            zIndex: "0",
-                        }}
-                        />
-                    <image
-                        href="/phi.svg"
-                        width="100%"
-                        height="100%"
-                        style={{
-                            position: "absolute",
-                            top: "50%",
-                            left: "50%",
-                            transform: "scale(1.5) translate(-15%, 0%)",
-                            opacity: "0.2",
-                            filter: "blur(5px)",
-                            zIndex: "0",
-                        }}
-                    />
-                    <image
                         href="/noclasses.svg"
                         width="100%"
                         height="100%"
@@ -86,7 +58,7 @@ const ClassList = ({
                         }}
                     />
                 </svg>
-            </motion.div>
+            </div>
         );
 
     const containerVariants = {
@@ -115,7 +87,11 @@ const ClassList = ({
     return (
         <div className="classList-container" style={{ width: "100vw" }}>
             <motion.div
-                className={"classList " + position}
+                className={
+                    theme === "classic"
+                    ? "classList " + position
+                    : "classListSimple " + position
+                }
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"

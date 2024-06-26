@@ -167,7 +167,7 @@ const TimeTable = () => {
 
     const postEvent = (event) => {
         axios.post(`/api/timetable/update/${ttRoute}`,
-            { ...data, editCode: getEditCodeFromLocalStorage(ttRoute), events: [...data.events, event] },
+            { ...data, editCode: userData?.editCodes?.find((code) => code.id === ttRoute).code, events: [...data.events, event] },
             {
                 headers: {
                     'Content-Type': 'application/json'

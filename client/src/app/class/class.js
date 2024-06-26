@@ -7,6 +7,7 @@ import {
     IconListDetails,
 } from "@tabler/icons-react";
 import "./class.css";
+import { useTheme } from "../../ThemeContext";
 
 const Class = ({
     classItem,
@@ -27,6 +28,7 @@ const Class = ({
     );
     const [footer, setFooter] = useState("buttons");
     const [event, setEvent] = useState("");
+    const {theme} = useTheme();
     const { userData, isLoggedIn } = useAuth();
     let userHasEditCode = isLoggedIn
         ? userData?.editCodes?.some((code) => code.id === ttRoute)
@@ -99,8 +101,9 @@ const Class = ({
                         </div>
                     )}
                     <div style={{ padding: "10px" }}>
-                        <h2>{classItem.Name}</h2>
-                        {cssClassName.includes("past") && (
+                        <h2>
+                            {classItem.Name}</h2>
+                        {/* {cssClassName.includes("past") && (
                             <IconCircleCheck
                                 size={25}
                                 fill="#50C878"
@@ -110,7 +113,7 @@ const Class = ({
                                     right: "5px",
                                 }}
                             />
-                        )}
+                        )} */}
                         <div
                             style={{
                                 display: "flex",
@@ -168,7 +171,7 @@ const Class = ({
                 </div>
 
                 <div
-                    className="classButtons"
+                    className= {theme === "classic" ? "classButtons" : "classButtonsSimple"}
                     style={{
                         height: focused ? "39px" : "0px",
                         overflow: "hidden",
