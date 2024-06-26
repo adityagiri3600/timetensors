@@ -7,11 +7,16 @@
     border-radius: 5px;
     font-size: 1rem;
 }
+.homePage-paper{
+    background-image: 
+    linear-gradient(to bottom, rgba(128, 128, 128, 0.4) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
 .recentlHeading{
     font-family: QuickSandRegular;
     font-size: 1.5rem;
     margin: 10px;
-    background: linear-gradient(90deg, white 0%, #ffffff7b 100%);
+    background: linear-gradient(90deg, rgb(var(--foreground-rgb)) 0%, rgba(var(--foreground-rgb), 0.5) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -28,6 +33,9 @@
     border-radius: 5px;
     -webkit-tap-highlight-color: transparent;
     transition: all 0.1s;
+}
+.homePage-paper .recentlyViewed{
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.283);
 }
 .textFade{
     width: 100%;
@@ -52,6 +60,10 @@
 .dottedgrid{
     animation: moveup 1s linear infinite;
     transition: all 1s;
+    border: rgba(var(--foreground-rgb),0.5) 1px solid;
+}
+.homePage-paper .dottedgrid{
+    background-color: rgb(var(--paper-rgb))
 }
 @keyframes moveup {
     0% {

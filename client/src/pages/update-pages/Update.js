@@ -77,7 +77,6 @@ const Update = () => {
                 <p style={{
                     margin: "0 10px",
                     fontSize: "0.8rem",
-                    color: "#FFFFFFAA"
                 }} >Swipe to Navigate</p>
                 <StepProgress step={step} n={steps.length} />
                 {editCodeError ? <p className="editCodeError">Invalid Edit Code</p> : null}

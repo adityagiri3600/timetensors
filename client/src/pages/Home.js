@@ -60,6 +60,7 @@ const Home = () => {
             style={{
                 height: "100vh",
             }}
+            className={`homePage homePage-${theme}`}
         >
             <div
                 className="recentlyViewedContainer"
@@ -93,7 +94,7 @@ const Home = () => {
                         ></img>
                         <p
                             style={{
-                                color: "#FFFFFFAA",
+                                color: "rgb(var(--foreground-rgb))",
                                 margin: "0",
                                 fontSize: "0.8rem",
                                 textAlign: "center",
@@ -105,7 +106,7 @@ const Home = () => {
                     {isLoggedIn ? (
                         <div
                             style={{
-                                border: "1px solid #FFFFFFAA",
+                                border: "1px solid rgba(var(--foreground-rgb), 0.5)",
                                 borderRadius: "5px",
                                 display: "flex",
                                 alihnitItems: "center",
@@ -130,7 +131,7 @@ const Home = () => {
                                 className="btn-press"
                                 style={{
                                     background: "#f31e40",
-                                    color: "white",
+                                    color: "rgb(var(--foreground-rgb))",
                                     border: "none",
                                     padding: "10px",
                                     borderRadius: "0  5px 5px 0",
@@ -150,7 +151,7 @@ const Home = () => {
                             className="btn-press"
                             style={{
                                 background: "none",
-                                color: "white",
+                                color: "rgb(var(--foreground-rgb))",
                                 border: "1px solid #FFFFFFAA",
                                 padding: "10px",
                                 borderRadius: "5px",
@@ -167,10 +168,11 @@ const Home = () => {
                         width: "fit-content",
                         margin: "20px 22px",
                         marginBottom: "0",
-                        border: "1px solid #FFFFFFAA",
+                        border: "1px solid rgba(var(--foreground-rgb), 0.5)",
                         borderRadius: "5px 5px 0 0",
                         borderBottom: "none",
                         padding: "10px",
+                        backgroundColor: "rgb(var(--background-rgb))",
                         backgroundImage:
                             "radial-gradient(#ffffffaa 1px, transparent 0)",
                         backgroundSize: "20px 20px",
@@ -187,6 +189,7 @@ const Home = () => {
                         style={{
                             width: "fit-content",
                             fontSize: "1rem",
+                            color: "rgb(var(--foreground-rgb))",
                         }}
                     >
                         <option value="classic">Classic</option>
@@ -196,7 +199,6 @@ const Home = () => {
                 </div>
                 <div
                     style={{
-                        border: "1px solid #FFFFFFAA",
                         margin: "0 20px",
                         borderRadius: "5px",
                         backgroundImage:
@@ -287,7 +289,7 @@ const Home = () => {
                                             <p
                                                 style={{
                                                     margin: "0 0 0 10px",
-                                                    color: "#FFFFFFAA",
+                                                    color: "rgb(var(--foreground-rgb))",
                                                     fontSize: "0.8rem",
                                                 }}
                                             >
@@ -297,7 +299,7 @@ const Home = () => {
                                         <p
                                             style={{
                                                 margin: 0,
-                                                color: "#FFFFFFAA",
+                                                color: "rgb(var(--foreground-rgb))",
                                             }}
                                         >
                                             {timetable?.description}
@@ -331,6 +333,7 @@ const Home = () => {
                             to={"https://github.com/adityagiri3600/timetensors"}
                             target="_blank"
                             style={{
+                                color: "white",
                                 margin: "2px",
                                 backgroundColor: "#010409da",
                                 padding: "2px 10px",

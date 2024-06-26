@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import FileUpload from "../app/fileUpload/FileUpload";
 import FileView from "../app/fileView/FileView";
 import { useAuth } from "../AuthContext";
-import { IconPaperclip, IconPencil } from "@tabler/icons-react";
+import { IconPaperclip, IconPencil, IconTrash } from "@tabler/icons-react";
 
 const ClassObject = () => {
     const { classRoute } = useParams();
@@ -61,7 +61,7 @@ const ClassObject = () => {
                         size={name.length + 1}
                         style={{
                             background: "none",
-                            color: "white",
+                            color: "rgb(var(--foreground-rgb))",
                             fontSize: "2rem",
                             border: "none",
                             outline: "none",
@@ -87,20 +87,20 @@ const ClassObject = () => {
                             border: "none",
                             padding: "5px",
                             background: "none",
-                            color: "white",
+                            color: "rgb(var(--foreground-rgb))",
                             marginLeft: "10px",
                         }}
                     >
                         <IconPencil
                             size={30}
-                            fill={editMode ? "#FFFFFFAA" : "black"}
+                            fill={editMode ? "rgba(var(--foreground-rgb), 0.5)" : "transparent"}
                         />
                     </button>
                     <p
                         style={{
                             fontSize: "1rem",
                             margin: 0,
-                            color: "#FFFFFFAA",
+                            color: "rgb(var(--foreground-rgb))",
                         }}
                     >
                         {classRoute}
@@ -117,7 +117,7 @@ const ClassObject = () => {
                         <p
                             style={{
                                 fontSize: "1rem",
-                                color: "#FFFFFFAA",
+                                color: "rgb(var(--foreground-rgb))",
                                 margin: 0,
                             }}
                         >
@@ -172,7 +172,7 @@ const ClassObject = () => {
                                             background: "none",
                                             width: "70px",
                                             border: "none",
-                                            color: "#FFFFFFAA",
+                                            color: "rgb(var(--foreground-rgb))",
                                             fontSize: "1rem",
                                             outline: "none",
                                             padding: "5px",
@@ -249,7 +249,7 @@ const ClassObject = () => {
                                             border: "none",
                                             padding: "5px",
                                             background: "none",
-                                            color: "white",
+                                            color: "rgb(var(--foreground-rgb))",
                                         }}
                                     >
                                         {property.Shown ? "Shown" : "Hidden"}
@@ -271,15 +271,7 @@ const ClassObject = () => {
                                             background: "none",
                                         }}
                                     >
-                                        <img
-                                            src="/delete.svg"
-                                            alt="delete"
-                                            style={{
-                                                background: "none",
-                                                width: "28px",
-                                                height: "28px",
-                                            }}
-                                        />
+                                        <IconTrash color="rgb(var(--foreground-rgb))" size={20} />
                                     </motion.button>
                                 </div>
                             ))}

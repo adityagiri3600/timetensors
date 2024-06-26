@@ -12,6 +12,11 @@ export const ThemeProvider = ({ children }) => {
         }
     }, []);
 
+    useEffect(() => {
+        document.documentElement.style.setProperty('--foreground-rgb', theme === 'paper' ? '0, 0, 0' : '255, 255, 255');
+        document.documentElement.style.setProperty('--background-rgb', theme === 'paper' ? '243, 232, 213' : '0, 0, 0');
+    }, [theme]);
+
     const value = {
         theme,
         setTheme,

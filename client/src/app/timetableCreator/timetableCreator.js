@@ -48,7 +48,7 @@ const TimetableCreator = ({ classes, setClasses, classObjects, classesAtSpecific
             {editingSpecificDate ?
                 <p style={{
                     fontSize: "0.8rem",
-                    color: "#FFFFFFAA",
+                    color: "rgb(var(--foreground-rgb))",
                     margin: "0",
                     padding: "0 20px"
                 }}>

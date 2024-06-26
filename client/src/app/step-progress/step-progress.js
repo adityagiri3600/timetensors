@@ -29,7 +29,7 @@ const StepProgress = ({ step, n, swipeToNavigateAlert }) => {
                     alignItems: "center",
                     fontSize: "2.4rem",
                     opacity: `${opacity}`,
-                    transition: "opacity 1s linear"
+                    transition: "opacity 1s linear",
                 }}>
                     Swipe to Navigate
                 </div>

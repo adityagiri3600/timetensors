@@ -98,7 +98,7 @@
     font-size: 1rem;
     border: none;
     background: none;
-    color: white;
+    color: rgb(var(--foreground-rgb));
     margin-left: 5px;
     padding: 3px;
     border-radius: 5px;

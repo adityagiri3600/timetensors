@@ -4,7 +4,7 @@ import "./InputField.css";
 const InputField = ({ state, setState, disabled, label, textarea }) => {
     return (
         <div>
-            <label htmlFor={`inputFieldid-${label}`} style={{ color: "#ffffff80", marginLeft: "15px" }}>{label}</label>
+            <label htmlFor={`inputFieldid-${label}`} style={{ color: "rgba(var(--foreground-rgb),0.5)", marginLeft: "15px" }}>{label}</label>
             {
                 textarea ?
                     <textarea
@@ -19,12 +19,12 @@ const InputField = ({ state, setState, disabled, label, textarea }) => {
                             }
                         }}
                         style={{
-                            backgroundColor: "black",
+                            backgroundColor: "rgb(var(--background-rgb))", 
                             width: "300px",
                             height: "150px",
                             margin: "10px",
                             padding: "10px",
-                            color: "white",
+                            color: "rgb(var(--foreground-rgb))",
                             borderRadius: "10px",
                             fontSize: "1.3rem",
                             outline: "none",
@@ -47,11 +47,11 @@ const InputField = ({ state, setState, disabled, label, textarea }) => {
                             }
                         }}
                         style={{
-                            backgroundColor: "black",
+                            backgroundColor: "rgb(var(--background-rgb))",
                             width: "300px",
                             margin: "10px",
                             padding: "10px",
-                            color: "white",
+                            color: "rgb(var(--foreground-rgb))",
                             borderRadius: "10px",
                             fontSize: "1.3rem",
                             outline: "none",

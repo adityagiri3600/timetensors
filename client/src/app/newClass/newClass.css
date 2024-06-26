@@ -6,7 +6,7 @@
     background: rgba(255, 255, 255, 0.13);
     margin-left: 10px;
     margin-right: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.347);
+    border: 1px solid rgba(var(--foreground-rgb), 0.347);
     border-bottom: none;
     border-top: none;
     font-family: QuickSandLight;
@@ -14,13 +14,13 @@
 .newClass:first-of-type{
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    border-top: 1px solid rgba(255, 255, 255, 0.347);
+    border-top: 1px solid rgba(var(--foreground-rgb), 0.347);
 }
 .newClass:last-of-type{
     margin-bottom: 5px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.347);
+    border-bottom: 1px solid rgba(var(--foreground-rgb), 0.347);
 }
 
 
@@ -45,8 +45,8 @@
 }
 .newClass input[type="time"]{
     max-width: 60px;
-    color: white;
-    background-color: #000000;
+    color: rgb(var(--foreground-rgb));
+    background-color: rgb(var(--background-rgb));
     border: 1px solid rgb(60, 60, 60);
     font-size: .9rem;
     margin: 0;

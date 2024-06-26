@@ -51,7 +51,7 @@ const NewClass = ({ classes, setClasses, classObjects, index, Day }) => {
                     singleValue: (styles) => ({
                         ...styles,
                         width: "100px",
-                        color: "white",
+                        color: "rgb(var(--foreground-rgb))",
                     }),
                     input: (styles) => ({
                         ...styles,
