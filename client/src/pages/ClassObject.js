@@ -8,6 +8,8 @@ import FileUpload from "../app/fileUpload/FileUpload";
 import FileView from "../app/fileView/FileView";
 import { useAuth } from "../AuthContext";
 import { IconPaperclip, IconPencil, IconTrash } from "@tabler/icons-react";
+import { determineTextColor } from "../app/timetrackFunctions";
+import styles from "./ClassObject.module.css";
 
 const ClassObject = () => {
     const { classRoute } = useParams();
@@ -42,271 +44,272 @@ const ClassObject = () => {
     }, []);
 
     return (
-        <motion.div
-            style={{
-                height: "100vh",
-            }}
-        >
+        <div className={styles.container}>
             {notFound ? (
                 <NotFound thing="class" name={classRoute} />
             ) : (
-                <div
+                <div>
+                    <div className={styles.header}
                     style={{
-                        padding: "20px",
-                    }}
-                >
-                    <input
-                        type="text"
-                        value={name}
-                        size={name.length + 1}
-                        style={{
-                            background: "none",
-                            color: "rgb(var(--foreground-rgb))",
-                            fontSize: "2rem",
-                            border: "none",
-                            outline: "none",
-                        }}
-                        disabled={!editMode}
-                        onChange={(e) => {
-                            setName(e.target.value);
-                        }}
-                    />
-                    <button
-                        onClick={() => {
-                            if (!isLoggedIn) {
-                                navigate("/auth/google");
-                            } else if (userData.editCodes.length === 0) {
-                                return;
-                            } else {
-                                setEditMode(!editMode);
-                            }
-                        }}
-                        style={{
-                            position: "absolute",
-                            right: "10px",
-                            border: "none",
-                            padding: "5px",
-                            background: "none",
-                            color: "rgb(var(--foreground-rgb))",
-                            marginLeft: "10px",
-                        }}
-                    >
-                        <IconPencil
-                            size={30}
-                            fill={editMode ? "rgba(var(--foreground-rgb), 0.5)" : "transparent"}
+                        backgroundColor: color,
+                        color: determineTextColor(color),
+                    }}>
+                        <input
+                            type="text"
+                            value={name}
+                            size={name.length + 1}
+                            className={styles.className}
+                            style={{
+                                color: determineTextColor(color),
+                            }}
+                            disabled={!editMode}
+                            onChange={(e) => {
+                                setName(e.target.value);
+                            }}
                         />
-                    </button>
-                    <p
-                        style={{
-                            fontSize: "1rem",
-                            margin: 0,
-                            color: "rgb(var(--foreground-rgb))",
-                        }}
-                    >
-                        {classRoute}
-                    </p>
-                    <div
-                        onClick={() =>
-                            setEditingColor(!editingColor && editMode)
-                        }
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                        }}
-                    >
+                        <button
+                            onClick={() => {
+                                if (!isLoggedIn) {
+                                    navigate("/auth/google");
+                                } else if (userData.editCodes.length === 0) {
+                                    return;
+                                } else {
+                                    setEditMode(!editMode);
+                                }
+                            }}
+                            style={{
+                                position: "absolute",
+                                right: "10px",
+                                border: "none",
+                                padding: "5px",
+                                background: "none",
+                                color: "rgb(var(--foreground-rgb))",
+                                marginLeft: "10px",
+                            }}
+                        >
+                            <IconPencil
+                                size={30}
+                                color={determineTextColor(color)}
+                                fill={
+                                    editMode
+                                        ? "rgba(var(--foreground-rgb), 0.5)"
+                                        : "transparent"
+                                }
+                            />
+                        </button>
                         <p
                             style={{
                                 fontSize: "1rem",
-                                color: "rgb(var(--foreground-rgb))",
                                 margin: 0,
+                                color: determineTextColor(color),
                             }}
                         >
-                            color :{" "}
+                            {classRoute}
                         </p>
                         <div
+                            onClick={() =>
+                                setEditingColor(!editingColor && editMode)
+                            }
                             style={{
-                                width: "20px",
-                                height: "20px",
-                                backgroundColor: color,
-                                borderRadius: "50%",
-                                marginLeft: "10px",
-                                marginRight: "5px",
-                            }}
-                        ></div>
-                        <p
-                            style={{
-                                fontSize: "1rem",
-                                margin: 0,
+                                display: "flex",
+                                alignItems: "center",
                             }}
                         >
-                            {color}{" "}
-                        </p>
-                    </div>
-                    {editingColor && editMode && (
-                        <HexColorPicker
-                            color={color}
-                            onChange={setColor}
-                            style={{ marginTop: "5px" }}
-                        />
-                    )}
-                    <div
-                        style={{
-                            paddingTop: "10px",
-                        }}
-                    >
-                        {properties &&
-                            properties.map((property, i) => (
-                                <div
-                                    key={i}
-                                    style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        height: editMode ? "40px" : "20px",
-                                        transition: "height 0.5s",
-                                    }}
-                                >
-                                    <input
-                                        type="text"
-                                        value={property.Name}
-                                        style={{
-                                            background: "none",
-                                            width: "70px",
-                                            border: "none",
-                                            color: "rgb(var(--foreground-rgb))",
-                                            fontSize: "1rem",
-                                            outline: "none",
-                                            padding: "5px",
-                                            paddingLeft: "0",
-                                            textAlign: editMode
-                                                ? "center"
-                                                : "left",
-                                            flex: "1 1 auto",
-                                        }}
-                                        disabled={!editMode}
-                                        placeholder="Name"
-                                        onChange={(e) => {
-                                            setProperties(
-                                                properties.map((p, j) =>
-                                                    j === i
-                                                        ? {
-                                                              ...p,
-                                                              Name: e.target
-                                                                  .value,
-                                                          }
-                                                        : p
-                                                )
-                                            );
-                                        }}
-                                    />
-                                    <p style={{ margin: "0 10px" }}>:</p>
-                                    <input
-                                        type="text"
-                                        value={property.Value}
-                                        style={{
-                                            background: "none",
-                                            width: "70px",
-                                            border: "none",
-                                            color: color,
-                                            fontSize: "1rem",
-                                            outline: "none",
-                                            borderLeft: "none",
-                                            padding: "5px",
-                                            textAlign: "center",
-                                            flex: "1 1 auto",
-                                        }}
-                                        disabled={!editMode}
-                                        placeholder="Value"
-                                        onChange={(e) => {
-                                            setProperties(
-                                                properties.map((p, j) =>
-                                                    j === i
-                                                        ? {
-                                                              ...p,
-                                                              Value: e.target
-                                                                  .value,
-                                                          }
-                                                        : p
-                                                )
-                                            );
-                                        }}
-                                    />
-                                    <motion.button
-                                        initial={{ scaleX: 0 }}
-                                        animate={{ scaleX: editMode ? 1 : 0 }}
-                                        onClick={() => {
-                                            setProperties(
-                                                properties.map((p, j) =>
-                                                    j === i
-                                                        ? {
-                                                              ...p,
-                                                              Shown: !p.Shown,
-                                                          }
-                                                        : p
-                                                )
-                                            );
-                                        }}
-                                        style={{
-                                            border: "none",
-                                            padding: "5px",
-                                            background: "none",
-                                            color: "rgb(var(--foreground-rgb))",
-                                        }}
-                                    >
-                                        {property.Shown ? "Shown" : "Hidden"}
-                                    </motion.button>
-
-                                    <motion.button
-                                        initial={{ scaleX: 0 }}
-                                        animate={{ scaleX: editMode ? 1 : 0 }}
-                                        onClick={() => {
-                                            setProperties(
-                                                properties.filter(
-                                                    (p, j) => j !== i
-                                                )
-                                            );
-                                        }}
-                                        style={{
-                                            border: "none",
-                                            padding: "5px",
-                                            background: "none",
-                                        }}
-                                    >
-                                        <IconTrash color="rgb(var(--foreground-rgb))" size={20} />
-                                    </motion.button>
-                                </div>
-                            ))}
-                        {editMode && (
-                            <motion.button
-                                initial={{ scaleY: 0 }}
-                                animate={{ scaleY: 1 }}
+                            <p
                                 style={{
-                                    width: "100%",
-                                    border: "none",
-                                    borderTopRightRadius: "0",
-                                    borderTopLeftRadius: "0",
-                                    borderBottomRightRadius: "5px",
-                                    borderBottomLeftRadius: "5px",
-                                    backgroundColor: color,
-                                    color: "white",
-                                    padding: "5px",
-                                }}
-                                onClick={() => {
-                                    setProperties([
-                                        ...properties,
-                                        { Name: "", Value: "" },
-                                    ]);
+                                    fontSize: "1rem",
+                                    color: determineTextColor(color),
+                                    margin: 0,
                                 }}
                             >
-                                +
-                            </motion.button>
+                                color :{" "}
+                            </p>
+                            <p
+                                style={{
+                                    fontSize: "1rem",
+                                    margin: 0,
+                                }}
+                            >
+                                &nbsp;
+                                {color}
+                            </p>
+                        </div>
+                        {editingColor && editMode && (
+                            <HexColorPicker
+                                color={color}
+                                onChange={setColor}
+                                style={{ marginTop: "5px" }}
+                            />
                         )}
+                        <div
+                            style={{
+                                paddingTop: "10px",
+                            }}
+                        >
+                            {properties &&
+                                properties.map((property, i) => (
+                                    <div
+                                        key={i}
+                                        style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            height: editMode ? "40px" : "20px",
+                                            transition: "height 0.5s",
+                                        }}
+                                    >
+                                        <input
+                                            type="text"
+                                            value={property.Name}
+                                            style={{
+                                                background: "none",
+                                                width: "70px",
+                                                border: "none",
+                                                color: determineTextColor(color),
+                                                fontSize: "1rem",
+                                                outline: "none",
+                                                padding: "5px",
+                                                paddingLeft: "0",
+                                                textAlign: editMode
+                                                    ? "center"
+                                                    : "left",
+                                                flex: "1 1 auto",
+                                            }}
+                                            disabled={!editMode}
+                                            placeholder="Name"
+                                            onChange={(e) => {
+                                                setProperties(
+                                                    properties.map((p, j) =>
+                                                        j === i
+                                                            ? {
+                                                                  ...p,
+                                                                  Name: e.target
+                                                                      .value,
+                                                              }
+                                                            : p
+                                                    )
+                                                );
+                                            }}
+                                        />
+                                        <p style={{ margin: "0 10px" }}>:</p>
+                                        <input
+                                            type="text"
+                                            value={property.Value}
+                                            style={{
+                                                background: "none",
+                                                width: "70px",
+                                                border: "none",
+                                                color: determineTextColor(color),
+                                                fontSize: "1rem",
+                                                outline: "none",
+                                                borderLeft: "none",
+                                                padding: "5px",
+                                                textAlign: "center",
+                                                flex: "1 1 auto",
+                                            }}
+                                            disabled={!editMode}
+                                            placeholder="Value"
+                                            onChange={(e) => {
+                                                setProperties(
+                                                    properties.map((p, j) =>
+                                                        j === i
+                                                            ? {
+                                                                  ...p,
+                                                                  Value: e
+                                                                      .target
+                                                                      .value,
+                                                              }
+                                                            : p
+                                                    )
+                                                );
+                                            }}
+                                        />
+                                        <motion.button
+                                            initial={{ scaleX: 0 }}
+                                            animate={{
+                                                scaleX: editMode ? 1 : 0,
+                                            }}
+                                            onClick={() => {
+                                                setProperties(
+                                                    properties.map((p, j) =>
+                                                        j === i
+                                                            ? {
+                                                                  ...p,
+                                                                  Shown: !p.Shown,
+                                                              }
+                                                            : p
+                                                    )
+                                                );
+                                            }}
+                                            style={{
+                                                border: "none",
+                                                padding: "5px",
+                                                background: "none",
+                                                color: determineTextColor(color),
+                                            }}
+                                        >
+                                            {property.Shown
+                                                ? "Shown"
+                                                : "Hidden"}
+                                        </motion.button>
+
+                                        <motion.button
+                                            initial={{ scaleX: 0 }}
+                                            animate={{
+                                                scaleX: editMode ? 1 : 0,
+                                            }}
+                                            onClick={() => {
+                                                setProperties(
+                                                    properties.filter(
+                                                        (p, j) => j !== i
+                                                    )
+                                                );
+                                            }}
+                                            style={{
+                                                border: "none",
+                                                padding: "5px",
+                                                background: "none",
+                                            }}
+                                        >
+                                            <IconTrash
+                                                color={determineTextColor(color)}
+                                                size={20}
+                                            />
+                                        </motion.button>
+                                    </div>
+                                ))}
+                            {editMode && (
+                                <motion.button
+                                    initial={{ scaleY: 0 }}
+                                    animate={{ scaleY: 1 }}
+                                    style={{
+                                        width: "100%",
+                                        border: "none",
+                                        borderTopRightRadius: "0",
+                                        borderTopLeftRadius: "0",
+                                        borderBottomRightRadius: "5px",
+                                        borderBottomLeftRadius: "5px",
+                                        backgroundColor: determineTextColor(color),
+                                        color: color,
+                                        padding: "5px",
+                                    }}
+                                    onClick={() => {
+                                        setProperties([
+                                            ...properties,
+                                            { Name: "", Value: "" },
+                                        ]);
+                                    }}
+                                >
+                                    +
+                                </motion.button>
+                            )}
+                        </div>
                     </div>
                     <p
                         style={{
                             fontFamily: "QuickSandRegular",
                             fontSize: "1.5rem",
                             margin: "5px",
-                            marginLeft: "-5px",
+                            marginLeft: "10px",
                             marginTop: "30px",
                         }}
                     >
@@ -460,7 +463,7 @@ const ClassObject = () => {
                     )}
                 </div>
             )}
-        </motion.div>
+        </div>
     );
 };
 
