@@ -4,6 +4,7 @@ const GlowingBorder = ({
     height,
     color1,
     color2="transparent",
+    backgroundColour="transparent",
     id,
     animation,
     style,
@@ -61,11 +62,11 @@ const GlowingBorder = ({
                     <defs>
                         <radialGradient id={`${id}-redGradient`}>
                             <stop offset="0%" stopColor={color1} />
-                            <stop offset="100%" stopColor="black" />
+                            <stop offset="100%" stopColor={backgroundColour} />
                         </radialGradient>
                         <radialGradient id={`${id}-blueGradient`}>
                             <stop offset="0%" stopColor={color2} />
-                            <stop offset="100%" stopColor="black" />
+                            <stop offset="100%" stopColor={backgroundColour} />
                         </radialGradient>
                         <filter
                             id="blurFilter"
@@ -123,11 +124,11 @@ const GlowingBorder = ({
                 <defs>
                     <radialGradient id={`${id}-redGradient`}>
                         <stop offset="0%" stopColor={color1} />
-                        <stop offset="100%" stopColor="black" />
+                        <stop offset="100%" stopColor={backgroundColour} />
                     </radialGradient>
                     <radialGradient id={`${id}-blueGradient`}>
                         <stop offset="0%" stopColor={color2} />
-                        <stop offset="100%" stopColor="black" />
+                        <stop offset="100%" stopColor={backgroundColour} />
                     </radialGradient>
                     <filter
                         id="blurFilter"
