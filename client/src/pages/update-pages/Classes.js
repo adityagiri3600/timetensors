@@ -3,6 +3,7 @@ import InputField from "../../app/inputField/InputField";
 import { determineTextColor } from "../../app/timetrackFunctions";
 import Select from "react-select";
 import { motion } from "framer-motion";
+import { IconCirclePlusFilled, IconId } from "@tabler/icons-react";
 
 const Classes = ({ classObjects, setClassObjects, disabled }) => {
     const [createNew, setCreateNew] = useState(true);
@@ -53,7 +54,7 @@ const Classes = ({ classObjects, setClassObjects, disabled }) => {
                         styles={{
                             control: (styles) => ({
                                 ...styles,
-                                backgroundColor: "black",
+                                backgroundColor: "transparent",
                                 border: "1px solid #3c3c3c",
                                 fontSize: "1.3rem",
                                 padding: "5px",
@@ -96,8 +97,7 @@ const Classes = ({ classObjects, setClassObjects, disabled }) => {
                         onClick={() => setCreateNew(!createNew)}
                         style={{
                             padding: "5px 10px",
-                            background: "black",
-                            color: "white",
+                            color: "rgb(var(--foreground-rgb))",
                             border: "none",
                             borderRadius: "5px",
                             cursor: "pointer",
@@ -108,32 +108,14 @@ const Classes = ({ classObjects, setClassObjects, disabled }) => {
                     >
                         {createNew ? (
                             <>
-                                <img
-                                    src="/plus.svg"
-                                    alt="plus"
-                                    style={{
-                                        width: "20px",
-                                        marginRight: "10px",
-                                    }}
-                                />
+                                <IconCirclePlusFilled size={25} fill="rgb(var(--foreground-rgb))" />
+                                &nbsp;
                                 <p style={{ margin: 0 }}>Create New Class</p>
                             </>
                         ) : (
                             <>
-                                <p
-                                    style={{
-                                        margin: 0,
-                                        marginRight: "10px",
-                                        backgroundColor: "white",
-                                        color: "black",
-                                        fontWeight: "bold",
-                                        paddingLeft: "5px",
-                                        paddingRight: "5px",
-                                        borderRadius: "5px",
-                                    }}
-                                >
-                                    id
-                                </p>
+                                <IconId size={25} stroke="rgb(var(--foreground-rgb))" />
+                                &nbsp;
                                 <p style={{ margin: 0 }}>Use Existing Class</p>
                             </>
                         )}

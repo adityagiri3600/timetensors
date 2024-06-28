@@ -40,7 +40,7 @@ const New = () => {
                 position: "absolute",
                 height: "100vh",
                 overflow: "hidden",
-                backgroundColor: "black",
+                backgroundColor: "rgb(var(--background-rgb))",
                 width: "100vw",
             }}
         >
@@ -49,7 +49,7 @@ const New = () => {
                         <p style={{
                             margin: "0 10px",
                             fontSize: "0.8rem",
-                            color: "#FFFFFFAA"
+                            color: "rgb(var(--foreground-rgb))",
                         }} >Swipe to Navigate</p>
                         <StepProgress step={step} n={steps.length} />
                         <Carousel getIndex={setStep}>
