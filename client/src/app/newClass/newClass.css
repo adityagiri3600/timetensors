@@ -87,7 +87,6 @@ select{
     margin-right: 5px;
 }
 select:focus{
-    border: 1px solid #2b7df8;
     font-weight: bold;
 }
 option{
