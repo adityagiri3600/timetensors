@@ -11,6 +11,23 @@ const Classes = ({ classObjects, setClassObjects, disabled }) => {
     const [selectedClass, setSelectedClass] = useState(null);
     const [existingClasses, setExistingClasses] = useState([]);
 
+    const colorArray = [
+        "#f31e40",
+        "#e58091",
+        "#81a3e6",
+        "#6d7688",
+        "#273859",
+        "#7876b3",
+        "#6662d2",
+        "#87b691",
+        "#a88768",
+        "#a86868",
+        "#83b39c",
+        "#829eb3",
+        "#c187a7",
+        "#c28888",
+    ];
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -26,6 +43,34 @@ const Classes = ({ classObjects, setClassObjects, disabled }) => {
         };
         fetchData();
     }, []);
+
+    function addClass(){
+        if (createNew) {
+            if (existingClasses.some((c) => c.Name === name) || classObjects.some((c) => c.Name === name)) {
+                return;
+            }
+            setClassObjects([
+                ...classObjects,
+                {
+                    Name: name,
+                    classid: Math.random()
+                        .toString(36)
+                        .substring(7),
+                    color: colorArray[
+                        Math.floor(
+                            Math.random() *
+                                colorArray.length
+                        )
+                    ],
+                },
+            ]);
+        } else {
+            setClassObjects([
+                ...classObjects,
+                selectedClass,
+            ]);
+        }
+    }
 
     return (
         <div className="update3-container">
@@ -108,35 +153,26 @@ const Classes = ({ classObjects, setClassObjects, disabled }) => {
                     >
                         {createNew ? (
                             <>
-                                <IconCirclePlusFilled size={25} fill="rgb(var(--foreground-rgb))" />
+                                <IconCirclePlusFilled
+                                    size={25}
+                                    fill="rgb(var(--foreground-rgb))"
+                                />
                                 &nbsp;
                                 <p style={{ margin: 0 }}>Create New Class</p>
                             </>
                         ) : (
                             <>
-                                <IconId size={25} stroke="rgb(var(--foreground-rgb))" />
+                                <IconId
+                                    size={25}
+                                    stroke="rgb(var(--foreground-rgb))"
+                                />
                                 &nbsp;
                                 <p style={{ margin: 0 }}>Use Existing Class</p>
                             </>
                         )}
                     </motion.div>
                     <button
-                        onClick={() => {
-                            if (createNew) {
-                                setClassObjects([
-                                    ...classObjects,
-                                    {
-                                        Name: name,
-                                        classid: Math.random()
-                                            .toString(36)
-                                            .substring(7),
-                                        color: "#2b7df8",
-                                    },
-                                ]);
-                            } else {
-                                setClassObjects([...classObjects, selectedClass]);
-                            }
-                        }}
+                        onClick={addClass}
                         style={{
                             padding: "5px 10px",
                             background: "#2b7df8",
@@ -168,6 +204,7 @@ const Classes = ({ classObjects, setClassObjects, disabled }) => {
                         key={index}
                         style={{
                             padding: "10px",
+                            minWidth: "50px",
                             margin: "5px",
                             position: "relative",
                             cursor: "pointer",
@@ -202,7 +239,7 @@ const Classes = ({ classObjects, setClassObjects, disabled }) => {
                                 }}
                             />
                         </button>
-                        <p style={{ textAlign: "center"}}>
+                        <p style={{ textAlign: "center" }}>
                             {classObject.Name.substring(0, 30)}
                         </p>
                     </div>
