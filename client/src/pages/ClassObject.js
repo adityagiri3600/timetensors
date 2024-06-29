@@ -481,6 +481,7 @@ const ClassObject = () => {
                                                 Properties: properties,
                                             }
                                         );
+                                        console.log(response);
                                         if (response.status === 200) {
                                             setSaved(true);
                                             setTimeout(() => {
