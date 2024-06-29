@@ -10,6 +10,7 @@ import { useAuth } from "../AuthContext";
 import { IconPaperclip, IconPencil, IconTrash } from "@tabler/icons-react";
 import { determineTextColor } from "../app/timetrackFunctions";
 import styles from "./ClassObject.module.css";
+import IconSelector, {icon} from "../app/iconSelector/IconSelector";
 
 const ClassObject = () => {
     const { classRoute } = useParams();
@@ -25,6 +26,7 @@ const ClassObject = () => {
     const [notFound, setNotFound] = useState(false);
     const [saved, setSaved] = useState(false);
     const [editCodeError, setEditCodeError] = useState(false);
+    const [focusedProperty, setFocusedProperty] = useState(null);
 
     const fetchData = async () => {
         try {
@@ -49,11 +51,13 @@ const ClassObject = () => {
                 <NotFound thing="class" name={classRoute} />
             ) : (
                 <div>
-                    <div className={styles.header}
-                    style={{
-                        backgroundColor: color,
-                        color: determineTextColor(color),
-                    }}>
+                    <div
+                        className={styles.header}
+                        style={{
+                            backgroundColor: color,
+                            color: determineTextColor(color),
+                        }}
+                    >
                         <input
                             type="text"
                             value={name}
@@ -155,8 +159,22 @@ const ClassObject = () => {
                                             alignItems: "center",
                                             height: editMode ? "40px" : "20px",
                                             transition: "height 0.5s",
+                                            backgroundColor:
+                                                i === focusedProperty &&
+                                                editMode
+                                                    ? "rgba(0,0,0,0.1)"
+                                                    : "transparent",
+                                        }}
+                                        onClick={() => {
+                                            setFocusedProperty(i);
                                         }}
                                     >
+                                        <div style={{
+                                            padding: "5px",
+                                            paddingBottom: "0",
+                                        }}>
+                                            {icon(property.iconName)}
+                                        </div>
                                         <input
                                             type="text"
                                             value={property.Name}
@@ -164,14 +182,14 @@ const ClassObject = () => {
                                                 background: "none",
                                                 width: "70px",
                                                 border: "none",
-                                                color: determineTextColor(color),
+                                                color: determineTextColor(
+                                                    color
+                                                ),
                                                 fontSize: "1rem",
                                                 outline: "none",
                                                 padding: "5px",
                                                 paddingLeft: "0",
-                                                textAlign: editMode
-                                                    ? "center"
-                                                    : "left",
+                                                textAlign: "center",
                                                 flex: "1 1 auto",
                                             }}
                                             disabled={!editMode}
@@ -198,7 +216,9 @@ const ClassObject = () => {
                                                 background: "none",
                                                 width: "70px",
                                                 border: "none",
-                                                color: determineTextColor(color),
+                                                color: determineTextColor(
+                                                    color
+                                                ),
                                                 fontSize: "1rem",
                                                 outline: "none",
                                                 borderLeft: "none",
@@ -244,7 +264,9 @@ const ClassObject = () => {
                                                 border: "none",
                                                 padding: "5px",
                                                 background: "none",
-                                                color: determineTextColor(color),
+                                                color: determineTextColor(
+                                                    color
+                                                ),
                                             }}
                                         >
                                             {property.Shown
@@ -271,7 +293,9 @@ const ClassObject = () => {
                                             }}
                                         >
                                             <IconTrash
-                                                color={determineTextColor(color)}
+                                                color={determineTextColor(
+                                                    color
+                                                )}
                                                 size={20}
                                             />
                                         </motion.button>
@@ -288,7 +312,8 @@ const ClassObject = () => {
                                         borderTopLeftRadius: "0",
                                         borderBottomRightRadius: "5px",
                                         borderBottomLeftRadius: "5px",
-                                        backgroundColor: determineTextColor(color),
+                                        backgroundColor:
+                                            determineTextColor(color),
                                         color: color,
                                         padding: "5px",
                                     }}
@@ -304,6 +329,52 @@ const ClassObject = () => {
                             )}
                         </div>
                     </div>
+                    {editCodeError && (
+                        <p
+                            style={{
+                                color: "red",
+                                fontSize: "1rem",
+                                marginLeft: "10px",
+                                fontWeight: "bold",
+                            }}
+                        >
+                            Invalid edit code
+                        </p>
+                    )}
+                    {saved && (
+                        <p
+                            style={{
+                                color: "green",
+                                fontSize: "1rem",
+                                marginLeft: "10px",
+                                fontWeight: "bold",
+                            }}
+                        >
+                            Saved!
+                        </p>
+                    )}
+                    {editMode && (
+                        <div style={{ padding: "10px" }}>
+                            <IconSelector
+                                iconCount={200}
+                                selectedIcon={properties[focusedProperty]?.iconName || null}
+                                setIcon={(iconName) => {
+                                    const newProperty = {
+                                        ...properties[focusedProperty],
+                                        iconName: iconName,
+                                    };
+                                    setProperties(
+                                        properties.map((p, j) =>
+                                            j === focusedProperty
+                                                ? newProperty
+                                                : p
+                                        )
+                                    );
+                                }}
+                            />
+                        </div>
+                    )}
+
                     <p
                         style={{
                             fontFamily: "QuickSandRegular",
@@ -332,35 +403,11 @@ const ClassObject = () => {
                             />
                         )}
                     </div>
-                    {editCodeError && (
-                        <p
-                            style={{
-                                color: "red",
-                                fontSize: "1rem",
-                            }}
-                        >
-                            Invalid edit code
-                        </p>
-                    )}
-                    {saved && (
-                        <p
-                            style={{
-                                color: "green",
-                                fontSize: "1rem",
-                            }}
-                        >
-                            Saved!
-                        </p>
-                    )}
+                    <div style={{ height: "100px" }}></div>
                     {editMode && (
                         <motion.div
                             initial={{ y: 100 }}
                             animate={{ y: 0 }}
-                            transition={{
-                                type: "spring",
-                                stiffness: 260,
-                                damping: 10,
-                            }}
                             style={{
                                 position: "fixed",
                                 bottom: "0",
