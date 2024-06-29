@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import  React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../AuthContext";
 import {
@@ -8,6 +8,7 @@ import {
 } from "@tabler/icons-react";
 import "./class.css";
 import { useTheme } from "../../ThemeContext";
+import { icon } from "../iconSelector/IconSelector";
 
 const Class = ({
     classItem,
@@ -28,7 +29,7 @@ const Class = ({
     );
     const [footer, setFooter] = useState("buttons");
     const [event, setEvent] = useState("");
-    const {theme} = useTheme();
+    const { theme } = useTheme();
     cssClassName += "class-" + theme + " ";
     const { userData, isLoggedIn } = useAuth();
     let userHasEditCode = isLoggedIn
@@ -51,8 +52,12 @@ const Class = ({
         return () => clearInterval(intervalId);
     }, [hour]);
 
-    const begin = parseInt(classItem.Start.split(":")[0]) + parseInt(classItem.Start.split(":")[1]) / 60;
-    const end = parseInt(classItem.End.split(":")[0]) + parseInt(classItem.End.split(":")[1]) / 60;
+    const begin =
+        parseInt(classItem.Start.split(":")[0]) +
+        parseInt(classItem.Start.split(":")[1]) / 60;
+    const end =
+        parseInt(classItem.End.split(":")[0]) +
+        parseInt(classItem.End.split(":")[1]) / 60;
 
     if (
         begin <= hour &&
@@ -102,36 +107,30 @@ const Class = ({
                         </div>
                     )}
                     <div style={{ padding: "10px" }}>
-                        <h2>
-                            {classItem.Name}</h2>
-                        {/* {cssClassName.includes("past") && (
-                            <IconCircleCheck
-                                size={25}
-                                fill="#50C878"
-                                style={{
-                                    position: "absolute",
-                                    top: "5px",
-                                    right: "5px",
-                                }}
-                            />
-                        )} */}
+                        <h2>{classItem.Name}</h2>
                         <div
                             style={{
                                 display: "flex",
                                 justifyContent: "space-between",
                                 alignItems: "center",
+                                paddingLeft: "5px",
                             }}
                         >
                             <div>
                                 {classItem.Properties.map(
                                     (property, i) =>
                                         property.Shown && (
-                                            <p
-                                                key={i}
-                                                style={{ fontSize: "0.6rem" }}
-                                            >
-                                                {property.Value}
-                                            </p>
+                                            <div style={{ display: "flex" }}>
+                                                {icon(property.iconName)}
+                                                <p
+                                                    key={i}
+                                                    style={{
+                                                        fontSize: "0.6rem",
+                                                    }}
+                                                >
+                                                    {property.Value}
+                                                </p>
+                                            </div>
                                         )
                                 )}
                             </div>
