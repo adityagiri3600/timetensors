@@ -77,13 +77,13 @@ const IconSelector = ({ selectedIconProp, setIcon, iconCount = 25 }) => {
     );
 };
 
-const icon = (iconName) => {
-    const iconPacks = {...tbIcons, ...FaIcons, ...AiIcons, ...GiIcons};
+const iconPacks = {...tbIcons, ...FaIcons, ...AiIcons, ...GiIcons};
+const icon = (iconName, size=20) => {
     if (!iconPacks[iconName]) {
         return null;
     }
     return React.createElement(iconPacks[iconName], {
-        size: 20,
+        size: size,
     });
 }
 

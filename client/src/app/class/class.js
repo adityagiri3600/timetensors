@@ -120,14 +120,14 @@ const Class = ({
                                 {classItem.Properties.map(
                                     (property, i) =>
                                         property.Shown && (
-                                            <div style={{ display: "flex" }}>
-                                                {icon(property.iconName)}
+                                            <div style={{ display: "flex" }} key={i}>
+                                                {icon(property.iconName, 10)}
                                                 <p
-                                                    key={i}
                                                     style={{
                                                         fontSize: "0.6rem",
                                                     }}
                                                 >
+                                                    &nbsp;
                                                     {property.Value}
                                                 </p>
                                             </div>
