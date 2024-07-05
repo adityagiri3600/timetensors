@@ -74,7 +74,7 @@ const Home = () => {
                         justifyContent: "space-between",
                         alignItems: "center",
                         paddingTop: "20px",
-                        paddingLeft: "20px",
+                        paddingLeft: "10px",
                         paddingRight: "20px",
                     }}
                 >
@@ -122,7 +122,7 @@ const Home = () => {
                             >
                                 <IconUser size={20} />
                                 &nbsp;
-                                {userData.username}
+                                {userData.username.split(" ")[0]}
                             </p>
                             <button
                                 onClick={() => {
