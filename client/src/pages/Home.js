@@ -86,10 +86,11 @@ const Home = () => {
                         }}
                     >
                         <img
-                            src="/TimeTrack.svg"
+                            src="/timetensors.svg"
                             alt="logo"
                             style={{
                                 height: "2rem",
+                                filter: theme=="paper"&&"invert(1)",
                             }}
                         ></img>
                         <p
@@ -100,7 +101,7 @@ const Home = () => {
                                 textAlign: "center",
                             }}
                         >
-                            pre-release 1.0.0-alpha
+                            pre-release 1.1.0-alpha
                         </p>
                     </div>
                     {isLoggedIn ? (

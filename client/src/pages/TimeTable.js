@@ -225,8 +225,10 @@ const TimeTable = () => {
                         }}
                             onClick={() => navigate("/")}
                         >
-                            <img src="/TimeTrack.svg" alt="logo" style={{
-                                height: "3rem"
+                            <img src="/timetensors.svg" alt="logo" style={{
+                                height: "2.5rem",
+                                padding: "0 1rem",
+                                filter: theme === "paper" ? "invert(100%)" : "invert(0%)",
                             }}></img>
                         </div>
                         <Link to={`/info/${ttRoute}`} style={{
